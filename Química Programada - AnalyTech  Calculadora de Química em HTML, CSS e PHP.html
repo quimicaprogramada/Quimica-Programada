@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="Formatação.css">
+		<title>Química Programada - AnalyTech : Calculadora de Química em HTML, CSS e PHP </title>
+	</head>
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+        <h1> Química Programada - AnalyTech : Calculadora de Química em HTML, CSS e PHP </h1>
+
+        <h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. AnalyTech - Página Inicial</a></li>
+			<li><a href="#secao3"> 3. AnalyTech - Determinação da massa específica e densidade de líquidos</a></li>
+			<li><a href="#secao4"> 4. AnalyTech Envase gravimétrico de líquidos</a></li>
+			<li><a href="#secao5"> 5. AnalyTech Determinação da umidade de sais hidratados</a></li>
+			<li><a href="#secao6"> 6. AnalyTech Determinação da pureza do ácido acético glacial</a></li>
+			<li><a href="#secao7"> 7. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+        <p> O objetivo dessa página é compartilhar algumas aplicações de programação estruturada em HTML, CSS e PHP na área de Química e Engenharia Química. Esse  material se destina a usuários 
+        já iniciados nessas linguagens, que saibam executar um programa php, usando um servidor local. Essa aplicação foi testada em Xampp v3.3.0.</p>
+        <p> Críticas e comentários podem ser feitos através do email quimicaprogramada@gmail.com.</p>
+        <p> A linguagem PHP integrada com formulários HTML é uma solução relativamente simples para geração de tabelas com dados de análises químicas que demandam cálculos simples.
+		Esses relatórios podem ser impresos em PDF no próprio bowser de preferência do usuário ou pode ser instalada alguma biblioteca de geração de PDF em PHP como do DOMPDF ou outras
+		disponíveis gratuitamente.</p>
+        
+		<h2 id="secao2"> 2. AnalyTech - Página inicial da calculadora química </h2>
+
+        <p> No caminho criado pelo usuário no diretório C para instalação dos arquivos da aplicação Xampp, deverá ser criada uma pasta chamada AnalyTech (C:\xampp\htdocs\AnalyTech). A calculadora 
+		deverá ser salva nesta pasta. O programa salvo nessa pasta será acessado através do browser de sua preferência, após a instalação do servidor local, digitando na barra de acesso
+		localhost/AnalyTech. Para aprender a usar um servidor local tipo Xampp, existe um vasto material na internet, recomenda-se os cursos online citados nas referências. Na página incial estão listados
+		os diferentes módulos da calculadora. Cada módulo é apenas um exemplo de utilização de formulários HTML e PHP para cálculos na área de química que pode ser alterado para novas utilizações
+		por necessidade do usuários usando um editor de texto gratuito como Sublime, ou mesmo o VSCODE, editando e salvando com a extensão .php. Na <strong>Figura 1</strong>, é exibida a tela da Página Inicial 
+		da calculadora química. </p>
+
+		<figure>
+  				<img src="paginainicial.png" alt="inicial">
+  				<figcaption><strong>Figura 1: Página incial da AnalyTech.</strong></figcaption>
+		</figure>
+		
+		<h2 id="secao3">3. AnalyTech - Determinação da massa específica e densidade de líquidos</h2>
+
+        <p> A calculadora AnalyTech tem um módulo para cálculo da massa específica de uma substância líquida na temperatura de 20<sup>o</sup>C, apresentado na <strong>Figura 2</strong>. A massa específica é 
+		determinada pelo método do picnômetro. Nesta página pode-se ver que há uma entrada de dados para massa do picnômetro vazio, configurado para tratar dados com até 4 casas decimais, utilizando o "."
+		(ponto) como separador. Também ha um formulário tipo select onde o usuário pode escolher entre 3 picnômetros A, B ou C, com volumes nominais hipotéticos de 50, 50 e 100 mL. Cada um tem o seu valor real de calibração 
+		que é possível ver no trecho de código da <strong>Figura 3</strong>. Nesse trecho podemos ver que foi feito um formulário HTML nos qual há como entrada massa do picnômtro (que é lida como variável "massavazio") 
+		e massa do picnômetro com produto (variável "massacomproduto"). Essas variáveis são recebidas quando o código é executado e enviadas pelo método "post" para um outro arquivo php chamado 
+		"Resultado da densidade.php" onde são recebidas e tratadas para cálculo da densidade. Na parte mais abaixo do código vemos que no mesmo formulário tem um trecho select onde há o nome do picnômetro escolhido
+		que deverá aparecer no navegador "Picnômetro A - 50 mL", por exemplo, e a variável com a "tag" value que armazena o valor do volume de calibração do picnômetro que deverá ser alterado pelo usuário. Quando o picnômetro é 
+		escolhido, esse valor é armazenado na tag name="picnômetro[]", um array que é enviado ao arquivo php onde é calculada a massa específica. O resto do trecho do arquivo dessa página é um código
+		HTML simples com parágrafos e tags h1, h2, e h3 com uma formatação de estilo especificada no arquivo "Formatação.css".</p>
+
+		<figure>
+  				<img src="paginadensidade.png" alt="paginadensidade">
+  				<figcaption><strong>Figura 2: Página de cálculo da densidade da AnalyTech.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="selectdensidade.png" alt="selectdensidade">
+  				<figcaption><strong>Figura 3: Formulário select para cálculo da densidade.</strong></figcaption>
+		</figure>
+
+		<p> As variáveis de entrada do código da <strong>Figura 3</strong> são enviadas pelo método post ao arquivo "Resultado da densidade.php" e são recebidas
+		e tranformadas em novas variáveis que serão maipuladas para realização dos cálculos. A tag "massavazio" é enviada pelo método post e transformada na variável
+		"$massavazio" que é usada para o cálculo da "$massaamostra",conforme mostrado na <strong> Figura 4 </strong>. O mesmo acontece com "massacomproduto". Ambos são transformados em "floats"  através 
+		 de do comando "floatval($massavazio)".</p>
+
+		<figure>
+  				<img src="enviodensidade.png" alt="enviodensidade">
+  				<figcaption><strong>Figura 4: Envio de dados para "Resultado da densidade.php".</strong></figcaption>
+		</figure>
+
+		<p> O envio e tratamento dos valores armazenados em "name=picnômetro[]" é feito através do comando "foreach" mostrado na <strong>Figura 5</strong>. O 
+		comando "if (isset($_POST["picnômetro"]))" indica que aquele trecho de código deverá ser executado apenas se tiver sido feita a seleão de algum picnômetro.
+		Os dados são tratados, transformados em "floats" e manipulados para cálculo da densidade e formatados para serem exibidos com 4 casas decimais através do 
+		comando "$d2020format = sprintf('%.4f', $d2020)". Dentro desse loop foreach também há impressão das informações através do comando php "echo". As variáveis 
+		calculadas são impressas dentro das tabelas geradas por "echo table>tr>th>Massa específica (g/ml)/th>th>$densidadeformat/th/tr". Após o comando echo, as tabelas
+		em php devem ser declaradas igualmente às tabelas dos códigos HTML. O resultado dos cálculos é exibido na <strong>Figura 6</strong>.</p>
+
+		<figure>
+  				<img src="calculopicnometro.png" alt="calculopicnometro">
+  				<figcaption><strong>Figura 5: Leitura dos dados de entrada do picnômetro.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="resultadodensidade.png" alt="resultadodensidade">
+  				<figcaption><strong>Figura 6: Tabela com resultado dos cálculos.</strong></figcaption>
+		</figure>
+
+		<h2 id="secao4"> 4. AnalyTech Envase gravimétrico de líquidos </h2>
+
+        <p> O formulário de envase gravimétrico de líquidos usa como dados de entrada a identificação do líquido, a massa específica em g/ml e há um formulário de seleção das embalagens
+        que foram produzidas e cujo peso dever ser estimado em kg. É apresentado na <strong>Figura 7</strong>. Com essas informações se obtém o peso de envase de cada tipo de embalagem e o peso de envase com uma tolerância
+        de 0,5% como mostrado na <strong>Figura 8</strong>. No casos de embalagens em kg, também é possível calcular o peso com desvio de 0,5% selecionando a embalagem no formulário de seleção.</p>
+        
+        <p> O código, nesse caso, se assemelha ao do formulário html de cálculo da massa específica, como pode-se ver na <strong>Figura 9</strong>, porém há dois "checkbox" com arrays distintos de
+        coleta e envio de dados : um armazena os dados no array "embalagem[]" e outro no array "embalagemkg[]". Dessa forma, no arquivo que recebe esses dados pelo método "post", há dois 
+        "if (isset($_POST["embalagem"]))", cada um com um "foreach" para percorrer um array específico e executar operações com os dados, como mostrado na <strong>Figura 10</strong>. </p>
+        <figure>
+  				<img src="paginaenvase.png" alt="paginaenvase">
+  				<figcaption><strong>Figura 7: Página para envase gravimétrico de líquidos.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="resultadoenvase.png" alt="resultadoenvase">
+  				<figcaption><strong>Figura 8: Página do resultado do envase.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="postenvase.png" alt="primeiroenvase">
+  				<figcaption><strong>Figura 9: Primeiro post para dados de envase (array embalagem[]).</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="segundopostenvase.png" alt="segundoenvase">
+  				<figcaption><strong>Figura 10: Segundo post para dados de envase (array embalagemkg[]).</strong></figcaption>
+		</figure>
+
+        <h2 id="secao5"> 5. AnalyTech Determinação da umidade de sais hidratados</h2>
+
+        <p> A calculadora AnalyTech também tem um módulo de para cálculo da umidade de sais hidratados através da dissecação 
+        em estufa com uso de pesa-filtro. Foi esboçado um procedimento esperimental genérico que pode ser alterado no arquivo pelo usuário e um formulário 
+        para entrada de dados mostrado na </strong> Figura 11</strong>. Nesse formulário podemos entrar com a massa do peso-filtro (mr1 - massa do recipiente), a massa inicial 
+        do sólido mais o pesa-filtro (m1) e a massa final do sólido com o pesa-filtro após o final do tratamento na estufa(mf1). Devem também entrar com 
+		os dados mr2, m2 e mf2 e será obtido o valor médio. <p>
+
+        <figure>
+  				<img src="sais.png" alt="sais">
+  				<figcaption><strong>Figura 11: Página da dissecação de sólidos.</strong></figcaption>
+		</figure>
+
+        <p> Os dados de entrada são usados para o cálculo da umidade da amostra de sal que pode ser utilizada para comparar com a umidade do sal puro segundo 
+        previsto na estequiometria do mesmo para saber se essa amostra foi armazenada em condições adequadas e até mesmo ter uma ideia de seu grau de prureza. Esses resultados 
+        são apresentados na imagem da </strong> Figura 12</strong>. </p>
+
+        <figure>
+  				<img src="resultadosais.png" alt="resultadosais">
+  				<figcaption><strong>Figura 12: Resultado do cálculo da umidade de sais.</strong></figcaption>
+		</figure>
+
+        <p> Os detalhes do algoritmo nos arquivos .php de entrada e saída de dados são apresentados nas </strong> Figura 13</strong> e </strong> Figura 14</strong>. </p>
+        
+        <figure>
+  				<img src="entradasais.png" alt="entradasais">
+  				<figcaption><strong>Figura 13: Entrada de dados para cálculo da umidade.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="calculosais.png" alt="calculosais">
+  				<figcaption><strong>Figura 14: Envio de dados pelo método post e cálculo da umidade.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao6"> 6. AnalyTech Determinação da pureza do ácido acético glacial </h2>
+
+        <p> A calculadora AnalyTech também conta com um módulo para o cálculo da concentração de uma solução de ácido acético que pode ser alterada
+        para outras substâncias, alterando os dados de estequiometria no código fonte. O formulário de entrada e a tabela de saída dos resultados são apresentados
+        nas </strong> Figura 15</strong> e </strong> Figura 16</strong>, respectivamente. Os detalhes relevantes do código  são apresentados nas 
+        </strong> Figura 17 </strong> e </strong> Figura 18 </strong>.</p>
+
+        <figure>
+  				<img src="entradaacidoacetico.png" alt="entradaacido">
+  				<figcaption><strong>Figura 15: Entrada de dados para cálculo da concentração de ácido acético.</strong></figcaption>
+		</figure>
+		
+        <figure>
+  				<img src="resultadoacido.png" alt="resultadoacido">
+  				<figcaption><strong>Figura 16: Tabela de saída de dados do ácido acético.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="formularioacido.png" alt="formularioacido">
+  				<figcaption><strong>Figura 17: Código de recepção de dados.</strong></figcaption>
+		</figure>
+		
+        <figure>
+  				<img src="concentracaoacetico.png" alt="concentracaoacetico">
+  				<figcaption><strong>Figura 18: Envio de dados e cálculos.</strong></figcaption>
+		</figure>
+        
+        <h2 id="secao7">7. Referências: </h2>
+
+		<ul>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+			<li> Curso Online : "Introdução ao PHP - Gerando HTML com PHP". Eucurso, Alfamídia.</li>
+            <li> Curso Online : "Introdução ao PHP - Lendo e Inserindo dados no Banco de Dados". Eucurso, Alfamídia.</li>
+            <li> Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+		</ul>
+
+				
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg" alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+        <p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+
+	</body>
+
+</html>

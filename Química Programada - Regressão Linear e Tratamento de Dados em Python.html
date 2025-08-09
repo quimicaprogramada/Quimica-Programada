@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<meta charset="utf-8">
+		<title> Química Programada - Regressão Linear e tratamento de dados em Python </title>
+		<link rel="stylesheet" href="Formatação.css">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Regressão Linear e tratamento de dados em Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Regressão linear em Python - Comparando tempo de execução de um algoritmo tradicional e a biblioteca scipy.optimize </a></li>
+			<li><a href="#secao2"> 2. Ajustes de modelos de curvas com curve_fit</a></li>
+			<li><a href="#secao3"> 3. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> Regressão linear em Python - Comparando tempo de execução de um algoritmo tradicional e a biblioteca scipy.optimize</h2>
+
+		<p> Para realizar um ajuste linear com um algoritmo numérico em Python é necessário importar as bibliotecas numpy para fazer as manipulações dos arrays dos dados e a biblioteca matplotlib.pyplot para 
+		visualização do ajuste. O algoritmo do ajuste linear mostrado na <strong>Figura 1 </strong> foi retirado do material do curso online : <strong>"Inteligência artificial conceitos, temáticas, desenvolvimento
+		e aplicações"</strong>. Foi inserida a biblioteca "Time" e um comando no início e no fim do trecho de código com fator de multiplicação 1000 para que seja exibido tempo de execução em ms. Isso é interessante, pois o existem diferentes maneiras
+		de se realizar um ajuste linear usando as bibliotecas do Python. Dessa forma você pode monitorar o desempenho da cada uma e escolher pela mais eficiente. Esse ajuste foi rodado no Googlecolab. 
+		Na <strong> Figura 2 </strong> estão os dados de temperatura e densidade do propilenoglicol com os comandos, a curva obtida e os parâmetros do modelo. O tempo de execução foi de 122 ms, no GoogleColab.</p>
+		
+		<figure>
+  				<img src="algoritmoregressao.png" alt="fregressao">
+  				<figcaption><strong>Figura 1: Algoritmo regressão linear.</strong></figcaption>
+		</figure>
+		
+        <figure>
+  				<img src="ajustelinear.png" alt="ajustelinear">
+  				<figcaption><strong>Figura 2: Ajuste da densidade do propilenoglicol (dados obtidos por Química Programada).</strong></figcaption>
+		</figure>
+
+		<p> Outra forma de obter um ajuste linear em Python é através do uso da função lambda, para declarar a função que você quer utilizar como modelo para a série de dados
+		e a biblioteca scipy.optimize (função curve_fit). Também deverão ser declaradas as bibliotecas numpy e matplotlib.pyplot. Ver <strong> Figura 3 </strong>. Para o mesmo
+		conjunto de dados o tempo de execução foi de 94 ms e os parâmetros da curva foram praticamente os mesmos.
+		
+		 <figure>
+  				<img src="curvefitdens.png" alt="curvefitdens">
+  				<figcaption><strong>Figura 3: Ajuste da densidade do propilenoglicol com curve_fit (dados obtidos por Química Programada).</strong></figcaption>
+		</figure>
+
+		<h2 id="secao2"> 2. Ajustes de modelos de curvas com curve_fit</h2>
+
+		<p> Na <strong> Figura 4 </strong> foi utilizado um polinômio de grau 3 como função lambda para ajustar a densidade da água, com um bom resultado para o máximo da curva
+		e com bom ajuste para para valores de temperatura à esquerda do máximo, o que não acontece com o uso de uma parábola como modelo. O tempo de execução foi de 206 ms
+		no GoogleColab e a solução é bastant simples, pois não é necessário de um algoritmo para o ajuste, tampouco definir uma função para o polinômio - são usados as
+		funções da biblioteca do Python. </p>
+
+		<figure>
+  				<img src="polinomialagua.png" alt="polinomialagua">
+  				<figcaption><strong>Figura 4: Ajuste da densidade do água com curve_fit.</strong></figcaption>
+		</figure>
+
+		<p> Na págia 260 da apostila gratuita disponível no site da ABEQ <strong>"Métodos Numéricos para Engenheiros Químicos- Algoritmos e aplicações"</strong> é proposto
+		um exercício para encontar os parâmetros de um modelo de perfil de velocidade de um fluido em escoamento do tipo u(y)= p*y + q*y<sup>2</sup>, onde y é a distância
+		da parede em centímetros e u é a velocidade em cm/s medida através de fotografias estroboscópicas de pequenas bolhas de ar. Na <strong> Figura 5</strong> é apresentada 
+		a solução em Python utilizando função lambda e curve_fit. Tempo de execução no GoogleColab de 97 ms.</p>
+
+		<figure>
+  				<img src="perfil.png" alt="perfil">
+  				<figcaption><strong>Figura 5: Perfil de velocidades de um fluido.</strong></figcaption>
+		</figure>
+
+		<h2 id="secao3"> 3. Referências </h2>
+		
+		<ul>
+			<li> Curso Online : "Inteligência artificial conceitos, temáticas, desenvolviemnto e aplicações". Unicamp.</li>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+            <li> Apostila gratuita do site da ABEQ : "Métodos Numéricos para Engenheiros Químicos- Algoritmos e aplicações". Argimiro R. Secchi e Evaristo C. Biscaia Jr.</li>
+            <li> Farmacopeia Brasileira Volume 1, 5<sup>a</sup> Edição.</li>
+		</ul>
+
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>

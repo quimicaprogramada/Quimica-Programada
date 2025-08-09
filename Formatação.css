@@ -1,0 +1,70 @@
+/* Fonte limpa e profissional */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Título principal */
+h1 {
+  font-size: 2.2rem;
+  color: #002855;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #00509d;
+  padding-bottom: 10px;
+}
+
+/* Subtítulo */
+h2 {
+  font-size: 1.6rem;
+  color: #00509d;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-left: 5px solid #00509d;
+  padding-left: 10px;
+}
+
+/* Seção de apoio */
+h3 {
+  font-size: 1.2rem;
+  color: #444;
+  margin-top: 25px;
+  margin-bottom: 8px;
+}
+
+/* Parágrafos explicativos */
+p {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  text-align: justify;
+}
+ul {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  text-align: justify;
+}
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto; /* centraliza e dá respiro */
+  max-width: 90%; /* evita imagem muito larga */
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+figcaption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+  font-style: italic;
+}
