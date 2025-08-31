@@ -2,9 +2,21 @@
 <html lang="pt">
 
 	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
 		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
 		<link rel="stylesheet" href="Formatação.css">
 		<title>Química Programada - AnalyTech : Calculadora de Química em HTML, CSS e PHP </title>
+		<meta name="description" content="Calculadora química gratuita em PHP e HTML. Inclui módulos para densidade de líquidos, envase gravimétrico, umidade de sais e titulação do ácido acético.">
 	</head>
 
 	<body>
@@ -35,14 +47,14 @@
 
         <p> No caminho criado pelo usuário no diretório C para instalação dos arquivos da aplicação Xampp, deverá ser criada uma pasta chamada AnalyTech (C:\xampp\htdocs\AnalyTech). A calculadora 
 		deverá ser salva nesta pasta. O programa salvo nessa pasta será acessado através do browser de sua preferência, após a instalação do servidor local, digitando na barra de acesso
-		localhost/AnalyTech. Para aprender a usar um servidor local tipo Xampp, existe um vasto material na internet, recomenda-se os cursos online citados nas referências. Na página incial estão listados
+		localhost/AnalyTech. Para aprender a usar um servidor local tipo Xampp, existe um vasto material na internet, recomenda-se os cursos online citados nas referências. Na página inicial estão listados
 		os diferentes módulos da calculadora. Cada módulo é apenas um exemplo de utilização de formulários HTML e PHP para cálculos na área de química que pode ser alterado para novas utilizações
 		por necessidade do usuários usando um editor de texto gratuito como Sublime, ou mesmo o VSCODE, editando e salvando com a extensão .php. Na <strong>Figura 1</strong>, é exibida a tela da Página Inicial 
 		da calculadora química. </p>
 
 		<figure>
   				<img src="paginainicial.png" alt="inicial">
-  				<figcaption><strong>Figura 1: Página incial da AnalyTech.</strong></figcaption>
+  				<figcaption><strong>Figura 1: Página inicial da AnalyTech.</strong></figcaption>
 		</figure>
 		
 		<h2 id="secao3">3. AnalyTech - Determinação da massa específica e densidade de líquidos</h2>
@@ -50,7 +62,7 @@
         <p> A calculadora AnalyTech tem um módulo para cálculo da massa específica de uma substância líquida na temperatura de 20<sup>o</sup>C, apresentado na <strong>Figura 2</strong>. A massa específica é 
 		determinada pelo método do picnômetro. Nesta página pode-se ver que há uma entrada de dados para massa do picnômetro vazio, configurado para tratar dados com até 4 casas decimais, utilizando o "."
 		(ponto) como separador. Também ha um formulário tipo select onde o usuário pode escolher entre 3 picnômetros A, B ou C, com volumes nominais hipotéticos de 50, 50 e 100 mL. Cada um tem o seu valor real de calibração 
-		que é possível ver no trecho de código da <strong>Figura 3</strong>. Nesse trecho podemos ver que foi feito um formulário HTML nos qual há como entrada massa do picnômtro (que é lida como variável "massavazio") 
+		que é possível ver no trecho de código da <strong>Figura 3</strong>. Nesse trecho podemos ver que foi feito um formulário HTML no qual há como entrada massa do picnômetro (que é lida como variável "massavazio") 
 		e massa do picnômetro com produto (variável "massacomproduto"). Essas variáveis são recebidas quando o código é executado e enviadas pelo método "post" para um outro arquivo php chamado 
 		"Resultado da densidade.php" onde são recebidas e tratadas para cálculo da densidade. Na parte mais abaixo do código vemos que no mesmo formulário tem um trecho select onde há o nome do picnômetro escolhido
 		que deverá aparecer no navegador "Picnômetro A - 50 mL", por exemplo, e a variável com a "tag" value que armazena o valor do volume de calibração do picnômetro que deverá ser alterado pelo usuário. Quando o picnômetro é 
@@ -63,7 +75,7 @@
 		</figure>
 
 		<figure>
-  				<img src="selectdensidade.png" alt="selectdensidade">
+  				<img src="selectdensidade.png" alt="exemplo de uso de formulário select para calcular densidade">
   				<figcaption><strong>Figura 3: Formulário select para cálculo da densidade.</strong></figcaption>
 		</figure>
 
@@ -85,12 +97,12 @@
 		em php devem ser declaradas igualmente às tabelas dos códigos HTML. O resultado dos cálculos é exibido na <strong>Figura 6</strong>.</p>
 
 		<figure>
-  				<img src="calculopicnometro.png" alt="calculopicnometro">
+  				<img src="calculopicnometro.png" alt="exemplo de algoritmo em php para cálculo de densidade por diferença de massas">
   				<figcaption><strong>Figura 5: Leitura dos dados de entrada do picnômetro.</strong></figcaption>
 		</figure>
 
 		<figure>
-  				<img src="resultadodensidade.png" alt="resultadodensidade">
+  				<img src="resultadodensidade.png" alt="como gerar uma tabela automática em php com resultado de cálculos matemáticos">
   				<figcaption><strong>Figura 6: Tabela com resultado dos cálculos.</strong></figcaption>
 		</figure>
 
@@ -114,7 +126,7 @@
 		</figure>
 
         <figure>
-  				<img src="postenvase.png" alt="primeiroenvase">
+  				<img src="postenvase.png" alt="como gerar tabela automática em php com resultado de operação de multiplicação">
   				<figcaption><strong>Figura 9: Primeiro post para dados de envase (array embalagem[]).</strong></figcaption>
 		</figure>
 
@@ -137,23 +149,23 @@
 		</figure>
 
         <p> Os dados de entrada são usados para o cálculo da umidade da amostra de sal que pode ser utilizada para comparar com a umidade do sal puro segundo 
-        previsto na estequiometria do mesmo para saber se essa amostra foi armazenada em condições adequadas e até mesmo ter uma ideia de seu grau de prureza. Esses resultados 
-        são apresentados na imagem da </strong> Figura 12</strong>. </p>
+        previsto na estequiometria do mesmo para saber se essa amostra foi armazenada em condições adequadas e até mesmo ter uma ideia de seu grau de pureza. Esses resultados 
+        são apresentados na imagem da <strong> Figura 12</strong>. </p>
 
         <figure>
   				<img src="resultadosais.png" alt="resultadosais">
   				<figcaption><strong>Figura 12: Resultado do cálculo da umidade de sais.</strong></figcaption>
 		</figure>
 
-        <p> Os detalhes do algoritmo nos arquivos .php de entrada e saída de dados são apresentados nas </strong> Figura 13</strong> e </strong> Figura 14</strong>. </p>
+        <p> Os detalhes do algoritmo nos arquivos .php de entrada e saída de dados são apresentados nas <strong> Figura 13</strong> e <strong> Figura 14</strong>. </p>
         
         <figure>
-  				<img src="entradasais.png" alt="entradasais">
+  				<img src="entradasais.png" alt="formulário php para entrada de dados de massa">
   				<figcaption><strong>Figura 13: Entrada de dados para cálculo da umidade.</strong></figcaption>
 		</figure>
 
         <figure>
-  				<img src="calculosais.png" alt="calculosais">
+  				<img src="calculosais.png" alt="exemplo de algoritmo em php para cálculo de umidade de sais com método do pesa-filtro">
   				<figcaption><strong>Figura 14: Envio de dados pelo método post e cálculo da umidade.</strong></figcaption>
 		</figure>
 
@@ -161,8 +173,8 @@
 
         <p> A calculadora AnalyTech também conta com um módulo para o cálculo da concentração de uma solução de ácido acético que pode ser alterada
         para outras substâncias, alterando os dados de estequiometria no código fonte. O formulário de entrada e a tabela de saída dos resultados são apresentados
-        nas </strong> Figura 15</strong> e </strong> Figura 16</strong>, respectivamente. Os detalhes relevantes do código  são apresentados nas 
-        </strong> Figura 17 </strong> e </strong> Figura 18 </strong>.</p>
+        nas <strong> Figura 15</strong> e <strong> Figura 16</strong>, respectivamente. Os detalhes relevantes do código  são apresentados nas 
+        <strong> Figura 17 </strong> e <strong> Figura 18 </strong>.</p>
 
         <figure>
   				<img src="entradaacidoacetico.png" alt="entradaacido">
@@ -170,7 +182,7 @@
 		</figure>
 		
         <figure>
-  				<img src="resultadoacido.png" alt="resultadoacido">
+  				<img src="resultadoacido.png" alt="exemplo de algoritmo em php para calcular resultado de titulação">
   				<figcaption><strong>Figura 16: Tabela de saída de dados do ácido acético.</strong></figcaption>
 		</figure>
 
@@ -180,7 +192,7 @@
 		</figure>
 		
         <figure>
-  				<img src="concentracaoacetico.png" alt="concentracaoacetico">
+  				<img src="concentracaoacetico.png" alt="cálculo de concentração de ácido titulado com base forte com algoritmo em php">
   				<figcaption><strong>Figura 18: Envio de dados e cálculos.</strong></figcaption>
 		</figure>
         

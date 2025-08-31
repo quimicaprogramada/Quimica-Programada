@@ -2,9 +2,21 @@
 <html lang="pt">
 
 	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
 		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
 		<title> Química Programada - Regressão Linear e tratamento de dados em Python </title>
 		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Uso de programação em Python para ajuste de curvas de densidade de líquidos usando algoritmo tradicional, biblioteca scipy.optimize e função lambda e polinômios.Perfil de velocidade de fluidos.">
 	</head>
 
 
@@ -33,7 +45,7 @@
 		</figure>
 		
         <figure>
-  				<img src="ajustelinear.png" alt="ajustelinear">
+  				<img src="ajustelinear.png" alt="ajuste linear em python para engenharia química">
   				<figcaption><strong>Figura 2: Ajuste da densidade do propilenoglicol (dados obtidos por Química Programada).</strong></figcaption>
 		</figure>
 
@@ -42,7 +54,7 @@
 		conjunto de dados o tempo de execução foi de 94 ms e os parâmetros da curva foram praticamente os mesmos.
 		
 		 <figure>
-  				<img src="curvefitdens.png" alt="curvefitdens">
+  				<img src="curvefitdens.png" alt="curve_fit e scipy.optimize na engenharia química">
   				<figcaption><strong>Figura 3: Ajuste da densidade do propilenoglicol com curve_fit (dados obtidos por Química Programada).</strong></figcaption>
 		</figure>
 
@@ -50,11 +62,11 @@
 
 		<p> Na <strong> Figura 4 </strong> foi utilizado um polinômio de grau 3 como função lambda para ajustar a densidade da água, com um bom resultado para o máximo da curva
 		e com bom ajuste para para valores de temperatura à esquerda do máximo, o que não acontece com o uso de uma parábola como modelo. O tempo de execução foi de 206 ms
-		no GoogleColab e a solução é bastant simples, pois não é necessário de um algoritmo para o ajuste, tampouco definir uma função para o polinômio - são usados as
+		no GoogleColab e a solução é bastante simples, pois não é necessário de um algoritmo para o ajuste, tampouco definir uma função para o polinômio - são usados as
 		funções da biblioteca do Python. </p>
 
 		<figure>
-  				<img src="polinomialagua.png" alt="polinomialagua">
+  				<img src="polinomialagua.png" alt="ajuste polinomial na engenharia química">
   				<figcaption><strong>Figura 4: Ajuste da densidade do água com curve_fit.</strong></figcaption>
 		</figure>
 
@@ -64,7 +76,7 @@
 		a solução em Python utilizando função lambda e curve_fit. Tempo de execução no GoogleColab de 97 ms.</p>
 
 		<figure>
-  				<img src="perfil.png" alt="perfil">
+  				<img src="perfil.png" alt="perfil de velocidade de fluido em escoamento, método numérico na engenharia química">
   				<figcaption><strong>Figura 5: Perfil de velocidades de um fluido.</strong></figcaption>
 		</figure>
 

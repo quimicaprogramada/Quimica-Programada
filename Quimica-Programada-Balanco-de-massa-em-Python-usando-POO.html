@@ -2,9 +2,21 @@
 <html lang="pt">
 
 	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
 		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
 		<link rel="stylesheet" href="Formatação.css">
 		<title>Química Programada - Balanço de massa usando POO (Programação Orientada a Objetos)</title>
+		<meta name="description" content="Aprenda a modelar balanços de massa em Python com POO, sem bibliotecas externas. Aplicações práticas para engenharia química e tratamento de efluentes.">
 	</head>
 
 	<body>
@@ -27,50 +39,51 @@
         representar as correntes de fluidos em um balanço de massa estacionário e seus atribuitos são : vazão e concentração mássica dos componentes. </p>
         
         <figure>
-  				<img src="classecorrente.png" alt="corrente">
+  				<img src="classecorrente.png" alt="Exemplo de código Python em POO para representar uma corrente em balanço de massa">
   				<figcaption><strong>Figura 1: Estrutura de uma classe com atributos.</strong></figcaption>
 		</figure>
 
-        <p> Num processo em que temos uma corrente de alimentação com vazão de 100 m<sup>3</sup>/d, concentração do componete A de 10 g/L e do componente B de 5 g/L e uma outra
-        corrente de recirculação com vazão de 25 m<sup>3</sup>/d, concentração do componente A de 3 g/L e do componente B de 1 g/L, os objetos da classe corrente devem ser instanciados 
+        <p> Num processo em que temos uma corrente de alimentação com vazão de 100 m<sup>3</sup>/d, uma concentração do componete A de 10 g/L e uma concentração do componente B de 5 g/L e uma outra
+        corrente de recirculação com vazão de 25 m<sup>3</sup>/d, uma concentração do componente A de 3 g/L e uma concentração do componente B de 1 g/L, os objetos da classe corrente devem ser instanciados 
         conforme <strong> Figura 2</strong>.</p>
 
         <figure>
-  				<img src="objetoscorrente.png" alt="objetocorrente">
+  				<img src="objetoscorrente.png" alt="instância de um objeto da classe corrente">
   				<figcaption><strong>Figura 2: Declaração dos objetos da classe corrente.</strong></figcaption>
 		</figure>
 
-        <p> Para outros elementos do fluxograma de um balanço de massa, que possuem propriedades que precisam ser definidas através de alguma função (manipulação de dados dos atributos das correntes), além dos atributos, é necessário
-        a definição de um método. O método irá utilizar dados do processo(atributos) para calcular as incógnitas que fecharão o balanço de massa. Na <strong> Figura 3</strong>  
+        <p> Para os outros elementos do fluxograma de um balanço de massa, que possuem propriedades que precisam ser definidas através de alguma função (manipulação matemática dos dados dos atributos das correntes), além dos atributos, é necessário
+        a definição de um método. O método irá utilizar dados do processo (atributos) para calcular as incógnitas que fecharão o balanço de massa. Na <strong> Figura 3</strong>  
         é apresentada a classe reator. Seu único atributo é a eficiência de remoção do componente A. Com esse dados, é possível calcular a concentração 
         do compente A na corrente de saída do reator, através do método calcular_CompA. Com os dados dos atributos da corrente de alimentação que foram definidos na <strong> Figura 2</strong>, 
         o resultado da concentração do componete A obtida foi de 3 g/L.</p>
 
         <figure>
-  				<img src="classereator.png" alt="reator">
+  				<img src="classereator.png" alt="declaração de uma classe representando um reator">
   				<figcaption><strong>Figura 3: Estrutura da classe reator e cálculo do método calcular_CompA.</strong></figcaption>
 		</figure>
 
         
-		<h2 id="secao2"> 2. Biodigestor de Lagoa Coberta - Dimensionamento Unidade de Precipitação Química do Fósforo  </h2>
+		<h2 id="secao2"> 2. Biodigestor de Lagoa Coberta - Dimensionamento de uma Unidade de Precipitação Química do Fósforo  </h2>
 
 		<h3> 2.1 Apresentação do Problema </h3>
 
         <p> O problema é apresentado na página 203 do livro <i> Fundamentos da Digestão Anaeróbia, Purificação do Biogás, Uso e Tratamento do Digestato, 2<sup>
-        a</sup> Edição, Embrapa.</i> Os dados diponíveis são apresentados na Fluxograma da <strong>Figura 4</strong> e com essas informações é necessário dimensionar 
+        a</sup> Edição, Embrapa.</i> Os dados disponíveis são apresentados no Fluxograma da <strong>Figura 4</strong> e com essas informações é necessário dimensionar 
         um sistema de remoção de fósforo do digestato oriundo de biodigestores de rejeitos suínos por precipitação química com uso de Ca(OH)<sub>2</sub>. Deverão 
         ser dimensionados uma unidade de mistura rápida da cal com o efluente, um decantador e o consumo diário de Ca(OH)<sub>2</sub>.</p>
 
         <figure>
-  				<img src="fluxogramacal.png" alt="esquemacal">
+  				<img src="fluxogramacal.png" alt="fluxograma do balanço de massa para remoção de fósforo de efluente de biodigestor">
   				<figcaption><strong>Figura 4: Fluxograma sistema de remoção de fósforo com Ca(OH)<sub>2</sub>.</strong></figcaption>
 		</figure>
 
-        <p> Nesse processo, temos como dado do problema a vazão de Alimentação de 220 m<sup>3</sup>/d e sua concentração de fósforo de 1,33 g/L. As vazões do lodo 
+        <p> Nesse processo, temos como dados do problema a vazão de Alimentação de 220 m<sup>3</sup>/d e sua concentração de fósforo de 1,33 g/L. As vazões do lodo 
         descartado no Biodigestor de Lagoa Coberta é de  8 m<sup>3</sup>/d e do lodo descartado no Reator de Nitrificação e Desnitrificação de 6 m<sup>3</sup>/d. São
         também fornecidas as eficiências do Reator de Nitrificação e Desnitrificação com valores de 86 e 75% respectivamente. A cal utilizada tem uma pureza de 90% e 
         é injetada no processo na forma de solução aquosa com concetração de 100 g/L. Deverão ser calculados os volumes da Unidade de Mistura Rápida para a cal e o 
-        efluente do reator de nitrificação e desnitrificação para se obter uma eficiência de remoção de fósforo no sistema - Unidade de Mistura Rápida_Decantador - de 90%.</p>
+        efluente do reator de nitrificação e desnitrificação para se obter uma eficiência de remoção de fósforo no sistema - <strong>Unidade de Mistura Rápida_Decantador</strong> - de 90%.
+		Para esses parâmetros, o tempo de retenção hidráulica na Unidade de Mistura Rápida é de 1 minuto, enquanto que no decantador é de 6 horas.</p>
         
         <h3> 2.2 Solução do Problema com POO em Python </h3>
 
@@ -92,12 +105,12 @@
 		</figure>
 
         <figure>
-  				<img src="equipamentos.py.png" alt="equipamentos">
+  				<img src="equipamentos.py.png" alt="declaração de uma classe representanto um equipamento">
   				<figcaption><strong>Figura 7: Módulo Equipamentos.py.</strong></figcaption>
 		</figure>
 
         <figure>
-  				<img src="quimicos.py.png" alt="quimicos">
+  				<img src="quimicos.py.png" alt="definição de uma classe representando sistema de dosagem de produtos quimicos">
   				<figcaption><strong>Figura 8: Módulo Quimicos.py.</strong></figcaption>
 		</figure>
 
@@ -111,8 +124,8 @@
   				<figcaption><strong>Figura 10: Resultado do dimensionamento.</strong></figcaption>
 		</figure>
     
-        <p>Essa aplicação pode ser usada para simular, por exemplo, com uma vazão constante, como será a variação o aumento da concentração de fósforo no efluente final.
-        Também pode ser usado para estimar a dosagem de coagulante para diferentes eficiências de remoção de fósforo no secundário, entre outros cenários.</p>
+        <p>Essa aplicação pode ser usada para simular, por exemplo, com uma vazão constante, como será a variação da concentração de fósforo no efluente final.
+        Também pode ser usada para estimar a dosagem de coagulante para diferentes eficiências de remoção de fósforo no secundário, entre outros cenários.</p>
         
         <h3> 2.3 Referências: </h3>
 
@@ -130,23 +143,23 @@
 
         <p> No artigo técnico <i> Otimização de Processos Físico-químicos na Remoção de Fósforo de Esgotos Sanitários por Processos de Precipitação Química com Cloreto Férrico</i> foi analisada a eficiência de remoção
         de fósforo em uma ETE. Foi realizado "jar-test" no esgoto bruto na entrada do tratamento secundário do tipo lodo ativado e com o efluente final da unidade. A caracterização das correntes revelou que o Esgoto Bruto
-        tinha uma concentração de fósforo total de 9 mg/L. Já o efluente final apresentou 5 mg/L de fósforo total. Essas dados nos permitem concluir que a eficiência do lodo ativado da ETE de lodo ativado estava em 44%, 
+        tinha uma concentração de fósforo total de 9 mg/L. Já o efluente final apresentou 5 mg/L de fósforo total. Essas dados nos permitem concluir que a eficiência da ETE de lodo ativado estava em 44%, 
         dentro da faixa típica de operação segundo o material fornecido no curso "Remoção de Nitrogênio e Fósforo em ETEs" ministrado por Mario Marmo Farias Peirano e Waltair Tessler no Senge/RS. Foi testado o tratamento 
-        com FeCl<sub>3</sub> tanto no Esgoto Bruto como no efluente final da unidade. Para obter uma eficiência em torno de 85-90%, o esgoto bruto foi tratado com uma relações estequiométrica de 6,67 mg FeCl<sub>3</sub>/
-        mg de P, enquanto que o efluente final teve que ser tratado com uma relações estequiométrica de 20 mg de FeCl<sub>3</sub>/ mg de P.</p>
+        com FeCl<sub>3</sub> tanto no Esgoto Bruto como no efluente final da unidade. Para obter uma eficiência em torno de 85-90%, o esgoto bruto foi tratado com uma relação estequiométrica de 6,67 mg FeCl<sub>3</sub>/
+        mg de P, enquanto que o efluente final teve que ser tratado com uma relação estequiométrica de 20 mg de FeCl<sub>3</sub>/ mg de P.</p>
 
         <h3> 3.2 Utilização dos Dados para um Estudo de Caso </h3>
 
         <h3> 3.2.1 Modelagem de uma ETE com Lodo Ativado e um Filtro como Tratamento Terciário  </h3>
 
-        <p> Na <strong> Figura 11</strong> é apresentado o esquema de uma ETE hipotética com a mesma vazão de alimentação, mesmas concentrações de fósforo na alimentação e na saída do secundário que a estudada no artigo citado. Foi admitido que o sistema 
-        Lodo Ativado - Decantador teve uma eficiência de 44%. O descarte de lodo foi estimado em 1,5% da alimentação. Foi desenvolvida uma aplicação em Python para estimar (e confirmar) a concentração de fósforo na corrente 
+        <p> Na <strong> Figura 11</strong> é apresentado o esquema de uma ETE hipotética com a mesma vazão de alimentação, com as mesmas concentrações de fósforo na alimentação e na saída do secundário do que fopi apresentado no artigo citado. Foi admitido que o sistema 
+        <strong>Lodo Ativado - Decantador</strong>teve uma eficiência de 44%. O descarte de lodo foi estimado em 1,5% da corrente de alimentação. Foi desenvolvida uma aplicação em Python para estimar (e confirmar) a concentração de fósforo na corrente 
         de saída da ETE hipotética, considerando uma eficiência de remoção do fósforo recolhido no sistema de filtros de 85%, uma vez que a injeção de FeCl<sub>3</sub> realizada seguiu a estequimetria de 20 mg de FeCl<sub>3</sub>/ mg de P. Foi também estimado o consumo de cloreto férrico, 
         supondo a aplicação de uma solução 40% (400 g de FeCl<sub>3</sub>/L). O resultado do fósforo final ficou em 0,7 mg/L. Os módulo que descrevem as classes programadas para resolução do problema são apresentadas na 
         <strong> Figura 12</strong> a <strong> Figura 14</strong> e o aquivo Main.py na <strong> Figura 15</strong>. O resultado obtido é apresentado na <strong> Figura 16</strong>. </p>
 
         <figure>
-  				<img src="fluxogramacloreto.png" alt="cloreto">
+  				<img src="fluxogramacloreto.png" alt="fluxograma do balanço de massa para remoção de fósforo em uma estação de tratamento de efluentes (ETE)">
   				<figcaption><strong>Figura 11: Fluxograma de uma ETE com lodo ativado e filtro como tratamento terciário.</strong></figcaption>
 		</figure>
 

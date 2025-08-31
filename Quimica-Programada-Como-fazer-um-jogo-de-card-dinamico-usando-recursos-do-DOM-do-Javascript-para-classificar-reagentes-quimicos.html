@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Como fazer um jogo de card dinâmico usando recursos do DOM do Javascript para classificar reagentes químicos</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Uso do DOM e ferramentas dinâmicas como botões e addEventListener para criar um jogo de classificação de reagentes químicos.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Como fazer um jogo de card dinâmico usando recursos do DOM do Javascript para classificar reagentes químicos </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Exemplo de Algoritmo</a></li>
+			<li><a href="#secao3"> 3. Instruções de uso do QuimSeg Card</a></li>
+            <li><a href="#secao4"> 4. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+		<p> A criação de páginas HTML integradas com a linguagem Javascript possibilita o desenvolvimento de interfaces dinâmicas e interativas através da utilização do DOM (Documento Object Model)
+        para representar os dados e os elementos de um documento web. Alguns elementos do HTML (div, botões, classes, objetos) podem ser manipulados, acessados e associados 
+        a eventos dinâmicos no código ".js". Nessa aplicação do Química Programada demonstramos como algumas funções podem ser usadas para elaborar um jogo de manipulação de "cards"
+        representando alguns reagentes químicos para fazer um jogo educativo. O primeiro jogo elaborado para o site se propõe a usar algumas caixas e alguns "cards" com nomes de alguns 
+        reagentes químicos usados em laboratórios e como matéria-prima para aprender a classificá-los de acordo com o risco associado (reação violenta com a água, inflamável
+        ou oxidante). Mas a mesma estrutura pode ser reaproveitada para elaborar novos jogos de "cards"  para classificar tipos de gases e risco associado, tipos de poluentes, etc.
+        Basta apenas o usuário entender a estrutura utilizada e alterar o código onde for conveniente.</p>
+		
+        <h2 id="secao2"> 2. Exemplo de Algoritmo </h2>
+
+        <p> Na <strong>Figura 1</strong> é apresentado o trecho de código HTML no qual é declarada uma classe chamada "lado-esquerdo" consistindo de uma caixa com caraterísticas 
+        de cor interna e borda descritas no arquivo ".css" associado. Na <strong> Figura 2</strong> são apresentados 3 caixas associadas a 2 botões (escolher e voltar) que servem 
+        para manipular os "cards" de produtos químicos da caixa da esquerda para a caixa adequada da direita, segundo sua característica (produto com reação violenta com a água, produto inflamável ou produto 
+        oxidante). O resultado dessas estruturas no browser no estado inicial é apresentado na <strong> Figura 3 </strong> : caixa azul → para destinar os produtos com reação violenta com a 
+        água; caixa vermelho-alaranjada → para destinar os produtos inflamáveis; caixa lilás → para destinar os produtos oxidantes.</p>
+		
+        <figure>
+  				<img src="caixaesquerda.png" alt="lista de produtos químicos num div">
+  				<figcaption><strong>Figura 1: Declaração de um 'div' representando uma caixa com "cards" de produtos químicos.</strong></figcaption>
+		</figure>
+		
+        <figure>
+  				<img src="caixasdireita.png" alt="caixas de classificação de produtos químicos">
+  				<figcaption><strong>Figura 2: Declaração de caixas destino e dos botões para classificação dos produtos químicos.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="resultadocaixas.png" alt="estrutura de cards no browser">
+  				<figcaption><strong>Figura 3: Resultado da estrutura do Jogo de "cards" em javascript.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong>Figura 4</strong> são apresentadas as configurações em css das duas classes ".produto" e ".p1" usadas para declarar e configurar os "cards"
+        de produtos químicos. Na <strong>Figura 5</strong> são apresentadas as configurações em css das classes desenvolvidas para declarar a caixa principal do lado esquerdo,
+        onde os "cards" ficam no estado inicial e um exemplo da classe ".caixap2", que são as caixas pequenas que se posicionam à 
+        direita para classificação dos produtos químicos.</p>
+
+        <figure>
+  				<img src="cardsprodutos.png" alt="arquivo css das classes produtos">
+  				<figcaption><strong>Figura 4: Trecho de código css de declaração das classes ".produto" e ".p1".</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="estruturacaixas.png" alt="arquivo css das classes caixas">
+  				<figcaption><strong>Figura 5: Trecho de código css de declaração das classes caixa grande e caixa pequena.</strong></figcaption>
+		</figure>
+
+        <p> Os comandos querySelector / querySelectorAll são usados para selecionar os elementos descritos no html e no css (as classes que foram declaradas)
+        para posteriormente serem associadas a eventos dinâmicos. Além disso, é necessário indicar qual o destino certo de cada produto, como é apresentado 
+        <strong>Figura 6</strong> onde tem a lista p1 : caixa2 e assim sucessivamente.
+        </p>
+
+        <figure>
+  				<img src="selecaoclasses.png" alt="arquivo js recebendo elementos no DOM">
+  				<figcaption><strong>Figura 6: Trecho de código js recebendo elementos no DOM.</strong></figcaption>
+		</figure>
+
+        <p> No arquivo ".js" também são definidos os eventos que são associados a eventos dinâmicos que podem ser realizados com os "cards". O primeiro 
+        deles, apresentado na <strong> Figura 7 </strong>, é um evento associado a todos os produtos - <strong> a seleção do "card" para movimentar quando é feito o 
+        clique sobre o mesmo </strong>. Como todos os "cards"estão inicialmente na caixa da esquerda, deve-se primeiro clicar sobre um deles para realizar a movimentação para alguma caixa da direita. Nesse clique,
+        o card passa a ficar na cor vermelha, pois foi definido no css uma classe ".selecionado" cuja cor é essa. Depois disso, o usuário deve escolher qual
+        botão utilizar : btn1 → enviar para caixa azul (produto reage violentamente com água), btn3 → enviar para caixa vermelho-alaranjada (produto inflamável)
+        ou btn4 → enviar para caixa lilás (produto oxidante). Se o "card" <strong> retornar para cor azul clara</strong> o usuário acertou a classificação do produto.
+        Se ele permanecer vermelho, a classificação foi feita errada (no evento de seleção dos botões btn1, btn2, btn3 tem um <strong>comando if</strong>,
+        onde o "card" permanece vermelho, pois foi definida uma classe ".erro" no css, cuja cor é a mesma da classe ".selecionado").
+        Nessa situação, basta o usuário selecionar o botão de retorno (bvolt1, bvolt2 ou bvolt3) para a caixa da esquerda e tentar novamente. 
+        Repare que no evento dos botões de escolha (btn1, btn2 e btn3), há um filtro que impede a movimentação entre
+        as caixas pequenas. Se o usuário errar, terá que retornar para a caixa da esquerda e tentar novamente. Também observe que há um
+        <strong>comando if</strong> que impede o envio de mais de 3 produtos para uma mesma caixa, apresentando uma mensagem de erro.</p>
+
+        <figure>
+  				<img src="selecaobotao.png" alt="arquivo js evento de seleção de card e movimentação">
+  				<figcaption><strong>Figura 7: Seleção do card e envio para a caixa adequada.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="botaovolta.png" alt="arquivo js evento de retorno para caixa inicial">
+  				<figcaption><strong>Figura 8: Botão associado ao evento de retorno.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao3"> 3. Instruções de uso QuimSeg Card </h2>
+
+		<p> O QuimSeg Card está no link a seguir : <a href="Quimica-Programada-QuimSeg-Card-um-jogo-de-classificacao-de-risco-de-reagentes-quimicos.html"> QuimSeg Card</a>
+         Selecione o "card" que deseja movimentar e envie para a caixa que julgue adequada. Se durante a migração, o "card" retornar
+        para coloração azul clara, você acertou a classificação. Se permanecer vermelho, errou. Retorne para a caixa da esquerda e tente outra vez.
+        Preste atenção na mensagem de erro se tentar enviar mais de 3 produtos para uma mesma caixa. Ao final, você pode selecionar um a um nas
+        caixas da direita (coloridas) e enviar os "cards" de volta para caixa de partida ou apenas das um <strong> refresh</strong> no browser.</p>
+
+		<h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+		    <li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+            <li> Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+            <li> "Curso de Javascript Moderno". CFB Cursos, Canal do Professor Bruno P. Campos no Youtube.<a href="https://www.youtube.com/watch?v=94KKNdx42lM&list=PLaQIDUTaGtn-stzQrwP9cA1WuiTeV95Oz&index=30">Acesse o conteúdo</a>.</li>
+            <li> Assistente de IA da Microsoft Pilot.</li>
+            <li> Assistente de IA do ChatGPT.</li>
+            <li> Manual de Segurança para Proteção Química CBPF.<a href='https://www.gov.br/cbpf/pt-br/acesso-a-informacao/Manual_Seg_Labs_CBPF.pdf'>Acesse o documento</a>.</li>
+            <li> NR 20 - Segurança e saúde no trabalho com inflamáveis e combustíveis.
+            <a href='https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-20-atualizada-2025.pdf'>Acesse o documento</a>.</li>
+        </ul>
+
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
