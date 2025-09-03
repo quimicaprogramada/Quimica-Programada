@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V8PJ6273R4');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width;initial-scale=1.0">
+    <title>Química Programada - QuimSeg Card<strong style="color: orange;">Gases</strong> um jogo de classificação de risco de reagentes gases</title>
+    <link rel="stylesheet" type="text/css" href="estilocaixa.css" />
+    <meta name="description" content="Classificação de gases perigosos com DOM em JavaScript: cards dinâmicos, botões interativos e eventos com addEventListener.">
+</head>
+
+<body>
+    <p style="text-align: center; font-size: 18px;">
+    <strong>QuimSeg Card </strong><strong style="color: orange;"> Gases</strong>
+    </p>
+    <p style="text-align: center; font-size: 18px;">
+    <strong>
+    caixa azul → asfixiantes simples; caixa vermelho-alaranjada → tóxicos; caixa lilás → explosivos
+    </strong>
+    </p>
+
+
+    <main>
+        <!-- Lado esquerdo com produtos -->
+        <div class="lado-esquerdo">
+            <div id="caixa1" class="caixa">
+                <div id="p1" class="produto p1"><p>N<sub>2</sub></p></div>
+                <div id="p2" class="produto p1"><p>Cl<sub>2</sub></p></div>
+                <div id="p3" class="produto p1"><p>H<sub>2</sub></p></div>
+                <div id="p4" class="produto p1"><p>CH<sub>4</sub></p></div>
+                <div id="p5" class="produto p1"><p>H<sub>2</sub>S</p></div>
+                <div id="p6" class="produto p1"><p>CO<sub>2</sub></p></div>
+                <div id="p7" class="produto p1"><p>C<sub>2</sub>H<sub>2</sub></p></div>
+                <div id="p8" class="produto p1"><p>CO</p></div>
+                <div id="p9" class="produto p1"><p>Ar</p></div>
+            </div>
+        </div>
+
+        <!-- Lado direito com caixas menores -->
+        <div class="lado-direito">
+            <div class="grupo">
+                <button id="btn_escolher1">escolher →</button>
+                <button id="btn_voltar1" title="Volta para a caixa principal">← voltar</button>
+                <div id="caixa2" class="caixap2"></div>
+            </div>
+            <div class="grupo">
+                <button id="btn_escolher2">escolher →</button>
+                <button id="btn_voltar2" title="Volta para a caixa principal">← voltar</button>
+                <div id="caixa3" class="caixap3"></div>
+            </div>
+            <div class="grupo">
+                <button id="btn_escolher3">escolher →</button>
+                <button id="btn_voltar3" title="Volta para a caixa principal">← voltar</button>
+                <div id="caixa4" class="caixap4"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="caixa.js"></script>
+			
+    <p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+</body>
+
+</html>
