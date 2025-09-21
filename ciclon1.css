@@ -1,0 +1,27 @@
+#cardContainer {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card {
+  padding: 10px;
+  background-color: #c56e6e;
+  border: 1px solid #ccc;
+  cursor: move;
+  width: 200px;
+  text-align: center;
+}
+
+.correct {
+  background-color: #4e84a4;
+}
+
+#feedback {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #dff0d8;
+  border: 1px solid #a3c293;
+}

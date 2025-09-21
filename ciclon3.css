@@ -1,0 +1,166 @@
+.jogo-biologico {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.container-jogo2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.lado-esquerdo2 {
+  flex: 1;
+}
+.lado-direito2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.grupo2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+button{
+    width: 150px;
+    height : 40px;
+    background-color: #025;
+    color:#fff;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.erro2 {
+  background-color: #800; /* vermelho escuro */
+  color: #fff;
+  border-color: #f00;
+}
+
+.bioprocesso{
+    display :flex;
+    justify-content:center;
+    width:270px;
+    border:4px solid #888;
+    border-radius: 10px;
+    padding:10px;
+    margin: 5px 0px;
+    cursor: pointer;
+
+}
+.b1{
+    background-color: rgb(3, 17, 17);
+    color:rgb(243, 238, 238)
+}
+.selecionado2{
+    background-color: #800 !important;
+    color:#fcc !important;
+    border-color: #f00 !important;
+}
+.bioprocesso:hover{
+    border-color:red
+}
+
+.caixa2{
+    border: 4px solid #000;
+    background-color: #eee;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 700px;
+    width : 300px;
+
+}
+.caixap22{
+    border: 4px solid #000;
+    background-color: #00BFFF;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 150px;
+    width : 300px;
+
+}
+.caixap32{
+    border: 4px solid #000;
+    background-color: #e9b75a;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 150px;
+    width : 300px;
+
+}
+.caixap42{
+    border: 4px solid #000;
+    background-color: #6fd077;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 120px;
+    width : 300px;
+
+}
+.caixap52{
+    border: 4px solid #000;
+    background-color: #935291;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 120px;
+    width : 300px;
+
+}
+/* Texto de marca d’água */
+#caixaBio2::before {
+  content: "Fixação de N₂ : alguns organismos são capazes de realizar esse processo de forma autotrófica ou heterotrófica.";
+}
+#caixaBio3::before {
+  content: "Amonificação : proteínas e aminoácidos presentes no ambiente são decompostos por algumas bactérias liberando amônia no solo ou na água.";
+}
+#caixaBio4::before {
+  content: "Nitrosação : algumas bactérias presentes no solo ou na água transformam o amônio presente em nitrito.";
+}
+#caixaBio5::before {
+  content: "Nitratação : algumas bactérias são capazes de oxidar o nitrito em nitrato, que é usado na síntese proteica de organismos.";
+}
+
+/* Estilo da marca d’água */
+#caixaBio2::before,
+#caixaBio3::before,
+#caixaBio4::before,
+#caixaBio5::before {
+  position: absolute;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.304); /* cor acinzentada, meio transparente */
+  font-size: 18px;
+  text-align: center;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* não atrapalha os cliques nos cards */
+}
+
+/* Necessário para funcionar: cada caixa deve ser relativa */
+#caixaBio2, #caixaBio3, #caixaBio4, #caixaBio5 {
+  position: relative;
+}

@@ -37,8 +37,14 @@
     <priority>0.7</priority>
   </url>
    <url>
-    <loc>https://quimicaprogramada.github.io/Quimica-Programada-QuimSeg-Card-Gases-um-jogo-de-classificacao-de-risco-de-gases.html</loc>
+    <loc>https://quimicaprogramada.github.io/Quimica-Programada/Quimica-Programada-QuimSeg-Card-Gases-um-jogo-de-classificacao-de-risco-de-gases.html</loc>
     <lastmod>2025-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://quimicaprogramada.github.io/Quimica-Programada/Quimica-Programada-Pagina-Dinamica-para-aprender-sobre-o-Ciclo-de-Nitrogenio-Parte-1.html</loc>
+    <lastmod>2025-09-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

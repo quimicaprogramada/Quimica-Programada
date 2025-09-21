@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-V8PJ6273R4');
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Química Programada - Ciclo do Nitrogênio Parte 1</title>
+    <link rel="stylesheet" href="Formatação.css">
+    <link rel="stylesheet" href="ciclon1.css">
+    <link rel="stylesheet" href="ciclon2.css">
+    <link rel="stylesheet" href="ciclon3.css">
+    <meta name="description"
+        content="Entenda o ciclo do nitrogênio com jogos interativos e simulações químicas e biológicas desenvolvidas em HTML, 
+        CSS e Javascript. Jogos sobre processos Bosch-Meiser, Processo Haber-Bosch, amonificação, fixação de nitrogênio, 
+        nitrosação, nitratação.">
+</head>
+
+<body>
+    <!-- Aqui está o corpo da página -->
+    <h1>Química Programada - Ciclo do Nitrogênio Parte 1 - Processos de Fixação do N<sub>2</sub>(g) </h1>
+
+    <h3>Seções</h3>
+    <ul>
+        <li><a href="#secao1">1. Introdução</a></li>
+        <li><a href="#secao2">2. Jogo interativo para entender as Rotas Químicas do Nitrogênio</a></li>
+        <li><a href="#secao3">3. Jogo interativo para entender Rota Biológica do Nitrogênio</a></li>
+        <li><a href="#secao4">4. Referências</a></li>
+    </ul>
+
+    <h2 id="secao1">1. Introdução</h2>
+
+    <p>O nitrogênio é um composto químico de número atômico 7. É o gás mais abundante da atmosfera, com uma concentração de 79%. A importância
+        da compreensão da química do nitrogênio advém de 6 fatores principais:</p>
+
+    <ul>
+        <li>Ele representa 16% do corpo humano;</li>
+        <li>É fonte limitante do crescimento de vegetais;</li>
+        <li>Ao lado do fósforo (P), enxofre (S) e potássio (K), é um dos elementos químicos mais importantes para a produtividade agrícola;</li>
+        <li>Na sua forma mais abundante, N<sub>2</sub>(g), não pode ser metabolizado por organismos superiores;</li>
+        <li>Cátions e ânions nitrogenados, em concentrações elevadas em cursos de água, causam uma forma de poluição que pode afetar de forma dramática a qualidade
+            da água disponível para os seres vivos;</li>
+        <li>Os óxidos de nitrogênio, em suas diversas formas, são uma importante forma de poluição atmosférica.</li>
+    </ul>
+
+    <p>Esse elemento está presente em várias formas de seres vivos, constituindo moléculas como clorofila, proteínas e aminoácidos, fazendo parte dos processos
+        de transferência de elétrons no interior de células e, também, sendo detectado nas diversas formas de excreção dos seres vivos. Adicionalmente deve ser produzido
+        industrialmente, pois como foi descrito acima, para manter nossa elevada produção agrícola, dependemos da síntese acelerada de compostos nitrogenados. Em vista
+        disso, é interessante entender em detalhes as reações responsáveis pela entrada desse composto nos ciclos biológicos, suas transformações,
+        para atuar de forma efetiva em casos de escassez, de descontrole ou de excesso do mesmo em algum sistema (ou ecossistema), sendo capazes de remediar o problema.</p>
+
+    <h2 id="secao2">2. Jogo interativo para entender as Rotas Químicas do Nitrogênio</h2>
+
+    <p>O nitrogênio, na sua forma N<sub>2</sub>(g), não pode ser absorvido pelos seres vivos. Existem duas <strong>Rotas Químicas</strong> para formação de compostos
+        nitrogenados assimiláveis: uma <strong style="color: orange;">Natural</strong>, disponibilizando formas de NO<sub>3</sub><sup>-</sup> e NO<sub>2</sub><sup>-</sup>
+        como nutrientes para os vegetais e outra <strong style="color: orange;">Industrial</strong>, formando amônia e uréia, que também entram nos ciclos biológicos.</p>
+
+    <div id="game">
+        <h3>Jogo da Rota Química Natural do Ciclo do Nitrogênio</h3>
+        <p>Tente ordenar os cartões abaixo, que esquematizam o processo de fixação atmosférica do N<sub>2</sub>(g). Através da ação das descargas elétricas dos raios, o ar
+            pode ser aquecido a temperaturas superiores a 30.000<sup>o</sup>C. Dessa forma, o N<sub>2</sub>(g) inerte, inicia uma sequência de transformações até chegar ao solo
+            na forma de nutriente para as plantas. Quando os cartões estiverem ordenados corretamente, todos ficarão azuis e aparecerá uma mensagem abaixo com explicações adicionais
+            sobre o ciclo do nitrogênio.</p>
+        <ul id="cardContainer"></ul>
+        <div id="feedback" style="display:none;"></div>
+    </div>
+
+    <script src="ciclon1.js"></script>
+
+    <h3>Jogo da Rota Química Industrial do Ciclo do Nitrogênio</h3>
+    
+    <p> Outra forma de fixação do N<sub>2</sub>(g)  ocorre através da <strong style="color: orange;">Rota Química Industrial</strong>. A conversão do nitrogênio em amônia
+    é realizada através do processo <strong>Haber-Bosch</strong>, desenvolvido em laboratório por Fritz Haber em 1908 e industrialmente 
+    por Carl Bosch em 1912. A amônia é um composto nitrogenado que é assimilável por alguns organismos. Mas também pode ser transforma da em fertilizantes, como a uréia, através 
+    do processo <strong>Bosch-Meiser</strong>. Esse processo foi patenteado em 1922 pelos cientistas Carl Bosch and Wilhelm Meiser. </p>
+
+    <p> Abaixo você pode tentar selecionar as características do processo <strong>Haber-Bosch</strong>, clicando sobre o "card" na caixa esquerda e enviar para a caixa superior da direita de cor azul.
+    Quando você selecionar o "card" na caixa da direita, ele ficará vermelho e quando for enviado para caixa correta na direita, ele retornará para cor azul. O mesmo para pode ser feito com as 
+    características do processo <strong>Bosch-Meiser</strong>. Você seleciona na caixa da direita, o "card" fica vermelho e deve enviar para a caixa inferior da direita. Se a escolha estiver correta,
+    o "card" selecionado permanecerá na cor azul. Se você errar, o "card" ficará vermelho e você deve retorná-lo à caixa inicial da esquerda. <strong> Ao final, quando você completar todos os "cards"
+    na caixa correta, logo abaixo da area do jogo, irá aparecer uma mensagem com as reações completas e balanceadas envolvidas nos processos<u> Haber-Bosch </u> e <u> Bosch-Meiser </u> e informações 
+    adicionais sobre o processo.</strong></p>
+
+    <!-- Container do jogo -->
+    <section class="jogo-industrial">
+    <div class="container-jogo">
+    <!-- Lado esquerdo -->
+    <div class="lado-esquerdo">
+      <div id="caixa1" class="caixa">
+        <div id="p1" class="processo p1">Processo Haber-Bosch</div>
+        <div id="p2" class="processo p1">Processo em 2 etapas, com formação de intermediário (carbamato)</div>
+        <div id="p3" class="processo p1">Síntese de Amônia</div>
+        <div id="p4" class="processo p1">Processo Bosch-Meiser</div>
+        <div id="p5" class="processo p1">Síntese da Uréia</div>
+        <div id="p6" class="processo p1">Necessidade de hidrogênio (obtido a partir de combustível fóssil)</div>
+        <div id="p7" class="processo p1">Catalisador de Ferro</div>
+        <div id="p8" class="processo p1">Consumo de gás carbônico</div>
+      </div>
+    </div>
+
+    <!-- Lado direito -->
+    <div class="lado-direito">
+      <div class="grupo">
+        <button id="btn_escolher1">escolher →</button>
+        <button id="btn_voltar1">← voltar</button>
+        <div id="caixa2" class="caixap2"></div>
+      </div>
+      <div class="grupo">
+        <button id="btn_escolher2">escolher →</button>
+        <button id="btn_voltar2">← voltar</button>
+        <div id="caixa3" class="caixap3"></div>
+      </div>
+    </div>
+    </section>
+  <!-- Feedback final -->
+    <div id="feedback2" style="display:none; padding: 20px; background-color: #dfd; border: 2px solid green; border-radius: 10px; margin-top: 20px;">
+    </div>
+    
+
+    <script src="ciclon2.js"></script>
+
+    <h2 id="secao3">3. Jogo interativo para entender Rota Biológica do Nitrogênio </h2>
+
+    <p> Existe também uma <strong style="color: orange;">Rota Biológica</strong> para que o N<sub>2</sub>(g) seja transformado em espécies químicas assimiláveis
+    por organismos superiores. Essas transformações são realizadas por alguns tipos de bactérias e por algas azuis (cianobactérias). Esses processos são denominados :
+    Fixação de N<sub>2</sub>, Amonificação, Nitrosação e Nitratação. Tente relacionar abaixo o tipo de microorganismo que realiza cada tipo de transformação nas 
+    espécieis nitrogenadas. A lógica do jogo é a mesma, selecione na caixa da esquerda, o "card" ficará vermelho e se for enviado para a caixa correta na direita, voltará
+    a ficar preta. Caso negativo, permanecerá vermelho e deve retornar para a caixa inicial. Em cada caixa já está descrito o processo de transformação do composto 
+    nitrogenado, com uma pequena explicação do mesmo. Algumas caixas podem receber dois "cards", enquanto outras apenas um.</p>
+
+    <!-- Container do jogo -->
+    <section class="jogo-biologico">
+    <div class="container-jogo2">
+    <!-- Lado esquerdo -->
+    <div class="lado-esquerdo2">
+      <div id="caixaBio1" class="caixa2">
+        <div id="b1" class="bioprocesso b1">Bactérias do gênero Nitrobacter</div>
+        <div id="b2" class="bioprocesso b1">Bactériais Arquéias</div>
+        <div id="b3" class="bioprocesso b1">Bactérias do gênero Azobacter, Rhizobia, Pseudomonas</div>
+        <div id="b4" class="bioprocesso b1">Bactérias do gênero Nitrossomonas</div>
+        <div id="b5" class="bioprocesso b1">Bactérias Saprófitas</div>
+        <div id="b6" class="bioprocesso b1">Algas azuis do gênero Nostoc, Chloroglea, Anabaena</div>
+      </div>
+    </div>
+
+    <!-- Lado direito -->
+    <div class="lado-direito2">
+      <div class="grupo2">
+        <button id="btn_escolher_bio1">escolher →</button>
+        <button id="btn_voltar_bio1">← voltar</button>
+        <div id="caixaBio2" class="caixap22"></div>
+      </div>
+      <div class="grupo2">
+        <button id="btn_escolher_bio2">escolher →</button>
+        <button id="btn_voltar_bio2">← voltar</button>
+        <div id="caixaBio3" class="caixap32"></div>
+      </div>
+      <div class="grupo2">
+        <button id="btn_escolher_bio3">escolher →</button>
+        <button id="btn_voltar_bio3">← voltar</button>
+        <div id="caixaBio4" class="caixap42"></div>
+      </div>
+      <div class="grupo2">
+        <button id="btn_escolher_bio4">escolher →</button>
+        <button id="btn_voltar_bio4">← voltar</button>
+        <div id="caixaBio5" class="caixap52"></div>
+      </div>
+    </div>
+  </section>
+
+    <script src="ciclon3.js"></script>
+
+    <h2 id="secao4">4. Referências</h2>
+
+    <ul>
+        <li>Curso Online : "Remoção de Nitrogênio e Fósforo em ETEs." Mario Marmo Farias Peirano e Waltair Tessler. Senge/RS.</li>
+        <li>"Relâmpagos e efeitos - Solo." <a href="http://www.inpe.br/webelat/homepage/menu/infor/relampagos.e.efeitos/solo.php">Acesse aqui.</a></li>
+        <li>"Tempestades que fertilizam: como raios transformam o ar em alimento para plantas." <a href="https://arvoresertecnologico.substack.com/p/tempestades-que-fertilizam-como-raios">Acesse aqui.</a></li>
+        <li>"Nitrogen fixation by lightning." <a href="https://journals.ametsoc.org/view/journals/atsc/37/1/1520-0469_1980_037_0174_nfbl_2_0_co_2.pdf">Acesse aqui.</a></li>
+        <li>"A síntese da amônia : alguns aspectos teóricos". Chagas, A. P. Quim. Nova, Vol. 30, No. 1, 240-247, 2007.</li>
+        <li>"Bosch–Meiser process" <a href="https://en.wikipedia.org/wiki/Bosch%E2%80%93Meiser_process"> Acesse aqui.</a></li>
+        <li> Registro da Patente da Produção de Uréia. <a href="https://ureaknowhow.com/pdflib/006_1922%20Bosch-Meiser%20BASF%201429483%20Urea%20Process.pdf"> Acesse aqui.</a></li>
+        <li>Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+        <li>Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+        <li>"Curso de Javascript - Eventos". CFB Cursos, Canal do Professor Bruno P. Campos no Youtube. <a href="https://www.youtube.com/watch?v=LzGjDFCmDx4&t=615s">Acesse o conteúdo</a>.</li>
+        <li>Curso Online: "Fundamentos de Programação." PUC-RS</li>
+        <li>Curso Online: "Fundamentos de Orientação a Objetos." PUC-RS</li>
+        <li>Assistente de IA da Microsoft Pilot.</li>
+        <li>Assistente de IA do ChatGPT.</li>
+    </ul>
+
+    <figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>

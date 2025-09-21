@@ -1,0 +1,112 @@
+.jogo-industrial {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.container-jogo {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.lado-esquerdo {
+  flex: 1;
+}
+.lado-direito {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.grupo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+button{
+    width: 150px;
+    height : 40px;
+    background-color: #025;
+    color:#fff;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.erro {
+  background-color: #800; /* vermelho escuro */
+  color: #fff;
+  border-color: #f00;
+}
+
+.processo{
+    display :flex;
+    justify-content:center;
+    width:270px;
+    border:4px solid #888;
+    border-radius: 10px;
+    padding:10px;
+    margin: 5px 0px;
+    cursor: pointer;
+
+}
+.p1{
+    background-color: aqua;
+    color:brown
+}
+.selecionado{
+    background-color: #800 !important;
+    color:#fcc !important;
+    border-color: #f00 !important;
+}
+.processo:hover{
+    border-color:red
+}
+
+.p2{
+    background-color: rgb(238, 255, 0);
+    color:brown
+}
+.caixa{
+    border: 4px solid #000;
+    background-color: #eee;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 600px;
+    width : 300px;
+
+}
+.caixap2{
+    border: 4px solid #000;
+    background-color: #00BFFF;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 270px;
+    width : 300px;
+
+}
+.caixap3{
+    border: 4px solid #000;
+    background-color: #FF4500;
+    padding : 10px;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    margin : 5px;
+    height : 270px;
+    width : 300px;
+
+}
+
