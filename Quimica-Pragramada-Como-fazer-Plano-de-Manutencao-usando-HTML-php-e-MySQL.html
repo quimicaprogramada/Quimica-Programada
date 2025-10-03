@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Banco de Dados de Manutenção usando MySQL</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Aplicação de html, php e SQL para fazer banco 
+        de dados de manutenção de equipamento e instrumentos. Gestão da qualidade. Controle automático da manutenção.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Como fazer um Plano de Manutenção usando banco de dados MySQL </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Exemplo do Plano de Manutenção</a></li>
+            <li><a href="#secao5"> 3. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+		<p> Um banco de dados MySQL é um sistema de gerenciamento de dados que utiliza a linguagem SQL (Linguagem de Consulta Estruturada)
+        para armazenar, gerenciar e recuperar dados. O dados ficam armazenados  em um servidor (pode ser local, na sua 
+        própria máquina) ou em um servidor central. Através de comandos inerentes à linguagem SQL, esses dados podem ser armazenados, 
+         tratados, explorados e analisados de forma rápida, ou exportados para serem tratados em Excel, por exemplo.</p>
+
+        <p> Nessa seção do Química Programada, vamos mostrar como formulários HTML e um Banco de dados em MySQL podem ser usados para elaborar
+        um plano de manutenção preventiva de instrumentos e equipamentos. </p>
+		
+        <h2 id="secao2"> 2. Exemplo do Plano de Manutenção </h2>
+
+        <h3 id="secao3"> 2.1 Exemplo do Plano de Manutenção - Interface Web </h3>
+
+        <p> Na <strong>Figura 1</strong> é apresentada a página inicial dos planos de manutenção. É uma página com um texto de apresentação,
+        com dois "links" que direcionam para um plano de manutenção de um instrumento, o manômetro <strong>P1-XX0</strong>, e um equipamento,
+        a bomba B1-XX0. Quando você clica no "link" para a página do P1-XX0, é direcionado para a página apresentada nas
+        <strong>Figura 2</strong> e <strong>Figura 3</strong>. Na <strong>Figura 2</strong> são listados os itens que serão analisados na manutenção
+        preventiva. Na <strong>Figura 3</strong> é apresentado o formulário HTML de entrada dos dados desse plano que serão armazenados na 
+        tabela abaixo que aumenta uma linha cada vez que as ações preventivas do plano são executadas e registradas no sistema. Também é possível
+         remover alguma linha com algum registro que tenha sido equivocado. </p>
+        
+        <figure>
+  				<img src="manuinicial.png" alt="plano de manutenção">
+  				<figcaption><strong>Figura 1: Página incial de um plano de manutenção.</strong></figcaption>
+		</figure>
+
+         <figure>
+  				<img src="man1.png" alt="Descrição do plano de manutenção">
+  				<figcaption><strong>Figura 2: Instruções sobre o plano de manutenção.</strong></figcaption>
+		</figure>
+
+        
+         <figure>
+  				<img src="man2.png" alt="Dados de entrada do plano de manutenção">
+  				<figcaption><strong>Figura 3: Formulário de entrada do plano de manutenção.</strong></figcaption>
+		</figure>
+
+
+        <p> Os dados que são inseridos na planilha do controle do plano de manutenção são salvos no banco de dados 
+        "manutenção" que foi criado no MariaBD, um banco MySQL criado no ambiente de desenvolvimento XAMPP. Fou criado 
+        um baco de dados chamado "manutenção" onde existe uma planilha chamada "map01" (manutenção preventiva 01) onde 
+        os dados inseridos são armazenados e podem ser acessados através de comandos da linguagem SQL.</p>
+
+        <figure>
+  				<img src="bancoman.png" alt="Planilha do banco de dados do manômetro">
+  				<figcaption><strong>Figura 4: Planilha do plano de manutenção.</strong></figcaption>
+		</figure>
+
+
+        <h3 id="secao4"> 2.1 Exemplo do Plano de Manutenção - O Algoritmo </h3>
+
+        <p> Nas figuras abaixo de <strong>Figura 5</strong> a <strong>Figura 8</strong> são apresentados os algoritmos em 
+        PHP para criação do formulário de entrada de dados do plano de manutenção (interface web), os comandos de comunicação 
+        com o banco de dados "manutenção" onde as variavés de entrada são tranformadas em variávies PHP que podem ser 
+        lidas, inseridas no banco de dados. Este bloco de código verifica se o formulário foi submetido (via método "POST") e, 
+        em seguida, atribui os valores dos campos HTML às variáveis PHP correspondentes (<i> note que nesse exemplo, o método "POST" 
+        direciona para o mesmo arquivo "Manometro.php" onde fica o formulário HTML</i>). Essas variáveis são utilizadas 
+        posteriormente para inserção no banco de dados, permitindo o registro das informações preenchidas pelo usuário.
+        Cada valor é armazenado em uma variável PHP ($data,$pressao,etc.).  Na <strong>Figura 7</strong> é apresentado 
+        o trecho do código referente à eliminação de alguma linha da tabela, com comando SQL <strong>"$sql = "DELETE FROM map01 WHERE id = :id"</strong>.
+        Na <strong>Figura 8</strong>, são apresentados os comandos para inserção das variáveis no banco de dados, leitura e sua formatação 
+        em uma tabela que também será visível na interface web (ver <strong>Figura 4</strong>) ou no banco de dados MariaBD, como 
+        mostrado na <strong>Figura 9</strong>.</p>
+
+        <figure>
+  				<img src="banco1.png" alt="Input das variáveis do plano">
+  				<figcaption><strong>Figura 5: Formulário HTML para plano de manutenção do manômetro.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="banco2.png" alt="Método POST de leitura das variáveis">
+  				<figcaption><strong>Figura 6: Entrada das variáveis registradas no plano.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="banco3.png" alt="Comando SQL delete">
+  				<figcaption><strong>Figura 7: Comando SQL para deletar alguma entrada equivocada.</strong></figcaption>
+		</figure>
+
+         <figure>
+  				<img src="banco4.png" alt="Comando SQL para inserção e leitura das variáveis no banco">
+  				<figcaption><strong>Figura 8: Comando SQL de inserção das variáveis de entrada no Banco de Dados.</strong></figcaption>
+		</figure>
+
+         <figure>
+  				<img src="bancoman.png" alt="CBanco de dados MariaBD">
+  				<figcaption><strong>Figura 9: A tabela das variáveis de entrada do plano no banco MariaBD.</strong></figcaption>
+		</figure>
+
+        <p> Os arquivos desse banco de dados (para o manômetro P1-XX0 e para a B1-XX) podem ser obtidas pelo emial quimicaprogramada@gmail.com
+        ou através do perfil do Química Programada no GitHub.</p>
+
+        <h2 id="secao5">3. Referências: </h2>
+
+		<ul>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+			<li> Curso Online : "Introdução ao PHP - Gerando HTML com PHP". Eucurso, Alfamídia.</li>
+            <li> Curso Online : "Introdução ao PHP - Lendo e Inserindo dados no Banco de Dados". Eucurso, Alfamídia.</li>
+            <li> Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
