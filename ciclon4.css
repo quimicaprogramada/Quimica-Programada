@@ -1,0 +1,171 @@
+/* ================================
+   ESTILO DO JOGO DE FERTILIZANTES
+   ================================ */
+
+/* ===== Layout principal ===== */
+.jogo-fertilizante,
+.container-jogofert {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ===== Lados do layout ===== */
+.lado-esquerdo2 {
+  flex: 1;
+}
+
+.lado-direito2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== Agrupamento de elementos ===== */
+.grupo2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ===== Botões ===== */
+button {
+  width: 150px;
+  height: 40px;
+  background-color: #025;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  border: none;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #047;
+}
+
+.erro2 {
+  background-color: #800; /* vermelho escuro */
+  color: #fff;
+  border-color: #f00;
+}
+
+/* ===== Cards dos fertilizantes ===== */
+.fertilizante {
+  display: flex;
+  justify-content: center;
+  width: 270px;
+  border: 4px solid #888;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px 0px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.fertilizante:hover {
+  border-color: red;
+}
+
+.b1 {
+  background-color: rgb(3, 17, 17);
+  color: rgb(243, 238, 238);
+}
+
+/* Quando o usuário seleciona uma opção */
+.selecionado2 {
+  background-color: #800 !important;
+  color: #fcc !important;
+  border-color: #f00 !important;
+}
+
+/* ===== Caixas principais ===== */
+.caixa2 {
+  border: 4px solid #000;
+  background-color: #eee;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  height: 550px;
+  width: 300px;
+}
+
+/* ===== Caixas específicas por tipo ===== */
+.caixap22 {
+  border: 4px solid #000;
+  background-color: #00BFFF; /* Azul - Nitrato de Amônio */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  height: 150px;
+  width: 300px;
+}
+
+.caixap32 {
+  border: 4px solid #000;
+  background-color: #e9b75a; /* Amarelado - Ureia */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  height: 150px;
+  width: 300px;
+}
+
+.caixap42 {
+  border: 4px solid #000;
+  background-color: #6fd077; /* Verde - Sulfato de Amônio */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  height: 150px;
+  width: 300px;
+}
+
+/* ===== Marcas d’água (nomes automáticos) ===== */
+#caixaFert2::before {
+  content: "Nitrato de Amônio (NH₄NO₃)";
+}
+
+#caixaFert3::before {
+  content: "Ureia (CO(NH₂)₂)";
+}
+
+#caixaFert4::before {
+  content: "Sulfato de Amônio ((NH₄)₂SO₄)";
+}
+
+/* ===== Estilo da marca d’água ===== */
+#caixaFert2::before,
+#caixaFert3::before,
+#caixaFert4::before {
+  position: absolute;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  text-align: center;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* não interfere nos cliques */
+}
+
+/* Cada caixa precisa ser relativa para o ::before funcionar */
+#caixaFert2,
+#caixaFert3,
+#caixaFert4 {
+  position: relative;
+}

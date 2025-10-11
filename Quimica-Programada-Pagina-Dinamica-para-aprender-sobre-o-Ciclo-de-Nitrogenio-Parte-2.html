@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-V8PJ6273R4');
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width;initial-scale=1.0">
+    <title>Química Programada - Ciclo do Nitrogênio Parte 1</title>
+    <link rel="stylesheet" href="Formatação.css">
+    <link rel="stylesheet" href="ciclon4.css">
+    <link rel="stylesheet" href="ciclon5.css">
+    <meta name="description"
+        content="Entenda o ciclo do nitrogênio com jogos interativos e simulações químicas e biológicas desenvolvidas em HTML, 
+        CSS e Javascript. Jogos sobre processos Bosch-Meiser, Processo Haber-Bosch, amonificação, fixação de nitrogênio, 
+        nitrosação, nitratação.">
+</head>
+
+<body>
+    <!-- Aqui está o corpo da página -->
+    <h1>Química Programada - Ciclo do Nitrogênio Parte 2 - Funções dos Compostos Nitrogenados </h1>
+
+    <h3>Seções</h3>
+    <ul>
+        <li><a href="#secao1">1. Introdução</a></li>
+        <li><a href="#secao2">2. Jogo interativo sobre os prinipais fertilizantes nitrogenados</a></li>
+        <li><a href="#secao3">3. Jogo interativo sobre os efeitos negativos da presença de compostos nitrogenados</a></li>
+        <li><a href="#secao4">4. Referências</a></li>
+    </ul>
+
+    <h2 id="secao1">1. Introdução</h2>
+
+<p>Os compostos nitrogenados são fundamentais para o metabolismo dos seres vivos. Cianobactérias, bactérias autotróficas e heterotróficas utilizam alguma forma de 
+    composto nitrogenado em seus processos metabólicos. Os seres vivos superiores (vegetais e animais) também dependem desses compostos para o crescimento e, além
+     disso, os excretam por meio de suas secreções. Esses compostos, liberados por excreções ou pela decomposição de matéria vegetal e animal morta, são transformados
+      por fungos e bactérias decompositoras, que liberam o nitrogênio das macromoléculas orgânicas para formas inorgânicas. Assim, o nitrogênio é reinserido no ciclo, 
+      principalmente na forma de amônia, que pode ser convertida novamente em nitrito ou nitrato.</p>
+
+<p>A agricultura é fortemente dependente de compostos nitrogenados. Eles podem ser fornecidos naturalmente, mas também por meio da ação antrópica, para alcançar a 
+produtividade necessária ao suprimento de alimentos da população. Dessa forma, existem diversos <strong>fertilizantes nitrogenados</strong> que suprem a necessidade
+ de uma determinada cultura vegetal, conforme as características do solo. Você pode aprender mais sobre as funções e características desses compostos na seção 2.</p>
+
+<p>A aplicação de compostos nitrogenados, quando feita sem parcimônia — ou seja, em excesso —, pode causar efeitos negativos ao meio ambiente. Um dos fenômenos mais 
+    conhecidos é a <strong>eutrofização</strong>, que ocorre quando há enriquecimento excessivo de corpos de água com compostos nitrogenados. Esse processo estimula a
+     proliferação exagerada de fitoplâncton e plantas aquáticas, comprometendo a qualidade e o equilíbrio dos ecossistemas aquáticos. Você pode conhecer mais sobre os 
+     efeitos deletérios da presença excessiva de compostos nitrogenados em corpos de água na seção 3.</p>
+
+<p>Além disso, existem compostos nitrogenados produzidos naturalmente na troposfera, como os gases NO e NO<sub>2</sub>, que participam da <strong>Rota Química Natural</strong> 
+    de incorporação do N<sub>2</sub> aos ciclos biológicos. No entanto, esses mesmos compostos também são emitidos por processos antrópicos, principalmente pela queima de 
+    combustíveis fósseis, contribuindo para a poluição atmosférica e a formação de chuva ácida. Você poderá aprender mais sobre esses efeitos na seção 3.</p>
+
+
+    <h2 id="secao2">2. Jogo interativo sobre os prinipais fertilizantes nitrogenados</h2>
+
+    <p>No jogo abaixo, você pode aprender de forma lúdica sobre os três principais fertilizantes nitrogenados utilizados para fornecer nitrogênio a um 
+    solo onde será cultivada uma determinada cultura que requer uma certa quantidade desse elemento para o crescimento e desenvolvimento. 
+    Você deve selecionar o "card" no lado esquerdo e clicar em <strong>Enviar</strong> para encaminhá-lo à caixa da direita, onde está o respectivo fertilizante. 
+    Se o "card" permanecer <strong>preto</strong>, você acertou a caixa (o fertilizante está correto). 
+    Se o "card" ficar <strong>vermelho</strong>, a associação está incorreta e você deve retornar o "card" para a caixa da esquerda e tentar novamente. </p>
+
+
+    <!-- Container do jogo -->
+    <section class="jogo-fertilizante">
+    <div class="container-jogofert">
+    <!-- Lado esquerdo -->
+    <div class="lado-esquerdo2">
+      <div id="caixaFert1" class="caixa2">
+        <div id="b1" class="fertilizante b1">21 % de Nitrogênio</div>
+        <div id="b2" class="fertilizante b1">Potencial explosivo</div>
+        <div id="b3" class="fertilizante b1">46 % de nitrogênio</div>
+        <div id="b4" class="fertilizante b1">Fornece enxofre ao solo </div>
+        <div id="b5" class="fertilizante b1">Mais usado no mundo</div>
+        <div id="b6" class="fertilizante b1">33 % de nitrogênio</div>
+      </div>
+    </div>
+
+    <!-- Lado direito -->
+    <div class="lado-direito2">
+      <div class="grupo2">
+        <button id="btn_escolher_bio1">escolher →</button>
+        <button id="btn_voltar_bio1">← voltar</button>
+        <div id="caixaFert2" class="caixap22"></div>
+      </div>
+      <div class="grupo2">
+        <button id="btn_escolher_bio2">escolher →</button>
+        <button id="btn_voltar_bio2">← voltar</button>
+        <div id="caixaFert3" class="caixap32"></div>
+      </div>
+      <div class="grupo2">
+        <button id="btn_escolher_bio3">escolher →</button>
+        <button id="btn_voltar_bio3">← voltar</button>
+        <div id="caixaFert4" class="caixap42"></div>
+      </div>
+    </div>
+  </section>
+
+    <script src="ciclon4.js"></script>
+
+     <h2 id="secao3">3. Jogo interativo sobre os efeitos negativos da presença de compostos nitrogenados</h2>
+
+     <p> Como foi descrito na introdução, alguns compostos nitrogenados que tem um efeito positivo nos ciclos biológicos, porém, quando presentes 
+    em excesso em cursos de água e no ar atmosférico, podem ter um efeito negativo. No jogo abaixo tente acertar quais os efeitos negativos da presença 
+    de NO e NO<sub>2</sub> em acesso no ar e de NH<sub>3</sub> e NO<sub>3</sub><sup>-</sup> nos cursos de água.</p>No jogo a seguir, você deve selecionar
+    o "card" no lado esquerdo e clicar em <strong>Enviar</strong> para encaminhá-lo à caixa da direita, onde está o respectivo poluente. Se o "card"
+    permanecer <strong>preto</strong>, você acertou a caixa (o fertilizante está correto). Se o "card" ficar <strong>vermelho</strong>, a associação está 
+    incorreta e você deve retornar o "card" para a caixa da esquerda e tentar novamente.</p>
+
+     <!-- Container do jogo -->
+    <section class="jogo-nitro5">
+  <div class="container-nitro5">
+    <!-- Lado esquerdo -->
+    <div class="lado-esquerdo-n5">
+      <div id="caixaNitro5a" class="caixa-n5">
+        <div id="n5b1" class="card-n5">Eutrofização</div>
+        <div id="n5b2" class="card-n5">Formação de ozônio na troposfera (tóxico)</div>
+        <div id="n5b3" class="card-n5">Síndrome do bebê azul</div>
+        <div id="n5b4" class="card-n5">Chuva ácida</div>
+        <div id="n5b5" class="card-n5">Diminuição drástica do oxigênio dissolvido</div>
+        <div id="n5b6" class="card-n5">Efeito estufa</div>
+      </div>
+    </div>
+
+    <!-- Lado direito -->
+    <div class="lado-direito-n5">
+      <div class="grupo-n5">
+        <button id="btn_escolher_n5a">escolher →</button>
+        <button id="btn_voltar_n5a">← voltar</button>
+        <div id="caixaNitro5b" class="caixa-n5b"></div>
+      </div>
+      <div class="grupo-n5">
+        <button id="btn_escolher_n5b">escolher →</button>
+        <button id="btn_voltar_n5b">← voltar</button>
+        <div id="caixaNitro5c" class="caixa-n5c"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="ciclon5.js"></script>
+
+    <h2 id="secao4">4. Referências</h2>
+
+    <ul>
+        <li>Curso Online : "Remoção de Nitrogênio e Fósforo em ETEs." Mario Marmo Farias Peirano e Waltair Tessler. Senge/RS.</li>
+        <li> "Eutrofização : Aspectos conceituais, usos da água e diretrizes para Gestão Ambiental". Ferreira, C. S. et all. Revista Ibero-Americana  de Ciências Ambientais, Dezembro 2014</li>
+        <li> "Parâmetros operacionais na remoção biológica de nitrogênio de águas por nitrificação e desnitrtrificação simultânea". Zoppas, F. M. et all. Engenharia Sanitária e Ambiental. jan/mar 2016.</li>
+        <li> "Palladium and Molybdenum Mono and Bimetallic Catalysts on Modernite for Direct NO Decomposition Reaction".  Silveira, Rodrigo S. ; OLIVEIRA, A. M. ; Pergher, Sibele B. C. ; Silva, 
+        Victor Teixeira ; Baibich, Ione M. .Catalysis Letters , v. 129, p. 259-265, 2009.</li>
+        <li>Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+        <li>Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+        <li>"Curso de Javascript - Eventos". CFB Cursos, Canal do Professor Bruno P. Campos no Youtube. <a href="https://www.youtube.com/watch?v=LzGjDFCmDx4&t=615s">Acesse o conteúdo</a>.</li>
+        <li>Curso Online: "Fundamentos de Programação." PUC-RS</li>
+        <li>Curso Online: "Fundamentos de Orientação a Objetos." PUC-RS</li>
+        <li>Assistente de IA da Microsoft Pilot.</li>
+        <li>Assistente de IA do ChatGPT.</li>
+    </ul>
+
+    <figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>

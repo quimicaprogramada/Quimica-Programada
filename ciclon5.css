@@ -1,0 +1,149 @@
+/* ================================
+   CICLON 5 - Efeitos dos Compostos Nitrogenados
+   ================================ */
+
+/* ===== Layout principal ===== */
+.jogo-nitro5,
+.container-nitro5 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ===== Lados do layout ===== */
+.lado-esquerdo-n5 {
+  flex: 1;
+}
+
+.lado-direito-n5 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== Agrupamento de elementos ===== */
+.grupo-n5 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ===== Botões ===== */
+button {
+  width: 150px;
+  height: 40px;
+  background-color: #025;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  border: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #047;
+}
+
+/* ===== Cartões ===== */
+.card-n5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 270px;
+  min-height: 50px;
+  border: 4px solid #888;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px 0px;
+  cursor: pointer;
+  background-color: rgb(3, 17, 17);
+  color: rgb(243, 238, 238);
+  transition: 0.3s;
+}
+
+.card-n5:hover {
+  border-color: red;
+}
+
+/* ===== Seleção e erro ===== */
+.sel-n5 {
+  background-color: #800 !important;
+  color: #fcc !important;
+  border-color: #f00 !important;
+}
+
+.err-n5 {
+  background-color: #800;
+  color: #fff;
+  border-color: #f00;
+}
+
+/* ===== Caixas ===== */
+.caixa-n5 {
+  border: 4px solid #000;
+  background-color: #eee;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  height: 750px;
+  width: 300px;
+}
+
+/* ===== Caixas de destino ===== */
+.caixa-n5b {
+  border: 4px solid #000;
+  background-color: #7db4e6; /* Azul - NOx */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  height: 350px;
+  width: 300px;
+  position: relative;
+}
+
+.caixa-n5c {
+  border: 4px solid #000;
+  background-color: #8ad188; /* Verde - NH3 e NO3 */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  height: 350px;
+  width: 300px;
+  position: relative;
+}
+
+/* ===== Marcas d’água ===== */
+#caixaNitro5b::before {
+  content: "Efeitos de NO e NO₂ (Excesso de NOx na atmosfera)";
+}
+
+#caixaNitro5c::before {
+  content: "Efeitos de NH₃ e NO₃⁻ (Excesso em corpos d’água)";
+}
+
+#caixaNitro5b::before,
+#caixaNitro5c::before {
+  position: absolute;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  text-align: center;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
