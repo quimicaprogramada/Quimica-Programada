@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Regressão Linear e tratamento de dados em Python </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Uso de programação em Python para fazer uma calculadora de titulação de retrocesso. Backtitration, ácido lático, ácido cítrico, estequimetria e Python. reacoes e programação orientada a objetos">
+	</head>
+
+    <body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Uma Calculadora de titulação de retrocesso (ou backtitration) usando POO </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução - Backtitration </a></li> 
+            <li><a href="#secao2"> 2. Uma calculadora usando POO em Python</a></li>
+			<li><a href="#secao3"> 3. Titulação experimental do ácido lático e uso da calculadora </a></li>
+            <li><a href="#secao4"> 4. Determinação da pureza do ácido cítrico e uso da calculadora </a></li>
+			<li><a href="#secao5"> 5. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Você já tentou fazer a titulação de um ácido fraco, com apenas um próton, com uma base forte como o NaOH e se sentiu frustrado, pois 
+        não obteve o resultado esperado? O Química Programada tentou. Tentamos fazer a titulação de uma solução com 85% de ácido lático com NaOH, 
+        utilizando fenolftaleína como indicador. Foi possível identificar um ponto de viragem definido, mas com os dados de volume do titulante obtidos
+        a fração mássica do ácido seria 74%. E agora? Fomos procurar qual seria o indicador adequado para quantificar esse ácido e encontramos na 
+        6<sup>a</sup> edição da Farmacopéia Brasileira que o método mais simples de executar, com reagentes disponíveis em qualquer laboratório de 
+        químca, seria a <strong> titulação de retrocesso (ou backtitration) </strong>  usando NaOH, HCl e solução indicadora de fenolftaleína. </p>
+
+        <p> Nesse típo de titulação, a <strong> titulação de retrocesso (ou backtitration) </strong>, você deve transferir uma fração da amostra
+        para um frasco, adicionar um excesso de uma base forte (nesse caso, NaOH) e deixar em repouso por cerca de 30 minutos. Depois do tempo de 
+        reação, adicionar fenolftaleína e titular com solução de ácido clorídrico de concentração conhecida. </p>
+
+        <p> Agora que você foi introduzido aos procedimentos da <strong> titulação de retrocesso (ou backtitration) </strong>, vamos descrever o passo a 
+        dos cálculos para obter a concentração do ácido. </p>
+
+        <h3> Adição da base forte em excesso</h3>
+
+        <p> Como primeira etapa, deve-se pesar uma amostra do analito em um Erlenmeyer.  Após, juntar uma quantidade de água desmineralizada e um dado volume
+        de uma base forte (NaOH) no mesmo Erlenmeyer. O número de mols da base em excesso pode ser obtida pela fórmula apresentada na <strong>Figura 2</strong>.
+        </p>
+
+        <figure>
+  				<img src="etapa1.png" alt="adicao base forte">
+  				<figcaption><strong> Figura 1. Etapa 1 da titulação de retrocesso.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  				<img src="backreacao1.png" alt="adicao base forte">
+  				<figcaption><strong> Figura 2. Etapa 1 da titulação de retrocesso.</strong></figcaption>
+	    </figure>
+
+
+         <h3> Tempo de descanso e reação</h3>
+
+         <p> Esses reagente devem permanecer em repouso por 30 minutos para que ocorra a reação entre o analito e a base adicionada, 
+        que é apresentada na <strong>Figura 4</strong>.</p>
+
+        <figure>
+  				<img src="etapa2.png" alt="descanso e reação">
+  				<figcaption><strong> Figura 3. Etapa 2 da titulação de retrocesso.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  				<img src="backreacao2.png" alt="descanso e reação">
+  				<figcaption><strong> Figura 4. Etapa 2 da titulação de retrocesso.</strong></figcaption>
+	    </figure>
+
+
+        <h3> Titulação com ácido forte </h3>
+
+        <p> Após isso, a base que restou e não reagiu com o analito (base em excesso), deve ser titulada com HCl ou outro ácido forte de 
+        concentração conhecida. A reação entre a base e o ácido forte é apresentada na <strong>Figura 6</strong>.</p>
+
+         <figure>
+  				<img src="etapa3.png" alt="titulação do excesso">
+  				<figcaption><strong> Figura 5. Etapa 3 da titulação de retrocesso.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  				<img src="backreacao3.png" alt="descanso e reação">
+  				<figcaption><strong> Figura 6. Etapa 3 da titulação de retrocesso.</strong></figcaption>
+	    </figure>
+
+        <h3> Cálculo da massa do analito </h3>
+
+        <p> O cálculo da massa de analito pode ser realizado pela fórmula apresentada na <strong>Figura 7</strong>.</p>
+
+        <figure>
+  				<img src="backreacao4.png" alt="descanso e reação">
+  				<figcaption><strong> Figura 7. Cálculo da massa do analito.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao2"> 2. Uma calculadora de titulação usando POO em Python </h2>
+
+        <p>Como um exemplo da aplicação de POO (programação orientada a objetos) usando linguagem Python, foi feita uma 
+        calculadora para determinação da fração mássica de um determinado ácido fraco que não possa ser titulado diretamente 
+        com uma base forte e deva-se empregar <strong>titulação de retrocesso (ou backtitration)</strong>.</p>
+
+        <p> Essa calculadora deverá apresentar uma classe que represente os reagentes do processo - a base e o ácido forte empregados
+        na titulação - com as respectivas concentrações e volumes utilizados. Dessa forma, deveremos elaborar uma classe que possa ser usada 
+        para instanciar esses objetos. Além desses atributos, a classe deverá ter um método que calcule o número de mols desse reagente.
+        A estrutura da classe reagentes é apresentada na <strong>Figura 8</strong>. Essa estrutura foi salva no módulo Reagente.py</p>
+
+        <figure>
+  				<img src="backclassereagente.png" alt="classe reagente">
+  				<figcaption><strong> Figura 8. Estrutura da classe Reagente (Módulo Reagente.py).</strong></figcaption>
+	    </figure>
+
+        <p> Também foi feita uma segunda classe chamada <strong>Reacao</strong>, salva no módulo Reacao.py e apresentada na <strong>Figura 9</strong>. 
+        Os atributos dessa classe são a estequiometria da reação entre o analito e a base forte, que serão inteiros do tipo 1, 2 ou 3, a 
+        massa molar do analito e a massa pesada do analito inserida no Erlenmeyer.</p>
+
+        <p> Os métodos dessa <strong>classe Reacao</strong> são : o excesso de base no Erlenmeyer, a massa no analito calculada com os dados da titulação e a 
+        fração mássica obtida para a amostra.</p>
+
+        <figure>
+  				<img src="backclassereacao.png" alt="classe reacao">
+  				<figcaption><strong> Figura 9. Estrutura da classe Reacao (Módulo Reacao.py).</strong></figcaption>
+	    </figure>
+    
+
+        <h2 id="secao3"> 3. Titulação experimental do ácido lático e uso da calculadora </h2>
+
+        <p> Foi realizada a titulação de retrocesso de uma amostra de ácido lático. Os reagentes foram :</p>
+
+        <ul>
+            <li> Base forte : NaOH, 0,5 mol/L;</li>
+            <li> Volume base forte : Amostra 1 -> 30,00 mL; Amostra 2 -> 30,03 mL;</li>
+            <li> Ácido forte : HCl, 1,0 mol/L;</li>
+            <li> Volume titulante : Amostra 1 -> 5,15; Amostra 2 -> 3,1 mL.</li>
+        </ul>
+
+        <p> A reação entre o ácido lático e a base forte é apresentada na <strong>Figura 10</strong> e os dados de entrada sobre a estequiometria da reação são listados 
+        abaixo:</p>
+
+        <ul>
+            <li> Estequiometria :  n=1; </li>
+            <li> Massa  molar analito : 90,08 g/mol;</li>
+            <li> Massa pesada do analito : Amostra 1 -> 1,03 g; Amostra 2 -> 1,26 g.</li> 
+        </ul>
+
+        <figure>
+  				<img src="laticosoda.png" alt="reacao latico">
+  				<figcaption><strong> Figura 10. Reação entre ácido lático e NaOH.</strong></figcaption>
+	    </figure>
+
+        <p> Na <strong>Figura 11</strong> é apresentado o módulo Main.py da calculadora, onde os objetos base e ácido são instanciados usando 
+        a <strong> classe Reagente</strong>, com os valores de concentração e volume apresentados no texto acima. Com esses dados e as informações sobre a estequiometria da 
+        reação, massa molar e massa pesada do analito são calculados os métodos da <strong>classe Reacao</strong> para cada amostra. Por fim é calcuda a 
+        fração mássica do ácido láticos nas amostras, que são impressas e apresentadas na <strong>Figura 12</strong>.</p>
+
+        <figure>
+  				<img src="mainlatico.png" alt="instancia objetos">
+  				<figcaption><strong> Figura 11. Programa principal (Main.py).</strong></figcaption>
+	    </figure>
+
+        <figure>
+  				<img src="resultadolatico.png" alt="fracoes massicas">
+  				<figcaption><strong> Figura 12. Saída do programa.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao4"> 4. Determinação da pureza do ácido cítrico e uso da calculadora </h2>
+
+        <p> Foi realizada a titulação de retrocesso de uma amostra de ácido cítrico, de pureza alegada 100%. Os reagentes foram :</p>
+
+        <ul>
+            <li> Base forte : NaOH, 0,5 mol/L;</li>
+            <li> Volume base forte : Amostra 1 -> 35,08 mL; Amostra 2 -> 40,03 mL;</li>
+            <li> Ácido forte : HCl, 1,0 mol/L;</li>
+            <li> Volume titulante : Amostra 1 -> 1,60; Amostra 2 -> 1,7 mL.</li>
+        </ul>
+
+        <p> A reação entre o ácida cítrico e a base forte é apresentada na <strong>Figura 13</strong> e os dados de entrada da estequiometria 
+        da reação no programa são listados abaixo:</p>
+
+        <ul>
+            <li> Estequiometria :  n=3; </li>
+            <li> Massa  molar analito : 192,123 g/mol;</li>
+            <li> Massa pesada do analito : Amostra 1 -> 1,01 g; Amostra 2 -> 1,14 g.</li> 
+        </ul>
+
+        <figure>
+  				<img src="citricosoda.png" alt="reacao citrico">
+  				<figcaption><strong> Figura 13. Reação entre ácido cítrico e NaOH.</strong></figcaption>
+	    </figure>
+
+        <p> Na <strong>Figura 14</strong> é apresentado o módulo Main.py da calculadora, onde os objetos base e ácido são instanciados usando a  
+        <strong> classe Reagente</strong>, com os valores de concentração e volume apresentados no texto acima. Com esses dados e as informações sobre a estequiometria da 
+        reação, massa molar e massa pesada do analito são calculados os métodos da <strong>classe Reacao</strong> para cada amostra. Por fim é calculada a 
+        fração mássica do ácido cítrico nas amostras, que são impressas e apresentadas na <strong>Figura 15</strong>.</p>
+
+        <figure>
+  				<img src="maincitrico.png" alt="instancia objetos">
+  				<figcaption><strong> Figura 14. Programa principal (Main.py).</strong></figcaption>
+	    </figure>
+
+        <figure>
+  				<img src="resultadocitrico.png" alt="fracoes massicas">
+  				<figcaption><strong> Figura 15. Saída do programa.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao5"> 5. Referências </h2>
+		
+		<ul>
+            <li>Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+            <li>Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+            <li>Curso Online: "Fundamentos de Programação." PUC-RS</li>
+            <li>Curso Online: "Fundamentos de Orientação a Objetos." PUC-RS</li>
+            <li> Farmacopeia Brasileira Volume 2, 6<sup>a</sup> Edição.</li>
+		</ul>
+
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
