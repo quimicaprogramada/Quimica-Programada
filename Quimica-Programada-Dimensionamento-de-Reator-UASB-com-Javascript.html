@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Dimensionamento de um Reator UASB com Javascript </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Uso de programação em Javascript para fazer o dimensionamento de um reator UASB. 
+        Tratamento de rejeitos, produção de biogás, automação de dimensionamento de reator UASB. Efluentes de suinocultura">
+	</head>
+
+    <body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Dimensionamento de um Reator UASB com Javascript </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução - O Reator UASB </a></li> 
+            <li><a href="#secao2"> 2. Projeto de um reator UASB</a></li>
+            <li><a href="#secao3"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1 Fluxo de entradas e saídas do projeto </a></li>
+            <li><a href="#secao4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2 Parâmetros e equações usados na aplicação - aspectos teóricos </a></li>
+			<li><a href="#secao5"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.3. Dimensione o seu Reator UASB </a></li>
+			<li><a href="#secao6"> 4. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução - O Reator UASB </h2>
+
+		<p> Na <strong>Figura 1</strong> é apresentado um desenho esquemático de um reator UASB. Esse reator foi concebido na Holanda pelo professor 
+        Lettinga para tratamento de efluentes industriais com elevada carga orgânica e atualmente ele é bastante disseminado no Brasil para tratamento
+        de efluentes da suinocultura, esgoto doméstico, resíduos oriundos de restaurantes, entre outras aplicaçoes. Ele tem como características 
+        principais : é um reator compacto, com baixa geração de lodo, admissão de elevada carga orgânica e baixa demanda energética, pois é um sistema 
+        de digestão anaeróbia, não necessitando de aeradores, que consomem energia. Além disso, esses sistemas produzem biogás, que pode ser aproveitado 
+        localmente para produção de energia. </p>
+
+        <figure>
+  				<img src="reatorUASB.png" alt="esquema de reator UASB">
+  				<figcaption><strong>Figura 1: Esquemático de um reator UASB.</strong></figcaption>
+		</figure>
+
+        <p> O reator UASB, internamente, apresenta três zonas : um leito de lodo, uma manta de lodo e uma zona de separação trifásica. No leito de lodo, os 
+        microorganismos que fazem o tratamento do efluente encontram-se concentrados - o lodo é bastante denso -  e há pontos de entrada do efluente. No leito
+         há uma grande atividade de conversão dos nutrientes. Logo acima há uma zona em que o lodo é mais disperso, chamada de manta de lodo. Nessa zona
+        a concentração pode variar entre 1 e 3% e há bolhas de gás formadas pelo metabolismo anaeróbio que movimentam-se para o topo e flocos de 
+        lodo em contracorrente sedimentando.O movimento de subida do gás e do fluxo de efluente para o topo é responsável pela mistura das fases. Na parte superior 
+        há o compartimento de sedimentação, onde alguma partícula de lodo que tenha sido carreada pelo fluxo de líquido ascendente ainda tem a oportunidade de 
+        sedimentar. Além disso, nessa parte o gás é direcionado pelo defletores laterais para serem coletados pelo compartimento central e o líquido tratado é 
+        coletado por uma espécie de calha.</p>
+        
+        <p> Segundo Carlos Chernicharo na obra<i> "Anaerobic reactors"</i>, os principais pontos de um bom projeto de um reator UASB são :</p>
+
+        <ul>
+            <li> O fluxo ascendente deve assegurar um máximo contato entre a biomassa e o substrato (efluente);</li>
+            <li> Caminhos preferenciais devem ser evitados, garantindo um tempo de contato suficiente para degradação dos contaminante;</li>
+            <li> O sistema de separação trifásico deve ser bem dimensionado e ter seu projeto testado para garantir a liberação do gás 
+            e retenção das outras duas fases;</li>
+            <li> É melhor operar com lodo granulado do que lodo floculento, pois aquele tem melhores cacaterísticas de sedimentação.</li>
+        </ul>
+
+        <h2 id="secao2"> 2. Projeto de um reator UASB </h2>
+
+        <h3 id="secao3"> 2.1 Fluxo de entradas e saídas do projeto</h3>
+
+        <p> Na <strong>Figura 2</strong> é apresentado um esquema de fluxo de entradas e saídas em um projeto de dimensionamento de um reator UASB.
+        No lado esquerdo são indicadas as entradas e no lado direito são apresentadas as saídas, conforme passo a passo apresentado no artigo <i>"Dimensionamento de 
+        um reator UASB para o tratamento de águas residuárias de suinocultura"</i> de Capassi e colaboradores e no livro <i>"Anaerobic Reactors"</i> de Carlos Augusto
+        de Lemos Chernicharo.</p>
+
+        <figure>
+  				<img src="fluxoaplicacao.png" alt="fluxo entradas e saídas">
+  				<figcaption><strong>Figura 2: Fluxo de entradas e saídas no dimensionamento de um reator UASB.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong>Tabela 1</strong> são apresentadas as descrições das variáveis de entrada da aplicação. Na <strong>Tabela 2</strong> são apresentadas as descrições
+        das variáveis de saída da aplicação.  </p>
+
+        <table>
+            <caption><strong>Tabela 1. Entradas do Dimensionamento</strong></caption>
+            <thead>
+                <tr>
+                <th>Variável</th>
+                <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Q<sub>med</sub></td>
+                <td>Vazão média (m<sup>3</sup>/d)</td>
+                </tr>
+                <tr>
+                <td>C<sub>DQO,e</sub></td>
+                <td>Concentração volumétrica de DQO na entrada (mg/L ou kgDQO/m<sup>3</sup>)</td>
+                </tr>
+                <tr>
+                <td>C<sub>DBO,e</sub></td>
+                <td>Concentração volumétrica de DBO na entrada (mg/L ou kgDBO/m<sup>3</sup>)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <caption><strong>Tabela 2. Saídas do Dimensionamento</strong></caption>
+            <thead>
+                <tr>
+                <th>Variável</th>
+                <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Q<sub>max</sub></td>
+                <td>Vazão máxima (m<sup>3</sup>/d)</td>
+                </tr>
+                <tr>
+                <td>V</td>
+                <td>Volume (m<sup>3</sup>)</td>
+                </tr>
+                <tr>
+                <td>C<sub>diariaDQO</sub></td>
+                <td>Concentração diária de DQO (kg/d)</td>
+                </tr>
+                <tr>
+                <td>C<sub>diariaDBO</sub></td>
+                <td>Concentração diária de DBO (kg/d)</td>
+                </tr>
+                <tr>
+                <td>CHV</td>
+                <td>Carga hidráulica volumétrica (m<sup>3</sup>/m<sup>3</sup>.d)</td>
+                </tr>
+                <tr>
+                <td>COV</td>
+                <td>Carga orgânica volumétrica (kgDQO/m<sup>3</sup>.d)</td>
+                </tr>
+                <tr>
+                <td>TDH<sub>máx</sub></td>
+                <td>Tempo de detenção hidráulica na vazão máxima (h)</td>
+                </tr>
+                <tr>
+                <td>H</td>
+                <td>Altura do reator (m)</td>
+                </tr>
+                <tr>
+                <td>A</td>
+                <td>Área transversal do reator (m<sup>2</sup>)</td>
+                </tr>
+                <tr>
+                <td>d</td>
+                <td>Diâmetro do reator (m)</td>
+                </tr>
+                <tr>
+                <td>N<sub>d</sub></td>
+                <td>Número de distribuidores</td>
+                </tr>
+                <tr>
+                <td>E<sub>DQO</sub></td>
+                <td>Eficiência de remoção de DQO (%)</td>
+                </tr>
+                <tr>
+                <td>E<sub>DBO</sub></td>
+                <td>Eficiência de remoção de DBO (%)</td>
+                </tr>
+                <tr>
+                <td>C<sub>DQO,s</sub></td>
+                <td>Concentração volumétrica de DQO na saída (mg/L ou kg/m<sup>3</sup>)</td>
+                </tr>
+                <tr>
+                <td>C<sub>DBO,s</sub></td>
+                <td>Concentração volumétrica de DBO na saída (mg/L ou kg/m<sup>3</sup>)</td>
+                </tr>
+                <tr>
+                <td>C<sub>SST</sub></td>
+                <td>Concentração de sólidos suspensos totais(mg/L)</td>
+                </tr>
+                <tr>
+                <td>D<sub>DQO</sub><sub>CH4</sub></td>
+                <td>Carga de DQO convertida em metano (kgDQO<sub>CH4</sub>/d)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 id="secao4"> 2.2 Parâmetros e equações usados na aplicação - aspectos teóricos</h3>
+        
+        <p> Toda aplicação, além das variáveis de entrada, conta com modelos compostos por parâmetros e equações usadas para calcular as variáveis de saída.
+        Na aplicação do reator UASB do Química Programada, o modelo se baseia no passo a passo do artigo <i>"Dimensionamento de um reator UASB para o tratamento
+         de águas residuárias de suinocultura"</i> de Capassi e colaboradores,  no livro <i>"Anaerobic Reactors"</i> de Carlos Augusto de Lemos Chernicharo e no artigo 
+         <i>"UASB Process  Design for Various Types of Wastewater"</i> de G. Lettinga e L. W. Hulshoff Pol.</p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Cálculo da vazão máxima</strong></p>
+
+        <p> Nos casos de dimensionamento de uma rede coletora de esgoto sanitário onde não há medição suficiente para conhecermos a vazão máxima para o projeto,
+        a NBR 9649, "Projeto de redes coletoras de esgoto sanitário", nos apresenta a equação abaixo: </p>
+
+        <p class="equacao">Q<sub>máx</sub> = k1 *  k2 * Q<sub>méd</sub></p>
+
+        <p> Onde k1 e k2 são: </p>
+
+        <ul>
+            <li> k1 = 1,2,  coeficiente de máxima vazão diária;</li>
+            <li> k5 = 1,5,  coeficiente de máxima vazão horária.</li>
+        </ul>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Cálculo das Concentrações Diárias de DBO e DQO (kgDQO/d e KgDBO/d)</strong></p>
+
+        <p> Os valores de concentração diária de DQO e DBO são obtidos a partir dos dados de vazão média e concentração de DQO e DBO no efluente
+        de entrada. Os valores de concentração DQO e DBO são dados mais costumeiramente em mg/L, mas também podem ser encontrados em kg/m<sup>3</sup>.</p>
+
+        <p class="equacao">C<sub>diariaDQO</sub> = Q<sub>méd</sub> * C<sub>DQO,e</sub></p>
+
+        <p class="equacao">C<sub>diariaDBO</sub> = Q<sub>méd</sub> * C<sub>DBO,e</sub></p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Volume do Reator</strong></p>
+
+        <p> O volume pode ser calculado através da vazão média e do tempo de detenção hidráulica, que geralmente é dado em horas, pela expressão abaixo:</p>
+
+        <p class="equacao">V = TDH * Q<sub>méd</sub>/24</p>
+
+        <p> O TDH, tempo de detenção hidráulica, é um parâmetro que, segundo artigo <i>"UASB Process  Design for Various Types of Wastewater" </i>de  G. Lettinga,
+        depende: </p>
+
+        <ul>
+            <li> Tipo de lodo (floculento ou granular);</li>
+            <li> Qualidade do separador trifásico;</li>
+            <li> Temperatura.</li>
+        </ul>
+
+        <p> No mesmo artigo é apresentada uma tabela com o indicativo do TDH a ser adotado segundo as condições operacionais:</p>
+
+        <table>
+            <caption><strong>Tabela 3. TDH para esgoto doméstico em um UASB com 4 m de altura</strong></caption>
+            <thead>
+                <tr>
+                <th>T (°C)</th>
+                <th>Média diária (h)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>16–19</td>
+                <td>&gt;10–14</td>
+                </tr>
+                <tr>
+                <td>22–26</td>
+                <td>&gt;7–9</td>
+                </tr>
+                <tr>
+                <td>&gt;26</td>
+                <td>&gt;6</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Carga Hidráulica Volumétrica (m<sup>3</sup>/m<sup>3</sup>.d)</strong></p>
+
+        <p> A carga hidráulica volumétrica é a razão entre a vazão média e o volume do reator, obtido conforme fórmula abaixo:</p>
+
+        <p class="equacao">CHV = Q<sub>méd</sub>/V</p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Carga Orgânica Volumétrica (kgDQO/m<sup>3</sup>.d)</strong></p>
+
+        <p> A carga orgânica volumétrica é a massa de matéria orgânica aplicada diariamente ao reator, por unidade de volume do mesmo, obtida pela equação abaixo:</p>
+        
+        <p class="equacao">COV = Q<sub>méd</sub>* C<sub>DQO,e</sub>/V</p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Tempo de Detenção na Vazão Máxima </strong></p>
+        
+        <p>É obtido pela relação abaixo:</p>
+        
+        <p class="equacao">TDH<sub>Qmáx</sub> = V / Q<sub>máx</sub></p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Altura do Reator </strong></p>
+
+        <p> A altura H do reator dependerá de dois parâmetros : do TDH, já explicado anteriormente, e da velocidade máxima ascensional <i><strong>v</strong></i>. </p>
+        Segundo o artigo<i> "UASB Process  Design for Various Types of Wastewater"</i>de G. Lettinga e a obra <i>"Anaerobic Reactors"</i> de Carlos Chernicharo, esse parâmetro depende
+        do tipo de lodo, da carga aplicada e da solubilidade do efluente. Para estimativa, pode-se utilizar os valores apresentado na <strong>Tabela 4</strong>
+         com dados retirados do artigo de Lettinga.<p>
+
+        <table>
+            <caption><strong>Tabela 4. Velocidade máxima ascensional</strong></caption>
+            <thead>
+                <tr>
+                <th>Velocidade (m/h)</th>
+                <th>Tipo de lodo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>3</td>
+                <td>lodo granular — efluente solúvel</td>
+                </tr>
+                <tr>
+                <td>1–1,25</td>
+                <td>lodo granular — efluente parcialmente solúvel</td>
+                </tr>
+                <tr>
+                <td>0,5</td>
+                <td>lodo volumoso e floculento</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p> De posse desses dois parâmetros, a altura pode ser obtida para fórmula a seguir:</p>
+
+        <p class="equacao">H = <i><strong>v</strong></i> * TDH</p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Área da Seção do Reator e Diâmetro </strong></p>
+
+        <p>A área da seção pode ser obtida pela razão entre o volume e a altura. E, posteriormente, pode ser obtido o diâmetro do mesmo.</p>
+
+        <p class="equacao">A = V / H</p>
+
+        <p class="equacao">d = (4* A / π)^(1/2)</p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Número de Distribuidores </strong></p>
+
+        <p> Esse parâmetro depende da área do reator e da área de influência de cada distribuidor, A<sub>d</sub>. A área de influência depende da carga orgânica 
+        aplicada e do tipo de lodo, conforme <strong>Tabela 5</strong> adaptada de<i>"Anaerobic Reactors"</i> de Carlos Chernicharo.</p>
+
+        <table border="1" cellpadding="6" cellspacing="0">
+            <caption><strong>Tabela 5. Área de influência de cada distribuidor.</strong></caption>
+            <thead>
+                <tr>
+                    <th>Tipo de lodo</th>
+                    <th>Carga Orgânica Aplicada (kgDQO/m³·d)</th>
+                    <th>Área de Influência do distribuidor (m²)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linha 1 -->
+                <tr>
+                    <td rowspan="3">Denso e floculento</td>
+                    <td>&lt;1</td>
+                    <td>0,5–1</td>
+                </tr>
+                <tr>
+                    <td>1–2</td>
+                    <td>1–2</td>
+                </tr>
+                <tr>
+                    <td>&gt;2</td>
+                    <td>2–3</td>
+                </tr>
+
+                <!-- Linha 2 -->
+                <tr>
+                    <td rowspan="3">Granular</td>
+                    <td>&lt;2</td>
+                    <td>0,5–1</td>
+                </tr>
+                <tr>
+                    <td>2–4</td>
+                    <td>0,5–2</td>
+                </tr>
+                <tr>
+                    <td>&gt;4</td>
+                    <td>&gt;2</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <p> Sabendo qual a área de influência, o número de distribuidores é obtido pela relação abaixo:</p>
+
+        <p class="equacao">N<sub>d</sub> = A / A<sub>d</sub></p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Estimativa de Eficiência do Reator </strong></p>
+        
+        <p> Na obra <i>"Anaerobic Reactors"</i> de Carlos Chernicaro, são apresentadas curvas de eficiência de remoção de DQO e DBO para 16 reatores UASB 
+        fazendo tratamento de de esgoto doméstico, operando no range de temperatura de 20 a 27<sup>o</sup>C, com C<sub>DQO</sub> entre 300 e 1400 mg/L (ou 0,3
+        a 1,4 kg/m<sup>3</sup>) e C<sub>DBO</sub> entre 150 e 850 mg/L( ou 0,15 a 0,85 kg/m<sup>3</sup>), para diferentes tempo de detenção hidráulica. 
+        Dessas curvas, o autor conclui que que exite uma correlação empítica da eficiência de remoção com o TDH dos reatores. Essas correlações empíricas 
+        são apresentadas a seguir.</p>
+        
+        <p class="equacao">E<sub>DQO</sub> = 100* (1 - 0,68 * TDH ^ (-0,35))</p>
+
+        <p class="equacao">E<sub>DBO</sub> = 100* (1 - 0,70 * TDH ^ (-0,50))</p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Concentração Volumétrica na saída do Reator </strong></p>
+        
+        <p> A concentração de DQO e DBO são dados de entrada de nosso programa. Assim, da definição da eficiência, as concentrações volumétricas no efluente
+        de saída são facilmente obtidas pelas equações abaixo:</p>
+
+        <p class="equacao">C<sub>DQO,s</sub> = E<sub>DQO</sub> * C<sub>DQO,e</sub> / 100 </p>
+
+        <p class="equacao">C<sub>DBO,s</sub> = E<sub>DBO</sub> * C<sub>DBO,e</sub> / 100 </p>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Concentração de Sólidos Suspensos Totais </strong></p>
+        
+        <p> A concentração de sólidos suspensos no efluente final, segundo Carlos Chernicharo, depende de diversos fatores: </p>
+
+        <ul>
+            <li> A concentração e características de sedimentação do lodo;</li>
+            <li> Altura do leito e da manta de lodo;</li>
+            <li> Perfil de velocidades no compartimento de sedimentação;</li>
+            <li> Eficiência do separador trifásico;</li>
+            <li> Carga hidráulica e tempo de detenção.</li>
+        </ul>
+
+        <p> Para 5 reatores entre os estudados pelo autor, foi possível obter curvas que correlacionam os sólidos suspensos totais no efluente de saída 
+        em função do tempo de detenção. A correlação empírica é apresentada a seguir:   </p>
+
+        <p class="equacao">C<sub>SST</sub> =  102 * TDH ^ (-0,24) </p>
+ 
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Conversão de Metano </strong></p>
+
+        <p> Também Carlos Chernicharo apresenta uma equação para determinação da conversão de DQO em metano, em kg. Em linhas gerais, a relação faz 
+        a diferença entre a DQO na entrada e na saída e também retira uma parte relativa à parcela da DQO que equivale à produção de sólidos no sistema.
+        Para quem quiser entender mais sobre essa relação, recomenda-se o capítulo 2 da obra do autor, onde são apresentadas as bases da Bioquímica da digestão
+        anaeróbia, às quais o autor faz referência ao longo de toda sua obra.</p>
+
+        <p class="equacao">DQO<sub>CH<sub>4</sub></sub> = Q<sub>méd</sub> * (C<sub>DQO,e</sub>-C<sub>DQO,s</sub>) - Y * Q<sub>méd</sub> * C<sub>DQO,e</sub> </p>
+        
+        <p> onde Y: coeficiente de produção de sólidos no sistema, em termos de DQO (0,11 a 0,23 kgDQO<sub>lodo</sub>/kgDQO<sub>apl</sub>)</p>
+
+        <h3 id="secao5"> Dimensione seu reator UASB </h3>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Cálculo da Vazão Máxima e das Concentrações Diárias de DQO e DBO </strong></p>
+
+            <label>Qmed (m³/d):</label>
+            <input type="number" id="qmed" step="0.01"><br><br>
+
+            <label>CDQOe (mg/L):</label>
+            <input type="number" id="cdqoe" step="0.01"><br><br>
+
+            <label>CDBOe (mg/L):</label>
+            <input type="number" id="cdboe" step="0.01"><br><br>
+
+            <button onclick="calcular()">Calcular</button>
+
+             <h3>Resultados</h3>
+             <p style="color: red ;"><strong>Os resultados são apresentados no sistema americano, no qual o "." é o separador decimal.</strong></p>
+            <div id="resultado"></div>
+            <script src="calculadoraUASBparte1.js"></script>
+        
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Cálculo do Volume, da Carga Hidráulica Volumétrica, da
+             Carga Orgânica Volumétrica e do Tempo de Detenção Hidráulica na Vazão Máxima </strong></p>
+        
+            <label>Qméd (m³/d):</label>
+            <input type="number" id="qmed">
+
+            <br><br>
+
+            <label>CDQO,e (mg/L):</label>
+            <input type="number" id="cdqoe">
+
+            <br><br>
+            <p style="color:blue  ;"><i>Escolha do tempo de detenção hidráulica TDH em função da temperatura de seu processo</i></p>
+            <label>Temperatura (°C) → TDH:</label>
+            <select id="tdh">
+                <option value="12">16–19 °C → TDH = 12 h</option>
+                <option value="8">22–26 °C → TDH = 8 h</option>
+                 <option value="6">>26 °C → TDH = 6 h</option>
+            </select>
+
+            <br><br>
+
+            <button onclick="calcularParte2()">Calcular</button>
+
+            <h3>Resultados</h3>
+            <p style="color: red ;"><strong>Os resultados são apresentados no sistema americano, no qual o "." é o separador decimal.</strong></p>
+            <div id="resultado2"></div>
+        
+            <script src="calculadoraUASBparte2.js"></script>
+
+        <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Cálculo da Altura, Área da Seção, Diâmetro e Número de Distribuidores </strong></p>
+
+                <label>Qméd (m³/d):</label>
+                <input type="number" id="qmed">
+
+                <br><br>
+
+                <!-- Select do TDH -->
+                <p style="color:blue  ;"><i>Escolha do tempo de detenção hidráulica TDH em função da temperatura de seu processo</i></p>
+                <label>Temperatura (°C) → TDH:</label>
+                <select id="tdh">
+                    <option value="12">16–19 °C → TDH = 12 h</option>
+                    <option value="8">22–26 °C → TDH = 8 h</option>
+                    <option value="6">>26 °C → TDH = 6 h</option>
+                </select>
+
+                <br><br>
+
+                <!-- Select da velocidade ascensional -->
+                 <p style="color:blue  ;"><i>Escolha da velocidade ascensional em função da característica do lodo do seu processo</i></p>
+                <label>Tipo de lodo / Velocidade ascensional:</label>
+                <select id="vel">
+                    <option value="3">Lodo granular – efluente solúvel (v = 3 m/h)</option>
+                    <option value="1.25">Lodo granular – efluente parcialmente solúvel (v = 1,25 m/h)</option>
+                    <option value="0.5">Lodo volumoso e floculento (v = 0,5 m/h)</option>
+                </select>
+
+                <br><br>
+
+                <!-- Select da área de influência Ad -->
+                <p style="color:blue  ;"><i>Escolha da área de influência do distribuidor em função da característica do lodo e carga aplicada</i></p>
+                <label>Área de influência Ad (m²):</label>
+                <select id="ad">
+                    <option value="0.75">Denso e floculento – COV &lt; 1 → Ad = 0,75</option>
+                    <option value="1.5">Denso e floculento – COV &gt; 1 → Ad = 1,5</option>
+                    <option value="2.5">Denso e floculento – COV &gt; 2 → Ad = 2,5</option>
+                    <option value="0.75">Granular – COV &lt; 2 → Ad = 0,75</option>
+                    <option value="1.25">Granular – COV &gt; 2 → Ad = 1,25</option>
+                    <option value="2">Granular – COV &gt; 4 → Ad = 2</option>
+                </select>
+
+                <br><br>
+
+                <button onclick="calcularParte3()">Calcular</button>
+
+                <h3>Resultados</h3>
+                <p style="color: red ;"><strong>Os resultados são apresentados no sistema americano, no qual o "." é o separador decimal.</strong></p>
+                <div id="resultado3"></div>
+                <script src="calculadoraUASBparte3.js"></script>
+        
+            <p style="color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Cálculo da Eficiência, Concentração Volumétrica na saída, Sólidos Suspensos Totais e Conversão em Metano </strong></p>
+                    
+                    <label>Qméd (m³/d):</label>
+                    <input type="number" id="qmed">
+
+                    <br><br>
+
+                    <label>C<sub>DQO,e</sub> (mg/L):</label>
+                    <input type="number" id="cdqo">
+
+                    <br><br>
+
+                    <label>C<sub>DBO,e</sub> (mg/L):</label>
+                    <input type="number" id="cdbo">
+
+                    <br><br>
+
+                    <!-- Select do TDH -->
+                    <p style="color:blue  ;"><i>Escolha do tempo de detenção hidráulica TDH em função da temperatura de seu processo</i></p>
+                    <label>Temperatura (°C) → TDH:</label>
+                    <select id="tdh">
+                        <option value="12">16–19 °C → TDH = 12 h</option>
+                        <option value="8">22–26 °C → TDH = 8 h</option>
+                        <option value="6">>26 °C → TDH = 6 h</option>
+                    </select>
+
+                    <br><br>
+
+                    <button onclick="calcularParte4()">Calcular</button>
+
+                    <h3>Resultados</h3>
+                    <p style="color: red ;"><strong>Os resultados são apresentados no sistema americano, no qual o "." é o separador decimal.</strong></p>
+                    <div id="resultado4"></div>
+
+                    <script src="calculadoraUASBparte4.js"></script>
+
+        <h2 id="secao6">4. Referências: </h2>
+
+		<ul>
+            <li> "Dimensionamento de um reator UASB para o tratamento de água residuárias de suinocultura" Capassi, C. M. et all. Revista de Saúde, Meio Amabiente e Sustentabilidade.</li>
+            <li> "Projeto de redes coletoras de esgoto sanitário" NBR 9649. </li>
+            <li> "UASB Process  Design for Various Types of Wastewater". G. Lettinga and L. W. Hulshoff Pol.</li>
+            <li> "Anaerobic Reactors" Carlos Augusto de Lemos Chernicharo. Publicação de 2007.</li>
+            <li> "Fundamentos da digestão anaeróbia, purificação do biogás, uso e tratamento do digestato". Airton Kunz, et al. 2<sup>a</sup>Edição. Embrapa.</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+            <li> Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+            <li>"Curso de Javascript - Eventos". CFB Cursos, Canal do Professor Bruno P. Campos no Youtube. <a href="https://www.youtube.com/watch?v=LzGjDFCmDx4&t=615s">Acesse o conteúdo</a>.</li>
+            <li>Curso Online: "Fundamentos de Programação." PUC-RS</li>
+            <li>Curso Online: "Fundamentos de Orientação a Objetos." PUC-RS</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>

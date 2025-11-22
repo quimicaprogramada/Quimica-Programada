@@ -35,22 +35,19 @@ h3 {
 }
 
 /* Parágrafos explicativos */
-p {
+p, ul {
   font-size: 1rem;
   margin-bottom: 16px;
   text-align: justify;
 }
-ul {
-  font-size: 1rem;
-  margin-bottom: 16px;
-  text-align: justify;
-}
+
+/* Figuras */
 figure {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px auto; /* centraliza e dá respiro */
-  max-width: 90%; /* evita imagem muito larga */
+  margin: 20px auto;
+  max-width: 90%;
 }
 
 figure img {
@@ -67,4 +64,58 @@ figcaption {
   color: #555;
   text-align: center;
   font-style: italic;
+}
+
+/* ---------------------------------- */
+/* -------- ESTILO PARA TABELAS ----- */
+/* ---------------------------------- */
+
+table {
+  width: 50%;                 /* ocupa metade da página */
+  margin: 25px auto;          /* centraliza horizontalmente */
+  border-collapse: collapse;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+table caption {
+  caption-side: top;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 8px;
+  color: #002855;
+}
+
+table th {
+  background-color: #00509d;
+  color: white;
+  text-align: left;
+  padding: 12px;
+  font-size: 1rem;
+  border-bottom: 2px solid #003b73;
+}
+
+table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Linhas alternadas */
+table tr:nth-child(even) {
+  background-color: #f2f7ff;
+}
+
+/* Hover */
+table tr:hover {
+  background-color: #e8f1ff;
+}
+
+.equacao {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 20px 0;
 }
