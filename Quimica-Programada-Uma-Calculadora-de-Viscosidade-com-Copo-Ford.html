@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V8PJ6273R4');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width;initial-scale=1.0">
+    <title>Química Programada - Uma Calculadora de Viscosidade com Copo Ford</title>
+    <link rel="stylesheet" href="Formatação.css">
+    <meta name="description" content="viscosidade, fluidos newtonianos.">
+</head>
+
+<body>
+
+     <h1>Química Programada - Uma Calculadora de Viscosidade com Copo Ford </h1>
+
+    <h3>Seções</h3>
+    <ul>
+        <li><a href="#secao1">1. Introdução</a></li>
+        <li><a href="#secao2">2. Interface da calculadora de Viscosidade</a></li>
+        <li><a href="#secao3">3. Algoritmo da Calculadora de Viscosidade</a></li>
+        <li><a href="#secao4">4. Referências</a></li>
+    </ul>
+
+    <h2 id="secao1">1. Introdução</h2>
+    
+    <p> A descrição do comportamento de fluidos newtonianos quando submetidos a tensões de cisalhamento
+    depende, basicamente, apenas de uma função material - a viscosidade. Essa propriedade define uma relação linear
+    entre as tensões às quais o material é submetido e a taxa de deformação observada. Esse tipo de descrição puramente
+    viscosa é aplicável apenas aos materiais de estrutura molecular simples, mais precisamente gases e moléculas
+    com massa inferior a 1000.</p>
+
+    <p> A <strong>viscosidade dinâmica</strong> é uma propriedade, com unidades Pa.s no sistema internacional, que dá uma dimensão da resistência 
+    interna ao escoalento do fluido sobre ação de forças cisalhantes. A <strong>viscosidade cinemática</strong> descreve a resistência de um fluido 
+    ao escoamento sob a ação da gravidade, levando em consideração sua densidade. No sistema internacional, suas unidades são m<sup>2</sup>/s. A relação entre essas propriedades é apresentada a seguir:</p>
+
+    <p style="text-align:center; font-weight:bold; font-size: 20px;">η = ν × ρ </p>
+
+    <p> onde:</p>
+
+		<ul>
+			<li> η é a viscosidade cinemática em m<sup>2</sup>/s;</li>
+			<li> ρ é a massa específica em kg/m<sup>3</sup>;</li>
+			<li> ν é a viscosidade dinâmica em mPa.s</li>
+		</ul>
+
+
+    <h2 id="secao2">2. Interface da calculadora de Viscosidade</h2>
+
+    <p> Na <strong>Figura 1</strong> e na <strong>Figura 2</strong> é apresentada a interface da calculadora de viscosidade. 
+    Na primeira parte está descrita uma definição da propriedade e a fórmula da obtenção da mesma, com fator de conversão (dividido por 1000),  
+    pois o valor da viscosidade cinemática é obtido em mm<sup>2</sup>/s e o valor usual da apresentação da viscosidade dinâmica é em mPa.s.</p>
+
+    <figure>
+  				<img src="interfacevisco.jpg" alt="procedimento viscosidade">
+  				<figcaption><strong>Figura 1: Procedimento de obtenção da viscosidade.</strong></figcaption>
+	</figure>
+
+    <p> Na <strong>Figura 2</strong> é apresentado a parte das entradas de dados : tempo de escoamento em segundos, feito em triplicata, e a 
+    massa espefícica do fluido a 25<sup>o</sup>C, em kg/m<sup>3</sup>.</p> 
+
+     <figure>
+  				<img src="formulariovisco.jpg" alt="formulario viscosidade">
+  				<figcaption><strong>Figura 2: Entrada de dados para o cálulo da viscosidade.</strong></figcaption>
+	</figure>
+
+    <p> Na utilização do viscosímetro Copo Ford, é recomendável fazer três medições de tempo de escoamento. Se elas tiverem um erro residual de 3%
+    em relação a média, o teste deverá ser repetido com mais cuidado e precisão. Dessa forma, se os valores inseridos estiveram de acordo com essa 
+    de precisão, o resultado vai aparecer para o usuário comforme  <strong>Figura 3</strong>. Para esse exemplo, utilizei um fluido com masssa
+    específica de 1031,00 kg/m<sup>3</sup> e os tempos de escoamento foram t1=28,47 s, t2=28,22 s e t3=27,83 s. Agora na <strong>Figura 4</strong> está 
+    a saída da aplicação se os valores fossem t1=28,47s, t2=28,22 e t3=25 s. Nessa último caso, o útimo dado tem uma variação em relação à média 
+    de 8,19%. Dessa forma o algoritmo é interrompido.</p>
+    
+    <figure>
+  				<img src="saidavisco.png" alt="exibição da viscosidade">
+  				<figcaption><strong>Figura 3: Dados de saída da calculadora.</strong></figcaption>
+	</figure>
+
+    <figure>
+  				<img src="invalidovisco.png" alt="ensaio invalido">
+  				<figcaption><strong>Figura 4: Mensagem de ensaio inválido.</strong></figcaption>
+	</figure>
+
+    <h2 id="secao3">3. Algoritmo da Calculadora de Viscosidade</h2>
+
+    <p> Esse material se destina a usuários já iniciados em HTML, CSS e PHP e  que saibam executar  um programa nessa linguagens usando um servidor local. 
+    Essa aplicação foi testada em Xampp v3.3.0. Sublime Text foi a aplicação de edição de código usado para elaborar os arquivos PHP. </p>
+
+    <p> Para realizar uma aplicação de leitura de dados inseridos pelo usuário, maniplução dos mesmos e exibição no formato de tabela como mostrado na seção 2, é 
+    nessário dois arquivos "".php" : um de entrada de dos dados, aqui chamado de "AnalyTech Determinação da viscosidade.php" e um de leitura, manipulação e 
+    saída/impressão de dados pelos métodos "GET" ou método "POST", chamado de "Resultado da viscosidade.php"</p>
+
+    <p> Na <strong>Figura 5</strong> é mostrado a parte do arquivo "AnalyTech Determinação da viscosidade.php" onde há o algoritmo do formulário de entrada de dados pelo usuário.
+    São seis entradas do tipo "text" e, posteriormente, um formulário do tipo "select", onde o usuário tem que escolher com o cursor entre os orifício de 
+    número 2 a número 6. Cada orifício tem um valor "value" associado de 1 a 5. Esse "value" é usado como valor da variável "$copoford" quando os dados são</object>
+    recebidos no outro arquivo chamado "Resultado da viscosidade.php". </p>
+
+    <figure>
+  				<img src="entradavisco.png" alt="metodo post">
+  				<figcaption><strong>Figura 5: Formulário de entrada de dados pelo usuário.</strong></figcaption>
+	</figure>
+
+    <p> Nas figuras de <strong>Figura 6</strong> a <strong>Figura 10</strong> é apresentado o conteúdo do arquivo "Resultado da viscosidade.php". Ele começa com 
+    um CSS inline que estabelece a configuração da tabela de resultados da aplicação na <strong>Figura 6</strong>. Depois vem o trecho onde os dados inseridos
+    pelo usuário são recebidos e associados às variáveis com símbolo de "$" no início da nome ($massaespecifica, $t1, $t2), que podem ser manipuladas. Elas primeiro são transformadas em Float, pois 
+    toda variável lida da entrada de usuário é to tipo <i>string</i>. Depois são manipuladas para cálculo da média e do erro das medições de tempo feitas no Copo Ford.
+
+
+    <figure>
+  				<img src="tabelavisco.png" alt="css da tabela">
+  				<figcaption><strong>Figura 6: Configuração da tabela com css inline.</strong></figcaption>
+	</figure>
+
+    <figure>
+  				<img src="variaveisvisco.png" alt="entrada e manipulação de variáveis">
+  				<figcaption><strong>Figura 7: Leiturad de dados pelo método post e realização de cálculos.</strong></figcaption>
+	</figure>
+
+    <p> Na <strong>Figura 8</strong> é apresentada o codicional <i>if</i> para verificar se as medições serão aceitas ou se terão que ser refeitas.
+    Para isso, nenhuma medição pode ter um resíduo em relação à média dos tempos superior a 3%. Sendo verdadeira essa condição o cálculo é 
+    interrompido. </p>
+
+    <figure>
+  				<img src="errovisco.png" alt="calculo do erro">
+  				<figcaption><strong>Figura 8: .</strong></figcaption>
+	</figure>
+
+    <p> Se todos resíduos forem menor que 3%, os cálculos prosseguem conforme <strong>Figura 9</strong>. Para cada orifício do Copo Ford, o qual pode ser pode ser escolhido 
+    no cursor "select" pelo usuário - a variável $copoford pode assumir valores inteiros de 1 até 6 - há uma expressão diferente para cálculo da viscosidade cinemática. Na mesma figura podemos também
+    ver a expressão de conversão da viscosidade cinemática em viscosidade dinâmica.</p>
+
+    <figure>
+  				<img src="calculovisco.png" alt="calculo da viscosidade">
+  				<figcaption><strong>Figura 9: Cálcula da viscosidade.</strong></figcaption>
+	</figure>
+
+    <p> Por fim, é apresentado o trecho do algoritmo relacionado à tabela de saída dos resultados.</p>
+
+    <figure>
+  				<img src="tabelasaidavisco.png" alt="tabela de saida">
+  				<figcaption><strong>Figura 10: Formatação da saída de dados.</strong></figcaption>
+	</figure>
+
+    <h2 id="secao4">4. Referências </h2>
+
+	<ul>
+        <li> "Viscosímetro Copo Ford - Manual do Usuário". Marte Científica e Instrumentação Industrail Ltda.</li>
+        <li> "Deterinação da Viscosidade pelo Copo Ford". Metalúrgica Tech Vision Ltda.</li>
+        <li> "Fenômenos de transporte". 2<sup>a</sup> Edição.Bird, R. B., Stewart, W. E. e Lghtfoot, E. N.</li>
+        <li> "Um primerio estudo do escoamento bicamada de polímeros viscoelásticos com o solver viscoelasticInterFoam". TCC em Engenharia Química. da Silveira, R.S.</li>
+        <li>Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+        <li>Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+        <li>Assistente de IA da Microsoft Pilot.</li>
+        <li>Assistente de IA do ChatGPT.</li>
+    </ul>
+
+
+
+    <p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+</body>
+
+</html>
