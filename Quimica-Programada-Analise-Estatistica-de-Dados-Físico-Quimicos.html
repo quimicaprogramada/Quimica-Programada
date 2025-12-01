@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V8PJ6273R4');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width;initial-scale=1.0">
+    <title>Química Programada - Análise Estatística da Dados Fisoco-químicos</title>
+    <link rel="stylesheet" href="Formatação.css">
+    <meta name="description" content="densidade em função da temperatura, resíduos, curva parametrizada.">
+</head>
+
+<body>
+
+     <h1>Química Programada - Análise Estatística de Dados Fisico-químicos </h1>
+
+    <h3>Seções</h3>
+    <ul>
+        <li><a href="#secao1">1. Introdução</a></li>
+        <li><a href="#secao2">2. Análise de dados de densidade de um óleo mineral</a></li>
+        <li><a href="#secao3">3. Análise de dados de densidade do butilglicol</a></li>
+        <li><a href="#secao4">4. Análise de dados da viscosidade do propilenoglicol</a></li>
+        <li><a href="#secao5">5. Referências</a></li>
+    </ul>
+
+    <h2 id="secao1">1. Introdução</h2>
+
+    <p> Análise estatística é o processo de coletar, organizar, interpretar e apresentar dados para identificar padrões, tendências e tomar decisões fundamentadas. 
+    Em outras palavras, é transformar números em informações úteis e compreensíveis. A linhuagem Python apresenta muitas ferramentas para fazer estatística descritiva
+    que engloba técnicas para resumir e apresentar séries de dados na forma de gráficos, tabelas ou médias.</p>
+
+    <p> Nessa postagem, é realizada a análise estatística de duas séries de dados de massa espefícica em função da temperatura para duas substância diferentes e 
+        a análise estatística de uma série de dados de viscosidade em função da temperatura, usando dados experimentais obtidos por "Química Programada".</p>
+
+    <h2 id="secao2">2. Análise de dados de densidade de um óleo mineral</h2>
+
+    <h3> Apresentação da série de dados</h3>
+
+    <p> Na <strong>Figura 1</strong> é apresentada uma série da dados de massa específica de um óleo mineral com propriedades tensoativas utilizado na fabricação 
+    adjuvantes agrícolas e na indústria cosmética. Esses dados foram todos obtidos com um densímetro digital. O objetivo dessa postagem é verificar qual modelo melhor se ajusta à série usando as ferramentas da Linguagem Python.</p>
+
+    <figure>
+  			<img src="seriedados1.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 1: Densidade de um óleo mineral como função da temperatura.</strong></figcaption>
+	</figure>
+
+    <p> Na <strong>Figura 2</strong> são apresentados os comandos necessários para plotagem de uma série de dados. Primeiramente temos das bibliotecas.
+    A biblioteca matplotlib.pyplot é a biblioteca gráfica mais usada em Python, com diversas formas de plotagem de dados. Também temos que entrar com a biblioteca 
+    numpy, que faz com que possamos tratar os dados de entradas como um array de valores. Ainda temos os comandos de entrada dos dados, a geração do gráficos
+    do tipo dispersão (scatter) e ativação das grades principais e secundárias para exibição dos dados.</p>
+    
+    <figure>
+  			<img src="algoritmodados1.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 2: Comandos para plotagem de série de dados.</strong></figcaption>
+	</figure>
+
+    <h3> Ajuste com modelo quadrático</h3>
+
+    <p> Agora vamos fazer testes de ajutes de modelos à série de dados usando Python. Na <strong>Figura 3</strong> são apresentados os comandos para plotagem 
+    do gráfico da dispersão e da curva ajustada com o uso da biblioteca scipy.optimize, usando a função curve_fit. Foi escolhido um modelo quadrático
+    com uma função lambda da forma a*x**2 + b + c. </p>
+
+    <figure>
+  			<img src="algoritmodados2.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 3: Comandos para plotagem de série de dados e curva quadrática.</strong></figcaption>
+	</figure>
+
+    <p> Na <strong>Figura 4</strong> é apresentado o gráfico da série de dados com a curva de ajuste quadrático para série. Visualmente parece uma boa 
+    opção, mas devemos fazer uma análise da escolha usando parâmetros estatísticos.</p>
+
+    <figure>
+  			<img src="curvaquadra1.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 4: Série de dados e curva quadrática.</strong></figcaption>
+	</figure>
+
+    <p> Nas figuras de <strong>Figura 5</strong> a <strong>Figura 7</strong> é apresentada a análise estatística da série, com R<sup>2</sup>, RMSE e gráfico dos resíduos.
+    Foi obtido valor de 0,9903 para R<sup>2</sup> e de 1,85 para o RMSE. Os resíduos tiveram uma boa dispersão, com valores positivos e negativos  não indicando nenhuma tendência de erro sistemático
+    na coleta dos dados. O maior resíduo foi da ordem de 3, isso representaria 0,3% em relação ao valor típico da série.</p>
+    <figure>
+  			<img src="Estatística1.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 5:  R<sup>2</sup> e RMSE para a série de dados.</strong></figcaption>
+	</figure>
+
+    
+    <figure>
+  			<img src="residuo1.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 6: Dispersão dos resíduos da série de dados quadrática.</strong></figcaption>
+	</figure>
+
+    
+    <figure>
+  			<img src="histograma1.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 7: Histograma dos resíduos da série de dados quadrática.</strong></figcaption>
+	</figure>
+
+    <h3> Ajuste com polinômio de grau 3</h3>
+
+    <p> Agora valos ver se há alguma melhora significativa na estatística dos dados se optamos por polinômio de grau 3. Não irei postar os comandos para 
+        plotagem do gráfico de dispersão, pois é idêntico ao do modelo quadrático, apenas devemos trocar a função lambda para polinômio de grau 3  
+    conforme a seguir : func = lambda x, a, b, c, d: a * x**3 + b*x**2 + c*x + d. </p>
+
+    <figure>
+  			<img src="curvagrau3.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 8: Série de dados e curva de ajuste de grau 3.</strong></figcaption>
+	</figure>
+
+    <p> O R<sup>2</sup>, conforme <strong>Figura 9</strong>, teve uma melhora, de 0,9903 para 0,9989 e o RMSE teve uma melhora mais expressiva de 1,85 para 0,6265 (redução de 66%).
+    Os resíduos tiveram uma boa dispersão, com valores positivos e negativos  não indicando nenhuma tendência de erro sistemático
+    na coleta dos dados, conforme <strong>Figura 10</strong>. O maior resíduo foi da ordem de 1 (<strong>Figura 10</strong>), isso representaria 0,1% em relação ao valor típico da série. 
+    Dessa forma julgamos que a escolha de um polinômio de grau 3 seria a melhor opção para escolher um modelo com uma ótima precisão em relação aos dados experimentais nessa faixa de temperatura. </p>
+
+    <figure>
+  			<img src="estatistica2.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 9: R<sup>2</sup> e RMSE para a série de dados.</strong></figcaption>
+	</figure>
+
+    <figure>
+  			<img src="residuo2.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 10: Dispersão dos resíduos da série de dados de grau 3.</strong></figcaption>
+	</figure>
+
+    <figure>
+  			<img src="histograma2.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 11: Histograma dos resíduos da série de dados de grau 3.</strong></figcaption>
+	</figure>
+
+    <h2 id="secao3">3. Análise de dados de densidade do butilglicol</h2>
+
+    <h3> Dados de massa específica da literatura</h3>
+
+    <p> Agora, além de fazer a análise estatística de uma série dados de massa específica em função da temperatura, queremos usar os parâmetros a, b, c e d 
+    do polinômio ajustado para comparar com dados experimentais retirados de um artigo do Journal of Chemical Enginnering Data : <i>"Density, viscosity, and 
+    refractive index for water+2-butoxiethanol and +2-(2-bitoxyehoxy)ethanol at various temperatures"</i>. Os valores de massa espefífica retirados do 
+    artigo são apresentados na tabela a seguir:</p>
+
+    <table>
+            <caption><strong>Tabela 1. Dados acadêmicos da massa específica do Butilglicol</strong></caption>
+            <thead>
+                <tr>
+                <th>Temperatura (<sup>o</sup>C)</th>
+                <th>Massa específica (kg/m<sup>3</sup>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>10</td>
+                <td>909,49</td>
+                </tr>
+                <tr>
+                <td>20</td>
+                <td>901,18</td>
+                </tr>
+                <tr>
+                <td>30</td>
+                <td>892,68</td>
+                </tr>
+                </tr>
+                <tr>
+                <td>40</td>
+                <td>884,41</td>
+                </tr>
+            </tbody>
+        </table>
+
+    <h3> Ajuste com polinômio de grau 3 </h3>
+
+    <p> Na <strong>Figura 12</strong> é apresentada dispersão dos dados da massa específica como função da temperatura do butilglicol, matéria-prima
+    utilizada na indústria de produtos de limpeza, de adjuvantes agrícolas e cosméticos. Na <strong>Tabela 2</strong> são apresentados os parâmetros
+    a, b, c e d da função func = lambda x, a, b, c, d: a * x**3 + b * x**2 + c * x + d, que serão usados na análise dos dados.</p>
+
+    <figure>
+  			<img src="curvabutilgrau3.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 12: Dispersão e curva dos dados do butilglicol.</strong></figcaption>
+	</figure>
+
+    <table>
+            <caption><strong>Tabela 2. Parâmetros da curva da massa específica do butilglicol</strong></caption>
+            <thead>
+                <tr>
+                <th>Parâmetro</th>
+                <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>a</td>
+                <td>-2.63891797e-04</td>
+                </tr>
+                <tr>
+                <td>b</td>
+                <td>9.68001558e-03</td>
+                </tr>
+                <tr>
+                <td>c</td>
+                <td>-8.89756141e-01</td>
+                </tr>
+                </tr>
+                <tr>
+                <td>d</td>
+                <td>9.16779762e+02</td>
+                </tr>
+            </tbody>
+        </table>
+    
+    <p> Nas figuras de <strong>Figura 13</strong> e <strong>Figura 15</strong> são apresentados o valor de R<sup>2</sup>, RMSE, a dispersão dos resíduos 
+    e o histograma dos resíduos, respectivamente. O valor do resíduo representa 0,2% do valor típico da série.</p>
+
+    <figure>
+  			<img src="estatistica3.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 13: R<sup>2</sup> e RMSE par dados do butil.</strong></figcaption>
+	</figure>
+
+    <figure>
+  			<img src="residuobutil.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 14: Resíduos para a série de dados de butilglicol.</strong></figcaption>
+	</figure>
+
+    <figure>
+  			<img src="histogramabutil.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 15: Histograma para série de dados do butilglicol.</strong></figcaption>
+	</figure>
+
+    <h3> Comparação da curva com dados acadêmicos</h3>
+
+    <p> Agora que já temos a curva com seus parâmetros, podemos comparar o resultado do ajuste aos dados experimentais obtidos de artigos acadêmicos que
+    tem um grau de precisão maior. O artigo de onde foram tirados os dados é <i>"Density, viscosity, and refractive index for water+2-butoxiethanol and 
+    +2-(2-bitoxyehoxy)ethanol at various temperatures"</i>.</p>
+
+    <p> Para obter os valores de massa específica usando o modelo obtido é possível fazer uma função chamada massa_especifica usando temperatura 
+    como dado de entrada, chamando a propria função lambda que foi criada para plotagem do gráfico, conforme <strong>Figura 16</strong>.</p>
+
+    <figure>
+  			<img src="funcaotemp.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 16: Função massa_especifica.</strong></figcaption>
+	</figure>
+
+    <table>
+            <caption><strong>Tabela 3. Comparação de dados com artigo acadêmico</strong></caption>
+            <thead>
+                <tr>
+                <th>Temperatura (<sup>o</sup>C)</th>
+                <th>Massa espefícida modelo (kg/m<sup>3</sup>)</th>
+                <th>Massa espefícida bibliografia (kg/m<sup>3</sup>)</th>
+                <th>Erro pecentual (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>10</td>
+                <td>908,59</td>
+                <td>909,49</td>
+                <td>-0,099</td>
+                </tr>
+                <tr>
+                <td>20</td>
+                <td>900,75</td>
+                <td>901,18</td>
+                <td>-0,048</td>
+                </tr>
+                <tr>
+                <td>30</td>
+                <td>891,67</td>
+                <td>892,68</td>
+                <td>-0,110</td>
+                </tr>
+                </tr>
+                <tr>
+                <td>40</td>
+                <td>879,79</td>
+                <td>884,68</td>
+                <td>-0,550</td>
+                </tr>
+            </tbody>
+        </table>
+
+    <p> Em vista dos resultados apresentados na <strong>Tabela 3</strong>, pode-se concluir que a curva parametrizada apresenta uma boa precisão para a massa 
+    específica do butilglicol para faixa de temperatura desse estudo.</p>
+
+    <h2 id="secao4">4. Análise de dados de viscosidade do propilenoglicol</h2>
+
+    <p> O objetivo dessa seção é determinar se o Copo Ford é um meio adequado para determinar a viscosidade do propilenoglicol. Para saber se ele 
+    oferece uma boa precisão, vamos determinar a viscosidade dessa substância com o Copo Ford, utilizando a calculadora de viscosidade em PHP que desenvolvemos
+    (<a href="Quimica-Programada-Uma-Calculadora-de-Viscosidade-com-Copo-Ford.html">acesse aqui</a>) e comparar com a curva que vamos obter a partir de dados 
+    viscosidade do propilenoglicol publicados no artigo <i>"Density and viscosity of propileneglicol at high temperatures and high pressures"</i>.
+    </p>
+
+    <h3> Ajuste exponencial dos dados acadêmicos de viscosidade</h3>
+
+    <p> No artigo <i>"Density and viscosity of propileneglicol at high temperatures and high pressures"</i>, há uma série de dados de viscosidade 
+    em função da temperatura. Essa série de dados será utilizada para se obter os parâmetros a e b  de um modelo de equação da forma apresentada a seguir:  </p>
+
+    <p style="text-align:center; font-weight:bold; font-size: 20px;">η = a * exp(b/T) </p>
+
+    <p> Na <strong>Figura 17</strong> são apresentados os comandos para plotagem da série de dados e obtenção dos parêmtros a e b da função lambda
+    func = lambda x, a, b: a * np.exp(b/x). Na <strong>Figura 18</strong> é apresentada a série de dados com a curva exponencial ajustada. Na 
+    <strong>Tabela 4</strong> são apresentados do parâmetros obtidos para o modelo.</p>
+
+    <figure>
+  			<img src="comandosglicol.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 17: Comandos para ajuste de dados do propilenoglicol.</strong></figcaption>
+	</figure>
+
+    <figure>
+  			<img src="dadosglicol.png" alt="densidade em função da temperatura">
+  			<figcaption><strong>Figura 18: Dados de viscosidade em função da temperatura para o propilenoglicol.</strong></figcaption>
+	</figure>
+
+    <table>
+            <caption><strong>Tabela 2. Parâmetros da curva da viscosidade do propilenoglicol</strong></caption>
+            <thead>
+                <tr>
+                <th>Parâmetro</th>
+                <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>a</td>
+                <td>3.12515116e-06</td>
+                </tr>
+                <tr>
+                <td>b</td>
+                <td>4.90436091e+03</td>
+                </tr>
+            </tbody>
+        </table>
+
+    <p> Nas figuras de <strong>Figura 19</strong> a <strong>Figura 21</strong>, são spresentados o R<sup>2</sup>, o RMSE, a dispersçao dos resíduos 
+    e o histograma dos resíduos para o ajuste de dados de viscosidade do propilenoglicol em função da temperatura. </p>
+
+    <figure>
+  			<img src="parametrosglicol.png" alt="viscosidade em função da temperatura">
+  			<figcaption><strong>Figura 19: R<sup>2</sup></strong> e RMSE do ajuste para o propilenoglicol.</strong></figcaption>
+	</figure>
+
+     <figure>
+  			<img src="residuosglicol.png" alt="viscosidade em função da temperatura">
+  			<figcaption><strong>Figura 20: Resíduos do ajuste para o propilenoglicol.</strong></figcaption>
+	</figure>
+
+    <figure>
+  			<img src="histogramaglicol.png" alt="viscosidade em função da temperatura">
+  			<figcaption><strong>Figura 21: Histograma dos resíduos do ajuste para o propilenoglicol.</strong></figcaption>
+	</figure>
+
+    <h3> Escolha do orifício do Copo Ford </h3>
+    
+    <p> Agora, usando a calculadora de obtenção da viscosidade <a href="Quimica-Programada-Uma-Calculadora-de-Viscosidade-com-Copo-Ford.html">com o Copo Ford</a>,
+    vamos comparar o resultado calculado a partir do modelo da série de dados com o dado obtido com o Copo Ford. No artigo em questão a viscosidade 
+    foi obtida com um método muito mais preciso e em condiçoes experimentais muito mais controladas: método da pesagem hidrostática e método do corpo em queda.</p>
+
+    <p> Para que uma medição no Copo Ford seja válida em um dado orifício, o primeiro critério é que o tempo de escoamento seja compreendido entre 20 e 100 segundos.
+    O segundo critério é que as três repetiçoes da medição de tempo tenham um erro em relação ao tempo médio de, no máximo, 3 %. Para obter a viscosidade, primeiramente
+     fizemos a aferição da viscosidade cinemática do propilenoglicol utilizando o orifício número 3. O resultado obtido é apresentado na <strong>Figura 22</strong>
+    é apresentado, utilizando a <a href="Quimica-Programada-Uma-Calculadora-de-Viscosidade-com-Copo-Ford.html">calculadora</a> desenvolvida por Química Programada 
+    e com orifício número 3.Os tempos de escoamento foram 28,47 s, 28,22 s e 27,83 s.</p>
+
+    <figure>
+  			<img src="copo3.png" alt="viscosidade em função da temperatura">
+  			<figcaption><strong>Figura 22: Resultado viscosidade com orifício n<sup>o</sup>3.</strong></figcaption>
+	</figure>
+
+
+    <p> Apesar dos resultados de tempo de escoamento estarem dentro da faixa de validade do instrumento de medição, ao compararmos com o valor obtido com os 
+    parâmetros do modelo ajustado com dados do artigo, o resultado não está muito preciso : com modelo a viscosidade dinâmica é de 43.52 mPa.s enquanto o obtido
+    com orifício número 3 do Copo Ford é de 51,44 mPa.s.
+    </p>
+
+    <p> Em vista disso, podemos tentar utilizando outro orifício do Copo Ford, o orifício número 2. Com este, os tempos de escoamento são 47,91s, 45,34 s e 46,74 s. 
+    O resultado é apresentado na <strong>Figura 23</strong> e está muito mais coerente com os dados exprimentais do artigo.  CONCLUSÃO : a medição  da 
+    viscosidade do propilenoglicol com orifício  n<sup>o</sup> 2 do Copo Ford oferece uma boa precisão.</p>
+
+
+    <figure>
+  			<img src="copoford2.png" alt="viscosidade em função da temperatura">
+  			<figcaption><strong>Figura 23: Resultado viscosidade com orifício n<sup>o</sup>2.</strong></figcaption>
+	</figure>
+
+    <h2 id="secao4">5. Referências </h2>
+
+	<ul>
+        <li> Curso Online : "Inteligência artificial conceitos, temáticas, desenvolvimento e aplicações". Unicamp.</li>
+		<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+        <li> "Density and viscosity of propileneglicol at high temperatures and high pressures". Sagdeev, D.I. et al. Fluid Phase Equlibria, 2017</li>
+        <li> "Density, viscosity, and refractive index for water+2-butoxiethanol and +2-(2-bitoxyehoxy)ethanol at various temperatures".Chiou, D. et al. J. Chem. Eng. Data, 2010.</li>
+        <li> Assistente de IA da Microsoft Pilot.</li>
+        <li> Assistente de IA do ChatGPT.</li>
+    </ul>
+
+     <p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+</body>
+
+</html>
