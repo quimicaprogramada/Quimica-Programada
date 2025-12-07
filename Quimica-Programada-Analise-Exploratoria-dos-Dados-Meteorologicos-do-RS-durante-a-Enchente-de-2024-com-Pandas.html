@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Análise Exploratória dos Dados Meteorológicos do RS durante a Enchente de 2024 com Pandas</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Exploração da dados ambientais e meterologicos com a biblioteca Pandas da linguagem Python. DataFrame, 
+        condições pluviométricas.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Análise Exploratória dos Dados Meteorológicos do RS durante a Enchente de 2024 com Pandas (Python) </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Upload de dados .csv</a></li>
+            <li><a href="#secao3"> 3. Explorando dados das estações Belém Novo e Jardim Botânico de Porto Alegre</a></li>
+            <li><a href="#secao4" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1 Temperaturas</a></li>
+            <li><a href="#secao5" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2 Pressão atmosférica</a></li>
+            <li><a href="#secao6" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3 Umidade relativa</a></li>
+            <li><a href="#secao7" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4 Precipitação mensal em Porto Alegre durante enchente de 2024</a></li>
+            <li><a href="#secao8"> 4. Explorando dados das estações de Teutônia e Canela</a></li>
+            <li><a href="#secao9" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.1 Temperaturas</a></li>
+            <li><a href="#secao10" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 Pressão atmosférica</a></li>
+            <li><a href="#secao11" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3 Umidade</a></li>
+            <li><a href="#secao12" class="no-sublinhado"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4 Precipitação mensal em Canela e Teutônia durante enchente de 2024</a></li>
+            <li><a href="#secao13"> 5. Os dados permitem concluir que a cheia era previsível?</a></li>
+            <li><a href="#secao14"> 6. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Essa publicação do Química Programada se propõe em fazer uma análise exploratória dos dados meteorológicos do site do INMET. Esses 
+            dados estão disponíveis em formato .csv no site https://bdmep.inmet.gov.br. Basta você clicar e fazer o download de dados 
+            meteorológicos de todas as estações cadastradas no Brasil por ano.</p>
+
+        <p> Será feita uma análise exploratória comparativa de dados meteorológicas nos anos de 2023, 2024 e 2025, a fim de verificar as diferenças 
+            das condições pluviométricas do RS no ano da grande cheia de Porto Alegre em 2024 e nos anos anterior e posterior a esse evento 
+            catastrófico. Para esse estudo será utilizado ambiente de programação do GoogleColab usando a Linguagem Python, principalmente a 
+            biblioteca de exploração da DataFrames do Pandas.</p>
+        
+        <p> Pandas é uma biblioteca de código aberto da linguagem Python, criada para manipulação e análise de dados estruturados, oferecendo 
+            estruturas como Series e DataFrames que facilitam a organização, limpeza e exploração de grandes volumes de informação.</p>
+
+
+        <h2 id="secao2"> 2. Upload de dados .csv </h2>
+
+        <p> Os dados do INMET estão em formato .csv, porém estão separados por vírgula. Para fazer o upload dos arquivos no ambiente do
+         GoogleColab, é necessário inserir o comando abaixo :</p>
+
+         <figure>
+  			<img src="Comando_upload.png" alt="comando upload">
+  			<figcaption><strong>Figura 1: Comando para upload de dados no GoogleColab.</strong></figcaption>
+	    </figure>
+
+        <p> Vai abrir uma janela onde você deve escolher o arquivo no local onde foi salvo no seu computador. Depois de haver escolhido o arquivo, 
+        você deve importar a biblioteca Pandas, com o comando <i><strong>"import pandas as pd"</strong></i>. </p>
+
+        <p> Agora o próximo passo é transformar os dados .csv que fizemos o upload num DataFrame do Pandas. Para isso é necessário o comando da <strong>Figura 2</strong>, 
+        onde além de transformar os dados num DataFrame, faz com que o GoogleColab reconheça que os dados do INMET estão separados por ponto e vírgula
+        (a maioria dos dados .csv dos sites governamentais são separados por ponto e vírgula e o GoogleColab reconhece por default dados separados por 
+        vírgula). Na figura é criado o DataFrame <i><strong></strong>dados_jardim_2023</i></strong>, que correspondedo aos dados meteorológicos da 
+        estação Jardim Botânico de Porto Alegre. O comando <i><strong> dados_jardim_2023.head()</i></strong>  faz com que sejam impressas as 5 primeiras linhas  do DataFrame. O 
+        comando <i><strong> dados_jardim_2023.shape</i></strong> faz com que sejam impressas o numero de linhas e o número de colunas totais do 
+        DataFrame. Para os dados anuais do INMET são 8760 linhas (24 leituras de variáveis pluviométricas por dia) e 19 colunas.</p>
+
+        <figure>
+  			<img src="Comando_csv_to_dataframe.png" alt="comando upload">
+  			<figcaption><strong>Figura 2: Comando transformação de dados de CSV para DataFrame.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao3"> 3. Explorando dados das estações Belém Novo e Jardim Botânico de Porto Alegre </h2>
+
+        <p> Na cidade de Porto Alegre há duas estações de coleta de dados meteorológicos do INMET : a Estação Belém Novo e a Estação 
+        Jardim Botânico. O conjunto de dados apresenta 24 leituras diárias de 18 dados meteorológicos. Nessa postagem vamos explorar os 
+        dados de apenas 5 colunas : temperatura no ponto de orvalho, temperatura de bulbo seco, pressão atmosférica, umidade e precipitação total.</p>
+        
+        <h3 id="secao4"> 3.1. Temperaturas </h3>
+
+        <p> Um indicativo do grau de saturação do ar é a diferença entre a temperatura de bulbo seco e a temperatura de orvalho. A diferença entre a 
+        temperatura de bulbo seco e a temperatura de orvalho é um indicador da proximidade da saturação do ar, sendo utilizada como parâmetro para 
+        avaliar condições favoráveis à ocorrência de precipitação. Em vista disso, plotamos com as bibliotecas Pandas e Matplotlib.pyplot gráficos de 2023,
+        2024 e 2025 da temperatura de bulbo seco, temperatura de orvalho e da diferença entre essas duas variáveis a fim de verificar se havia alguma diferença
+        radical nos padrões durante maio de 2024, mês da grande enchendo no Rio Grande do Sul.</p>
+
+        <p> Na <strong>Figura 3</strong> são apresentados os comandos para plotagem dos gráficos de temperaturas de bulbo seco e temperatura de orvalho. 
+        Na <strong>Figura 4</strong> são apresentados os comandos para plotagem do gráfico da diferença entre essas temperaturas.</p>
+
+        <figure>
+  			<img src="Comando_grafico_serie_temporal.png" alt="comando upload">
+  			<figcaption><strong>Figura 3: Comando para plotagem de série temporal das temperaturas.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Comandos_grafico_diferença.png" alt="comando upload">
+  			<figcaption><strong>Figura 4: Comando para plotagem da diferença entre as temperaturas.</strong></figcaption>
+	    </figure>
+
+        <p> Nas figuras de <strong>Figura 5</strong> a <strong>Figura 11</strong> são apresentados os gráficos das temperatura de bulbo seco e 
+        temperatura de orvalho, assim como o gráfico da diferença entre essas duas temperaturas para as estações meteorológicas Belém Novo e 
+        Jardim Botânico de Porto Alegre.</p>
+
+        <figure>
+  			<img src="Estacao_belem_temperaturas_2023.png" alt="temperaturas">
+  			<figcaption><strong>Figura 5: Temperatura bulbo seco e orvalho Estação Belém Novo 2023.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_belem_temperaturas_2024.png" alt="temperaturas">
+  			<figcaption><strong>Figura 6: Temperatura bulbo seco e orvalho Estação Belém Novo 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_belem_diferenca_temperatura.png" alt="temperaturas">
+  			<figcaption><strong>Figura 7: Diferença entre temperaturas na Estação Belém Novo 2023 e 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_jardim_temperaturas_2023.png" alt="temperaturas">
+  			<figcaption><strong>Figura 8: Temperatura bulbo seco e orvalho Estação Jardim Botânico 2023.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_jardim_temperaturas_2024.png" alt="temperaturas">
+  			<figcaption><strong>Figura 9: Temperatura bulbo seco e orvalho Estação Jardim Botânico 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_jardim_temperaturas_2025.png" alt="temperaturas">
+  			<figcaption><strong>Figura 10: Temperatura bulbo seco e orvalho Estação Jardim Botânico 2025.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_jardim_diferenca_temperatura.png" alt="temperaturas">
+  			<figcaption><strong>Figura 11: Diferença entre temperaturas na Estação Jardim Botânico 2023, 2024 e 2025.</strong></figcaption>
+	    </figure>
+
+        <p> Os padrões de diferença entre temperatura de bulbo seco e temperatura de orvalho em 2024 mantiveram-se semelhantes aos observados 
+        em 2023 e 2025, não fornecendo sinais que pudessem antecipar a chuva extrema registrada na enchente de 2024.</p>
+
+        <h3 id="secao5"> 3.2. Pressão atmosférica </h3>
+
+        <p> As zonas de baixa pressão atmosférica estão diretamente associadas à formação de condições favoráveis à precipitação. Isso ocorre 
+        porque, em regiões de baixa pressão, o ar tende a se elevar, expandir e resfriar. Esse resfriamento promove a condensação do vapor 
+        de água presente na atmosfera, resultando na formação de nuvens. Quanto mais intensa for a baixa pressão, maior a instabilidade 
+        atmosférica, aumentando a probabilidade de chuvas, tempestades e até eventos extremos. Assim, a identificação de áreas de baixa 
+        pressão é um dos principais indicadores utilizados pela meteorologia para prever episódios de precipitação significativa. </p>
+
+        <p> Na <strong>Figura 12</strong> são apresentados os comandos para plotagem do gráfico de pressão atmosférica usando Pandas 
+        e Matplotlib.pyplot</p>
+
+        <figure>
+  			<img src="Comandos_grafico_pressao.png" alt="comandos pressao">
+  			<figcaption><strong>Figura 12: Comandos plotagem gráficos pressão.</strong></figcaption>
+	    </figure>
+
+        <p> Na figuras <strong>Figura 13</strong> e <strong>Figura 14</strong> são apresentados os gráficos de pressão atmosférica nas estações Belém Novo
+        para os anos 2023 e 2024 e Jardim Botânico nos anos de 2023, 2024 e 2025. É possível observar que no ano de 2024, em relação aos anos de 2023 e 2025,
+        foram verificadas zonas de baixa pressão proximo às estações, indicando condições de precipitação.</p>
+
+        <figure>
+  			<img src="Estacao_belem_pressao.png" alt="pressao atmosférica">
+  			<figcaption><strong>Figura 13: Pressão atmosférica Estação Belém Novo 2023 e 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_jardim_pressao.png" alt="pressao atmosférica">
+  			<figcaption><strong>Figura 14: Pressão atmosférica Estação Jardim Botânico 2023, 2024 e 2025.</strong></figcaption>
+	    </figure>
+
+        <h3 id="secao6"> 3.3. Umidade Relativa </h3>
+
+        <p> A umidade relativa do ar é um dos fatores mais importantes para a formação de chuva, mas não existe um único valor fixo que garanta 
+            precipitação. O que importa é a combinação de alta umidade com outros elementos meteorológicos (pressão, temperatura, ventos, 
+            presença de nuvens).</p>
+        
+        <p> Na <strong>Figura 15</strong> são apresentados os comandos para plotagem do gráfico de umidade relativa. Nas figuras <strong>Figura 15</strong>
+        e <strong>Figura 16</strong> são apresentados os gráficos de umidade relativa para as estações Belém Novo e Jardim Botânico.</p>
+
+        <figure>
+  			<img src="Comandos_grafico_umidade.png" alt="umidade">
+  			<figcaption><strong>Figura 15: Comandos plotagem gráfico umidade relativa.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_belem_umidade.png" alt="pressao atmosférica">
+  			<figcaption><strong>Figura 15: Umidade relativa Estação Belém Novo 2023 e 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_jardim_umidade.png" alt="pressao atmosférica">
+  			<figcaption><strong>Figura 16: Umidade relativa Estação Jardim Botânico 2023, 2024 e 2025.</strong></figcaption>
+	    </figure>
+
+        <p> Nos perfis de umidade, podemos observar que em maio de 2024 a umidade relativa permaneceu durante vários dias acima de 90%. Nos dados 
+        da Estação Belém é possível verificar que os valores permaneceram quase todos os dias do mês de maio de 2024 acima dos valores 
+        registrados em maio de 2023. Já nos dados da Estação Jardim Botânico, houve uma sequência de dias em que a umidade permaneceu mesmo acima de 95%.</p>
+
+        <p> Esse fato combinado com os dados de baixa pressão no período, que já foram descritos, indicam uma tendência para a chuva elevada verificada no período, que 
+        culminou nas enchentes de maio de 2024.</p>
+
+        <h3 id="secao7"> 3.4. Precipitação Mensal </h3>
+
+        <p> Nos dados do INMET também é possível explorar a pecipitação total dia a dia nas estações. Dessa forma, usando os comandos da <strong> Figura 17</strong>,
+         fizemos um compilado da precipitação total mensal nas estações de Porto Alegre nos anos de 2023, 2024 e 2025, que são apresentados nas tabelas <strong>Tabela 1</strong> e <strong>Tabela 2</strong>.</p>
+
+        <figure>
+  			<img src="Belem_acumulado_2023_mes.png" alt="precipitação">
+  			<figcaption><strong>Figura 17: Comandos precipitação acumulada.</strong></figcaption>
+	    </figure>
+
+        <table>
+            <caption><strong>Tabela 1. Precitipação acumulada (mm) na Estação Belém Novo</strong></caption>
+            <thead>
+                <tr>
+                <th>Mês </th>
+                <th>Precipitação ano de 2023 (mm)</th>
+                <th>Precipitação ano de 2024 (mm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Janeiro</td>
+                <td> 100,8</td>
+                 <td> 113,6</td>
+                </tr>
+                <tr>
+                 <td> Fevereiro</td>
+                <td> 151,8</td>
+                 <td> 67,4</td>
+                </tr>
+                <tr>
+                 <td> Março</td>
+                <td> 91,4</td>
+                 <td> 90,0</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Abril</td>
+                <td> 50,0</td>
+                <td style="color:red"> 279,8</td>
+                </tr>
+                <tr>
+                <td> Maio</td>
+                <td> 174,0</td>
+                <td style="color:red"> 523,4</td>
+                </tr>
+                <tr>
+                <td> Junho</td>
+                <td> 188,6</td>
+                 <td> 175,0</td>
+                </tr>
+                <tr>
+                <td> Julho</td>
+                <td> 194,6</td>
+                 <td> 93,4</td>
+                </tr>
+                <tr>
+                <td> Agosto</td>
+                <td> 73,4</td>
+                 <td> 69,4</td>
+                 <tr>
+                <td> Setembro</td>
+                <td> 375,2</td>
+                 <td> 209,4</td>
+                </tr>
+                <tr>
+                <td> Outubro</td>
+                <td> 99,4</td>
+                 <td> 73,6</td>
+                </tr>
+                <tr>
+                <td> Novembro</td>
+                <td> 233,2</td>
+                 <td> 68</td>
+                </tr>
+                <tr>
+                <td> Dezembro</td>
+                <td> 110,4</td>
+                 <td> 226,4</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <caption><strong>Tabela 2. Precitipação acumulada (mm) na Estação Jardim Botânico</strong></caption>
+            <thead>
+                <tr>
+                <th>Mês </th>
+                <th>Precipitação ano de 2023 (mm)</th>
+                <th>Precipitação ano de 2024 (mm)</th>
+                <th>Precipitação ano de 2025 (mm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Janeiro</td>
+                <td> 53,2</td>
+                 <td> 233,8</td>
+                 <td> 86,6</td>
+                </tr>
+                <tr>
+                 <td> Fevereiro</td>
+                <td> 116,4</td>
+                 <td>85,4</td>
+                 <td> 137,6</td>
+                </tr>
+                <tr>
+                 <td> Março</td>
+                <td> 89,8</td>
+                 <td> 81,6</td>
+                 <td> 162,4</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Abril</td>
+                <td> 32,5</td>
+                <td style="color:red"> 271,0</td>
+                <td> 50,8</td>
+                </tr>
+                <tr>
+                <td> Maio</td>
+                <td> 106,8</td>
+                <td style="color:red"> 524,4</td>
+                <td> 197,4</td>
+                </tr>
+                <tr>
+                <td> Junho</td>
+                <td> 247,6</td>
+                 <td> 176,6</td>
+                 <td> 265,4</td>
+                </tr>
+                <tr>
+                <td> Julho</td>
+                <td> 210,8</td>
+                 <td> 73,8</td>
+                 <td> 91,2</td>
+                </tr>
+                <tr>
+                <td> Agosto</td>
+                <td> 77,0</td>
+                 <td> 45,2</td>
+                 <td> 211,6</td>
+                 <tr>
+                <td> Setembro</td>
+                <td> 394,8</td>
+                 <td> 211,8</td>
+                 <td> 212,0</td>
+                </tr>
+                <tr>
+                <td> Outubro</td>
+                <td> 110,0</td>
+                 <td> 61,6</td>
+                 <td> 109,8</td>
+                </tr>
+                <tr>
+                <td> Novembro</td>
+                <td> 342,8</td>
+                 <td> 72,4</td>
+                 <td> 39,9</td>
+                </tr>
+                <tr>
+                <td> Dezembro</td>
+                <td> 88,6</td>
+                 <td> 260,6</td>
+                 <td>  -  </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p> Como é possível observar na <strong>Tabela 1</strong>, no mês de maio de 2024, a precipitação acumulada na Estação de Belém Novo foi 200% superior ao mesmo 
+        período de 2023. Em abril foi 459%. Já na Estação Jardim Botânico, conforme <strong>Tabela 2</strong>, em maio de 2024 a precipitação acumulada foi 391% superior ao mesmo período de 
+        2023 e 165% superior ao mesmo período de 2025. Já no mês de abril, os valores ficaram em 733% em relação a 2023 e 433% em relação a 2025.
+        </p>
+
+        <h2 id="secao8"> 4. Explorando dados das estações de Teutônia e Canela </h2>
+
+        <p> Grandes contribuintes para a situação de cheia prolongada na cidade de Porto Alegre em 2024 foram os volumes de água que escoaram a partir da serra e da região 
+        do vale do Taquari, chegando ao Guaíba, acumulando-se na capital por um bom tempo. Dessa forma, iremos fazer a mesma análise para estações INMET localizadas 
+        nessas regiões, explorando os dados das estações de Teutônia e Canela. A de Teutônia só tem dados disponíveis no site do INMET nos anos de 2023 e 2024. 
+        Já Canela contém dados de 2023, 2024 e 2025.</p>
+
+        <h3 id="secao9"> 4.1. Temperaturas </h3>
+
+        <p> Na figuras de <strong>Figura 18</strong> a <strong> Figura 20</strong> temos os dados de temperatura de bulbo seco, temperatura de orvalho e diferença entre
+        essas temperaturas para os dados da Estação de Teutônia. Já nas figuras de <strong>Figura 21 </strong> a <strong>Figura 24</strong> temos os dados 
+        da Estação Canela.</p>
+
+        <figure>
+  			<img src="Estacao_teutonia_temperaturas_2023.png" alt="temperaturas">
+  			<figcaption><strong>Figura 18: Temperatura bulbo seco e orvalho Estação Jardim Botânico 2023.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_teutonia_temperaturas_2024.png" alt="temperaturas">
+  			<figcaption><strong>Figura 19: Temperatura bulbo seco e orvalho Estação Jardim Botânico 2024.</strong></figcaption>
+	    </figure>
+
+         <figure>
+  			<img src="Estacao_teutonia_diferenca_temperatura.png" alt="comando upload">
+  			<figcaption><strong>Figura 20: Diferença entre temperaturas Estação Teutônia anos de 2023 e 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_canela_temperaturas_2023.png" alt="temperaturas">
+  			<figcaption><strong>Figura 21: Temperatura bulbo seco e orvalho Estação Canela em 2023.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_canela_temperaturas_2024.png" alt="temperaturas">
+  			<figcaption><strong>Figura 22: Temperatura bulbo seco e orvalho Estação Canela em 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_canela_temperaturas_2025.png" alt="temperaturas">
+  			<figcaption><strong>Figura 23: Temperatura bulbo seco e orvalho Estação Canela 2025.</strong></figcaption>
+	    </figure>
+
+         <figure>
+  			<img src="Estacao_canela_diferenca_temperatura.png" alt="comando upload">
+  			<figcaption><strong>Figura 24: Diferença entre temperaturas Estação Canela anos de 2023, 2024 e 2025.</strong></figcaption>
+	    </figure>
+
+        <p> Os padrões de diferença entre temperatura de bulbo seco e temperatura de orvalho em 2024 mantiveram-se semelhantes aos observados 
+        em 2023 e 2025, não fornecendo sinais que pudessem antecipar a chuva extrema registrada na enchente de 2024.</p>
+
+        <h3 id="secao10"> 4.2. Pressão atmosférica </h3>
+
+        <p> Na figuras <strong>Figura 25</strong> e <strong>Figura 26</strong> são apresentadas, respectivamente, a pressão atmosférica nas Estações 
+        de Teutônia (2023 e 2024) e Canela (2023,2024 e 2025). É possível observar que no período da catástrofe as Estações registraram valores de pressão
+        inferiores ao mesmo período nos anos de 2023 e 2025. Esse, juntamente com outro fatores, é indicaivo de condições de precipitação.</p>
+        
+        <figure>
+  			<img src="Estacao_teutonia_pressao.png" alt="pressao atmosférica">
+  			<figcaption><strong>Figura 25: Pressão atmosférica Estação Teutônia em 2023 e 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_canela_pressao.png" alt="pressao atmosférica">
+  			<figcaption><strong>Figura 26: Pressão atmosférica Estação Canela em 2023, 2024 e 2025.</strong></figcaption>
+	    </figure>
+
+
+        <p> Ou seja, além de condições favoráveis à precipitação em Porto Alegre, o período foi caracterizado pelas mesmas condições na serra e no vale
+        do Taquari, regiões com cursos de água que desembocam na Capital.</p>
+
+        <h3 id="secao11"> 4.3. Umidade Relativa </h3>
+
+        <p> Nas figuras <strong>Figura 27</strong> e <strong>Figura 28</strong> são apresentados os dados de umidade relativa nos anos de 2023, 2024 e 2025
+        para as Estações de Teutônia e Canela respectivamente. No período de maio de 2024, as leituras permaneceram mais próximas a 100% (valores acima de 95%),
+        indicando a manutenção de condições favoráveis à precipitação também nessas regiões.</p>
+
+        <figure>
+  			<img src="Estacao_teutonia_umidade.png" alt="umidade relativa">
+  			<figcaption><strong>Figura 27: Umidade relativa Estação Teutônia em 2023 e 2024.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="Estacao_canela_umidade.png" alt="umidade relativa">
+  			<figcaption><strong>Figura 28: Umidade relativa Estação Teutônia em 2023, 2024 e 2025.</strong></figcaption>
+	    </figure>
+
+        <h3 id="secao12"> 4.4. Precipitação Mensal </h3>
+
+        <p> Nas tabelas <strong>Tabela 3 </strong> e <strong>Tabela 4 </strong> são apresentados os valores de precipitação acumulada mensal 
+        nas Estações de Teutônia e Canela respectivamente. </p>
+
+        <table>
+            <caption><strong>Tabela 3. Precitipação acumulada (mm) na Estação Teutônia</strong></caption>
+            <thead>
+                <tr>
+                <th>Mês </th>
+                <th>Precipitação ano de 2023 (mm)</th>
+                <th>Precipitação ano de 2024 (mm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Janeiro</td>
+                <td> 35,4</td>
+                 <td> 133,4</td>
+                </tr>
+                <tr>
+                 <td> Fevereiro</td>
+                <td> 161,8</td>
+                 <td> 108,6</td>
+                </tr>
+                <tr>
+                 <td> Março</td>
+                <td> 127,0</td>
+                 <td> 90,0</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Abril</td>
+                <td> 25,6</td>
+                <td style="color:red"> 273,0</td>
+                </tr>
+                <tr>
+                <td> Maio</td>
+                <td> 223,6</td>
+                <td style="color:red">465,6</td>
+                </tr>
+                <tr>
+                <td> Junho</td>
+                <td> 265,2</td>
+                 <td> 231,8</td>
+                </tr>
+                <tr>
+                <td> Julho</td>
+                <td> 204</td>
+                 <td> 16,4</td>
+                </tr>
+                <tr>
+                <td> Agosto</td>
+                <td> 56,2</td>
+                 <td> 20,6</td>
+                 <tr>
+                <td> Setembro</td>
+                <td> 443,4</td>
+                 <td> 179</td>
+                </tr>
+                <tr>
+                <td> Outubro</td>
+                <td> 184</td>
+                 <td> 145,2</td>
+                </tr>
+                <tr>
+                <td> Novembro</td>
+                <td> 416,4</td>
+                 <td>124</td>
+                </tr>
+                <tr>
+                <td> Dezembro</td>
+                <td> 180,6</td>
+                 <td> 194,2</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <caption><strong>Tabela 4. Precitipação acumulada (mm) na Estação Canela</strong></caption>
+            <thead>
+                <tr>
+                <th>Mês </th>
+                <th>Precipitação ano de 2023 (mm)</th>
+                <th>Precipitação ano de 2024 (mm)</th>
+                <th>Precipitação ano de 2025 (mm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Janeiro</td>
+                <td> 119,8</td>
+                 <td> 263,4</td>
+                 <td> 146,2</td>
+                </tr>
+                <tr>
+                 <td> Fevereiro</td>
+                <td> 209,8</td>
+                 <td> 272,2</td>
+                 <td> 158,8</td>
+                </tr>
+                <tr>
+                 <td> Março</td>
+                <td> 227,2</td>
+                 <td> 143,8</td>
+                 <td> 63,6</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Abril</td>
+                <td> 133,2</td>
+                <td style="color:red"> 386,2</td>
+                <td> 171,0</td>
+                </tr>
+                <tr>
+                <td> Maio</td>
+                <td> 152,6</td>
+                <td style="color:red"> 706,0</td>
+                <td> 142,7</td>
+                </tr>
+                <tr>
+                <td> Junho</td>
+                <td> 229,8</td>
+                 <td> 345,0</td>
+                 <td> 0,2</td>
+                </tr>
+                <tr>
+                <td> Julho</td>
+                <td> 237,4</td>
+                 <td> 117,6</td>
+                 <td> 0</td>
+                </tr>
+                <tr>
+                <td> Agosto</td>
+                <td> 108,0</td>
+                 <td> 123,6</td>
+                 <td> 0</td>
+                 <tr>
+                <td> Setembro</td>
+                <td> 442,6</td>
+                 <td> 166,0</td>
+                 <td> 0</td>
+                </tr>
+                <tr>
+                <td> Outubro</td>
+                <td> 360,2</td>
+                 <td> 185,4</td>
+                 <td> 134,0</td>
+                </tr>
+                <tr>
+                <td> Novembro</td>
+                <td> 439,4</td>
+                 <td> 318,8</td>
+                 <td> 157,7<td>
+                </tr>
+                <tr>
+                <td> Dezembro</td>
+                <td> 158,8</td>
+                 <td> 282,2</td>
+                 <td>  -  </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p> Como é possível observar na <strong>Tabela 3</strong>, no mês de maio de 2024, a precipitação acumulada na Estação de  Teutônia foi 108% superior ao mesmo 
+        período de 2023. Em abril foi 966%. Ja na Estação Canela, conforme <strong>Tabela 4</strong>, em maio de 2024 a precipitação acumulada foi 362% superior ao mesmo período de 
+        2023 e 394% superior ao mesmo período de 2025. Já no mês de abril, os valores ficaram 189% em relação a 2023 e 125% em relação a 2025.
+        </p>
+
+        <h2 id="secao13"> 5. Os dados permitem concluir que a cheia era previsível? </h2>
+
+        <p> A longa e catastrófica enchente de 2024 em Porto Alegre ocorreu devido aos altos índices pluviométricos nos meses de abril e maio em Porto
+        Alegre e em outras regiões do Estado com cursos de água que desembocam na Capital. Tanto na Capital quanto nessas outras regiões, a precipitação acumulada
+        já havia sido extremamente elevada em relação ao mesmo período de 2023 <strong>no mês de abril</strong>. Esse fato, aliado à baixa pressão e alta umidade 
+        relativa que persistiu no mês de maio, permitem afirmar que era previsível que haveria um sobrecarregamento da bacia hidrográfica nas regiões vizinhas a Porto
+        Alegre em maio de 2024.</p>
+
+         <h2 id="secao14"> 6. Referências </h2>
+
+		<ul>
+            <li> Apostila de Meteorologia Básica - IF 111 – 2013 – DCA/IF/UFRRJ </li>
+            <li> Curso Online : "Fundamentos de Linguagem Python - Do Básico a Aplicações de IA". Data Science Academy</li>
+            <li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science - Nível Introdutório". Data Sience Academy</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+			<li> Curso Online : "Introdução ao PHP - Gerando HTML com PHP". Eucurso, Alfamídia.</li>
+            <li> Curso Online : "Introdução ao PHP - Lendo e Inserindo dados no Banco de Dados". Eucurso, Alfamídia.</li>
+            <li> Curso online : "HTML e CSS". Eucurso, Alfamídia.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>

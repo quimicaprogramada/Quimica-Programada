@@ -107,6 +107,13 @@
     <priority>0.9</priority>
   </url>
 
+  <url>
+    <loc>C:\Quimica_Programada\Quimica-Programada-Analise-Exploratoria-dos-Dados-Meteorologicos-do-RS-durante-a-Enchente-de-2024-com-Pandas.html</loc>
+    <lastmod>2025-12-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
 </urlset>
 
 

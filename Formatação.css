@@ -119,3 +119,7 @@ table tr:hover {
   font-weight: bold;
   margin: 20px 0;
 }
+.no-sublinhado {
+    text-decoration: none; /* remove o sublinhado */
+    color: inherit;        /* mantém a cor do texto igual ao padrão */
+}
