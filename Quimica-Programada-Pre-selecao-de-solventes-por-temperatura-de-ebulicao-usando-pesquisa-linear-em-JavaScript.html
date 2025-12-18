@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Pré-seleção de solventes por temperatura de ebulição usando pesquisa linear em Javascript</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Algoritmo de pesquisa linear modificado, utilizando um dicionários como entrada, para filtro de substâncias por propriedades químicas.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Pré-seleção de solventes por temperatura de ebulição usando pesquisa linear em Javascript </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+            <li><a href="#secao2"> 2. Apresentação do problema </a></li>
+			<li><a href="#secao3"> 3. Adaptação do algoritmo de pesquisa linear ao problema proposto</a></li>
+            <li><a href="#secao4"> 4. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Algoritmos de pesquisa ou de busca são algoritmos fundamentais em ciência da computação que se propõem a procurar um  valor em uma 
+        estrutura de dados. O mais básico desses algoritmos é a pesquisa linear, na qual se faz a iteração sobre uma estrutura de dados, um valor por vez, 
+        e cada valor é comparado com o valor que estamos procurando. Esse método é aplicável a uma busca numa lista de valores que não esteja ordenada, segundo 
+        podemos ler em <a href="https://www.freecodecamp.org/portuguese/news/manual-de-introducao-aos-algoritmos-com-exemplos-em-javascript/#pesquisa-linear">Manual de introdução aos algoritmos</a>.</p>
+
+        <p> Na <strong>Figura 1</strong>, temos um array de números chamado <strong>arr</strong>. O objetivo do algoritmo é, através de uma função chamada
+        procura, receber um número qualquer de entrada e procurar a posição desse número no array <strong>arr</strong>, fazendo a iteração por cada posição.
+        Ao percorrer cada posição do array, o algoritmo faz a comparação <strong>num === arr[i]</strong>, que compara o número de entrada da função com o valor
+        da posição i do array. Se a expressão for verdadeira, é impressa a posição encontrada no array e o valor. Se, ao percorrer todo array, não for verificada 
+        a expressão como verdadeira para nenhuma posição, é impresso "Nao encontrado". Na <strong>Figura 2</strong> são apresentadas as saídas da função procura.</p>
+        
+        <figure>
+  				<img src="pesquisalinear.png" alt="Algoritmo pesquisa linear">
+  				<figcaption><strong>Figura 1: Algoritmo da pesquisa linear.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="pesquisalinearsaida.png" alt="Saída pesquisa linear">
+  				<figcaption><strong>Figura 2: Saída do algoritmo da pesquisa linear.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao2"> 2 Apresentação do problema </h2>
+
+        <p> Imagine que você trabalha em uma empresa que comercializa diferentes solventes orgânicos. Abaixo na <strong> Tabela 1</strong> está a lista dos produtos comercializados 
+        com seus pontos de ebulição. Você recebe várias vezes ao dia contato de algum cliente que precisa fazer uma pré-seleção de solventes que possam ser utilizados em uma dada aplicação
+        com uma temperatura específica. A cada nova demanda e nova temperatura, você precisa escolher manualmente a lista de solventes pré-selecionados para a aplicação e enviá-la
+        para o cliente em questão.</p>
+
+        <p> Na seção seguinte, Química Programada propõe uma versão modificada do algoritmo de pesquisa linear para que essa busca de solventes com temperatura de ebulição
+        acima da temperatura de aplicação de determinado cliente possa ser feita de forma programável.</p>
+
+        <table>
+            <caption><strong>Tabela 1. Temperatura de ebulição de solventes orgânicos</strong></caption>
+            <thead>
+                <tr>
+                <th> Solvente </th>
+                <th> Temperatura de ebulição (°C)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Acetona</td>
+                <td> 56,1</td>
+                </tr>
+                <tr>
+                 <td> Diisobutil cetona</td>
+                <td> 169,3</td>
+                </tr>
+                <tr>
+                 <td> Metanol</td>
+                <td> 64,5</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Tolueno</td>
+                <td> 110,5</td>
+                </tr>
+                <tr>
+                <td> Xileno</td>
+                <td> 140,0</td>
+                </tr>
+                <tr>
+                <td> Hexano</td>
+                <td> 68,7</td>
+                </tr>
+                <tr>
+                <td> Nafta aromática C-9</td>
+                <td> 165,9</td>
+                </tr>
+                <tr>
+                <td> Aguarrás mineral</td>
+                <td> 148,0</td>
+                 <tr>
+                <td> Butilglicol</td>
+                <td> 171,2</td>
+                </tr>
+                <tr>
+                <td> Butildiglicol</td>
+                <td> 230,6</td>
+                </tr>
+                <tr>
+                <td> Etilenoglicol</td>
+                <td> 197,6</td>
+                </tr>
+                <tr>
+                <td> Dietilenoglicol</td>
+                <td> 245,8</td>
+                </tr>
+                <tr>
+                <td> Acetato de n-butila</td>
+                <td> 126,1</td>
+                </tr>
+                <tr>
+                <td> Acetato de etila</td>
+                <td> 77,2</td>
+                </tr>
+                <tr>
+                <td> Acetato de isopentila</td>
+                <td> 142,0</td>
+                </tr>
+                <tr>
+                <td> n-Butanol</td>
+                <td> 117,7</td>
+                </tr>
+                <tr>
+                <td> Isopentanol</td>
+                <td> 131,4</td>
+                </tr>
+                 </tr>
+                <tr>
+                <td> Isopropanol</td>
+                <td> 82,4</td>
+                </tr>
+                <tr>
+                <td> n-Propanol</td>
+                <td> 97,2</td>
+                </tr>
+                <tr>
+                <td> Metiletilcetona</td>
+                <td> 79,6</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <h2 id="secao3"> 3. Adaptação do algoritmo de pesquisa linear ao problema proposto </h2>
+
+        <p> Para resolver o problema proposto na seção 2, Química Programada fez uma modificação no algoritmo de pesquisa linear  tradicional apresentado na seção 1. 
+        O novo algoritmo terá que executar as seguintes tarefas : percorrer uma estrutura de dados do tipo dicionário na qual a chave seja o nome dos solventes e o valor seja a temperatura de ebulição; fazer a comparação 
+        do tipo <strong>" > (maior) " </strong> entre a temperatura de ebulição de cada solvente do dicionário e a temperatura da aplicação do cliente; gerar 
+        como saída não apenas o nome de um solvente, mas um array de strings com todos os solventes cuja temperatura de ebulição seja superior à temperatura requerida para a aplicação.</p>
+
+        <p> Na <strong> Figura 3 </strong> é apresentado o dicionário de todos os solventes e suas respectivas temperaturas de ebulição apresentados na <strong>Tabela 1</strong>. Nesse tipo de estrutura de dados, temos
+        a chave, que é uma string com nome dos solventes comercializados pela empresa e o valor, que é um float que representa a temperatura de ebulição do solvente em graus Celsius.</p>
+        <figure>
+  				<img src="dicionariosolventes.png" alt="Dicionario de temperatura bulição">
+  				<figcaption><strong>Figura 3: Dicionário com temperatura de ebulição de solventes.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 4 </strong>é apresentado o algoritmo da pesquisa linear modificado. Para armazenar a lista de strings que representam os solventes pré-selecionados pela temperatura de ebulição,
+        foi criado um array inicializado vazio chamado resultado. Depois foi feito um laço for(let chave in solventes) que percorre todas as posições do dicionário. Se a temperatura de ebulição de uma dada chave 
+        atende à condição if(solventes[chave] > valor), a chave desse solventes é armazenada no array resultado.</p>
+
+        <p> Na segunda parte do algoritmo é verificado se o comprimento do array resultado é igual a 0. Caso positivo, é impresso que nenhum solvente foi encontrado. Caso negativo, é impresso o array resultado 
+        com a lista dos solventes que podem ser pré-selecionados para a aplicação.
+        </p>
+
+        <figure>
+  				<img src="pesquisalinearmodificado.png" alt="Pesquisa linear modificado">
+  				<figcaption><strong>Figura 4: Algoritmo de pesquisa linear modificado.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 5 </strong> são apresentadas as saídas do algoritmo para as temperaturas de aplicação de 120, 170 e 200°C. Este algoritmo não 
+        substitui uma análise completa de compatibilidade, segurança ou toxicidade. Ele serve como ferramenta de pré-seleção apenas por critério de temperatura de ebulição, 
+        devendo sempre ser considerados critérios adicionais. É um exemplo simples de como automatizar decisões preliminares de engenharia de processo.</p>
+
+        <figure>
+  				<img src="saidapesquisalinearmodificado.png" alt="Saída pesquisa linear modificado">
+  				<figcaption><strong>Figura 5: Saída da busca para temperaturas de 120, 170 e 200°C.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> "Tabela de solventes" Indorama Ventures. <a href="https://indovinya.indoramaventures.com/wp-content/uploads/2025/04/SOLVENTS-PROPERTIES-CHART-PORT-versaofinal-PT.pdf"> Acesse aqui.</a></li>
+            <li> "Manual de introdução aos algoritmos - com exemplos em JavaScript." Freecodecamp.<a href="https://www.freecodecamp.org/portuguese/news/manual-de-introducao-aos-algoritmos-com-exemplos-em-javascript/"> Acesse aqui </a></li>
+            <li>Curso Online: "Fundamentos de Programação." PUC-RS</li>
+			<li>Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
