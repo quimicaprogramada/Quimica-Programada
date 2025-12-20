@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Adaptação do algoritmo de pesquisa linear para pré-seleção de solventes com múltiplos critérios fisico-químicos em JavaScript</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Algoritmo de pesquisa linear modificado, utilizando um dicionários como entrada, para filtro de substâncias por propriedades químicas.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada -Adaptação do algoritmo de pesquisa linear para pré-seleção de solventes com múltiplos critérios fisico-químicos em JavaScript</h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+            <li><a href="#secao2"> 2. Apresentação do problema </a></li>
+			<li><a href="#secao3"> 3. Adaptação do algoritmo para pré-seleção por múltiplos critérios </a></li>
+            <li><a href="#secao4"> 4. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Na postagem <a href="Quimica-Programada-Pre-selecao-de-solventes-por-temperatura-de-ebulicao-usando-pesquisa-linear-em-JavaScript.html">Pré-seleção de solventes
+        por temperatura de ebulição usando pesquisa linear em JavaScript</a>, foi apresentado na introdução, o algoritmo da pesquisa linear em detalhes. Depois foi apresentada uma versão modificada do 
+        algoritmo em sua versão mais elementar, a fim de implementar uma rotina que fizesse a seleção de solventes de um dicionário em função de sua temperatura de ebulição,
+        gerando uma lista com os compostos que seriam adequados para uma dada aplicação em uma temperatura específica.</p>
+
+        <p> Agora, nessa postagem, vamos implementar um código que seja capaz de realizar a escolha de solventes em um dicionário em função de mais de uma parâmetro fisico-químico da 
+        substância. </p>
+
+        <h2 id="secao2"> 2. Apresentação do problema </h2>
+
+        <p> Imagine que você trabalha em uma empresa que comercializa diferentes solventes orgânicos. Abaixo na <strong>Tabela 1</strong> está a lista dos produtos comercializados com seus pontos de ebulição
+        e seu ponto de fulgor. Você recebe com frequência a demanda de selecionar  os solventes em função de sua temperatura de ebulição e também, que não sejam inflamáveis ou que não sejam inflamáveis 
+        nem combustíveis. Você gostaria de automatizar essa escolha para evitar de ter de fazê-la manualmente na tabela abaixo.</p>
+
+        <table>
+            <caption><strong>Tabela 1. Temperatura de ebulição e ponto de fulgor de solventes orgânicos</strong></caption>
+            <thead>
+                <tr>
+                <th> Solvente </th>
+                <th> Temperatura de ebulição (°C)</th>
+                <th> Ponto de fulgor (°C)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Acetona</td>
+                <td> 56,1</td>
+                <td> -17</td>
+                </tr>
+                <tr>
+                 <td> Butilglicol</td>
+                <td> 171,2</td>
+                <td> 65,5</td>
+                </tr>
+                <tr>
+                 <td> Butildiglicol</td>
+                <td> 230,6</td>
+                <td> 105</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Etildiglicol</td>
+                <td> 202,7</td>
+                <td> 91</td>
+                </tr>
+                <tr>
+                <td> Etilglicol</td>
+                <td> 135,1</td>
+                <td> 43</td>
+                </tr>
+                <tr>
+                <td> Etilenoglicol</td>
+                <td> 197,6</td>
+                <td> 116</td>
+                </tr>
+                <tr>
+                <td> Dietilenoglicol</td>
+                <td> 245,8</td>
+                <td> 124</td>
+                </tr>
+                <tr>
+                <td> Tolueno</td>
+                <td> 110,5</td>
+                <td> 4,4</td>
+                 <tr>
+                <td> Xileno</td>
+                <td> 140</td>
+                <td> 31</td>
+                </tr>
+                <tr>
+                <td> Hexano</td>
+                <td> 68,7</td>
+                <td> -35</td>
+                </tr>
+                <tr>
+                <td> Acetato de butilglicol</td>
+                <td> 191,6</td>
+                <td> 74</td>
+                </tr>
+                <tr>
+                <td> Acetato de isopentila</td>
+                <td> 142</td>
+                <td> 34</td>
+                </tr>
+                <tr>
+                <td> Isoforona</td>
+                <td> 215,2</td>
+                <td> 84,4</td>
+                </tr>
+                <tr>
+                <td> Acetato de etila</td>
+                <td> 77,2</td>
+                <td> -3</td>
+                </tr>
+                <tr>
+                <td> Diisobutil cetona</td>
+                <td> 169,3</td>
+                <td> 49</td>
+                </tr>
+                <tr>
+                <td> Isopentanol</td>
+                <td> 131,4</td>
+                <td> 42,7</td>
+                </tr>
+                <tr>
+                <td> Isopropanol</td>
+                <td> 82,4</td>
+                <td> 12</td>
+                </tr>
+                 </tr>
+                <tr>
+                <td> n-Propanol</td>
+                <td> 97,2</td>
+                <td> 15</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p> O critério de classificação de solventes em inflamáveis ou combustíveis que você deve aplicar é a NR-20:</p>
+
+        <ul>
+            <li> líquidos inflamáveis possuem ponto de fulgor inferior ou igual a 60 °C;</li>
+            <li> líquidos combustíveis possuem ponto de fulgor maior que 60 °C menor ou igual a 93 °C.</li>
+        </ul>
+
+        <p> Dessa forma, temos que fazer uma adaptação novamente do algoritmo de pesquisa linear para que faça escolha em função de critérios múltiplos.
+        Esse algoritmo modificado é apresentado na seção a seguir.</p>
+
+        <h2 id="secao1"> 3. Adaptação do algoritmo para pré-seleção por múltiplos critérios </h2>
+
+        <p> Para a implementação do algoritmo, primeiramente teremos que ter uma estrutura de dados que irá descrever o conjunto de solventes apresentado
+        na <strong>Tabela 1</strong>. Agora não temos apenas um valor associado a cada substância, mas duas propriedades. A estrutura de dados que deve ser 
+         utilizada é um dicionário implementado como um objeto JavaScript aninhado. Cada chave do dicionário é uma string que representa o nome de um solvente. O valor associado 
+         a cada chave não é um valor simples, mas sim outro objeto, que contém as propriedades físico-químicas do solvente, como a temperatura de ebulição (Teb) e o ponto
+        de fulgor (Tfulgor). Não foi possível apresentar o dicionário completo na <strong>Figura 1</strong>, mas apenas uma parte devido ao seu tamanho.</p>
+
+        <figure>
+  				<img src="dicionarioaninhado.png" alt="Dicionario aninhado">
+  				<figcaption><strong>Figura 1: Dicionário aninhado de solventes.</strong></figcaption>
+		</figure>
+
+        <p> Para resolver o problema, o novo algoritmo deverá realizar as seguintes tarefas : percorrer a estrutura de dados do tipo dicionário aninhado na qual a chave seja o nome dos 
+        solventes associada a duas propriedades (temperatura de ebulição e ponto de fulgor), fazer a comparação do tipo<strong> " > (maior) "</strong> entre a temperatura de ebulição de cada solvente do 
+        dicionário e a temperatura da aplicação do cliente, fazer a comparação do tipo <strong>" > (maior) "</strong> entre o ponto de fulgor e os critérios de classificação de fluido inflamável ou fluido combustível  
+        segundo critérios da NR 20, gerar como saída um array de strings dos solventes selecionados segundo os múltiplos critérios.</p>
+
+        <p> Na <strong>Figura 2</strong> é apresentado o algoritmo da pesquisa linear que classifica segundo os dois critérios. Para armazenar a lista de strings que representam os solventes 
+        selecionados, foi criado um array inicializado vazio chamado resultado. Depois foi feito um laço for(let chave in solventes) que percorre todas as posições do dicionário. O comando 
+        <strong>solventes[chave].Teb</strong> acessa a propriedade temperatura de ebulição que está no segundo objeto do dicionário, e compara o valor com a Toper (temperatura de aplicação 
+        do cliente que é entrada do algoritmo). Já o comando <strong>solventes[chave].Tfulgor</strong> acessa a propriedade temperatura de fulgor que também está no segundo objeto do dicionário
+        e faz a comparação com a TfulgorMin que  vem da aplicação do critério de líquido inflamável ou combustível segundo a NR 20. Os dois critérios são aplicados simultaneamente, por isso são 
+        ligados por um operador && (AND booleano). Se algum solvente atende aos dois critérios, sua chave é armazenada no array resultado.</p>
+
+        <p> Na segunda parte do algoritmo é verificado se o comprimento do array resultado é igual a 0. Caso positivo, é impresso que nenhum solvente foi encontrado. Caso negativo, é impresso o 
+        array resultado com a lista dos solventes que podem ser pré-selecionados para a aplicação.</p>
+
+        <figure>
+  				<img src="pesquisalinearmultipla.png" alt="Pesquisa linear multipla">
+  				<figcaption><strong>Figura 2: Algoritmo da pesquisa linear por múltiplos critérios.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong>Figura 3</strong> são apresentadas as saídas do algoritmo para as tempraturas Toper=100 °C e TfulgorMin=60 °C (selecionando líquidos que não sejam inflamáveis)
+        e Toper=100 °C e TfulgorMIN=93 °C (selecionando líquidos que não sejam nem inflamáveis nem combustíveis). Esse algoritmo não exclui uma análise mais completa incluindo compatibilidade, toxicidade
+        entre outros critérios. É um exemplo simples de como automatizar decisões preliminares de engenharia de processo. </p>
+
+         <figure>
+  				<img src="saidapesquisalinearmultipla.png" alt="Saída pesquisa linear multipla">
+  				<figcaption><strong>Figura 3: Saída do algoritmo pesquisa linear por múltiplos critérios.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> NR 20 - Segurança e saúde no trabalho com inflamáveis e combustíveis <a href="https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-20-atualizada-2025.pdf"> Acesse aqui.</a></li>
+            <li> "Tabela de solventes" Indorama Ventures. <a href="https://indovinya.indoramaventures.com/wp-content/uploads/2025/04/SOLVENTS-PROPERTIES-CHART-PORT-versaofinal-PT.pdf"> Acesse aqui.</a></li>
+            <li> "Manual de introdução aos algoritmos - com exemplos em JavaScript." Freecodecamp.<a href="https://www.freecodecamp.org/portuguese/news/manual-de-introducao-aos-algoritmos-com-exemplos-em-javascript/"> Acesse aqui </a></li>
+            <li> Curso Online: "Fundamentos de Programação." PUC-RS</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
