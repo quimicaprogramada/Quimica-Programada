@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Uma Calculadora para Dosagem de Matérias-primas para Produção de Fertilizantes e Cálculos Simplificados de Reprocesso usando POO</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Cálculo de concentracao de nutrientes em fertilizantes, pesagem de matérias-primas para produção de fertilizantes.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Uma Calculadora para Dosagem de Matérias-primas para Produção de Fertilizantes e Cálculos Simplificados de Reprocesso usando POO</h1>
+
+		<h3> Seções </h3>
+
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+            <li><a href="#secao2"> 2. Apresentação da especificação em nutrientes do fertilizante </a></li>
+			<li><a href="#secao3"> 3. Apresentação das matérias-primas e da formulação </a></li>
+            <li><a href="#secao4"> 4. Apresentação da calculadora </a></li>
+            <li><a href="#secao5"> 5. Exemplos de usos da calculadora </a></li>
+            <li><a href="#secao6"> 6. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Essa postagem tem o objetivo de apresentar uma aplicação para calcular automaticamente a pesagem de materia-prima necessária para produção de um lote de um dado fertilizante 
+        e também fazer o recálculo simplificado de matéria-prima adicional necessária no caso da análise quimica das garantias do lote resultar em um valor inferior a garantia do rótulo para algum dos nutrientes.</p>
+
+        <p> A metodologia de programação utilizada foi Programação Orientada a Objetos (POO) em Python utilizando a IDE Pycharm versão 2025.1 </p>
+
+        <h2 id="secao2"> 2. Apresentação da especificação em nutrientes do fertilizante </h2>
+
+        <p> Na <strong>Tabela 1</strong> são apresentadas as informações de concentração de nutrientes constando nos rótulos de um fertilizante. Além dos dados 
+        da tabela, há a informação adicional de que contém acidulante ácido cítrico na concentração mássica de 1,4%. </p>
+
+        <p> O fertilizante objeto da formulação é um fertilizante foliar. Os fertilizantes foliares são soluções nutritivas aplicadas diretamente nas folhas das 
+        plantas, proporcionando uma absorção rápida de nutrientes e corrigindo deficiências nutricionais.</p>
+
+        <table>
+            <caption><strong>Tabela 1. Informações do rótulo de um dado fertilizante. </strong></caption>
+            <thead>
+                <tr>
+                <th> Nutriente </th>
+                <th> Concentração (P/P em %) </th>
+                <th> Concentração (P/V em g/L)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Boro solúvel em H<sub>2</sub>O</td>
+                <td> 0,5</td>
+                <td> 6,7</td>
+                </tr>
+                <tr>
+                 <td> Manganês solúvel em H<sub>2</sub>O</td>
+                <td> 6,0</td>
+                <td> 81,0</td>
+                </tr>
+                <tr>
+                 <td> Nitrogênio solúvel em H<sub>2</sub>O</td>
+                <td> 10,0</td>
+                <td> 135,0</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Enxofre solúvel em H<sub>2</sub>O</td>
+                <td> 4,0</td>
+                <td> 54,0</td>
+                </tr>
+                <tr>
+                <td> Zinco solúvel em H<sub>2</sub>O</td>
+                <td> 2,0</td>
+                <td> 27,0</td>
+                </tr>
+                </tbody>
+        </table>
+
+        <h2 id="secao3"> 3. Apresentação das matérias-primas e da formulação </h2>
+
+        <p> Na <strong>Figura 1</strong> são apresentadas as especificações dos fabricantes da matérias-primas necessárias para a produção do fertilizante foliar. As únicas matérias-primas 
+        que estão no estado líquido são o cloreto de manganês e a água potável, que não aparece na figura. As outras susbtâncias estão no estado sólido.</p>
+
+        <figure>
+  				<img src="especificacaomaterias.png" alt="Especificação das matéria-primas">
+  				<figcaption><strong>Figura 1: Especificação das matérias-primas.</strong></figcaption>
+		</figure>
+
+        <p> Para obter as concentrações em nutrientes especificadas no rótulo do fertilizante com as matérias-primas apresentadas na <strong>Figura 1</strong>, a formulação em 
+        percentagem mássica que deve ser adicionada no misturador para produção de um determinado lote do produto é apresentada na <strong>Tabela 2</strong>.</p>
+
+        <table>
+            <caption><strong>Tabela 2. Formulação do fertilizante. </strong></caption>
+            <thead>
+                <tr>
+                <th> Matéria prima </th>
+                <th> Formulação (% mássica) </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Ácido bórico</td>
+                <td> 2,9 </td>
+                </tr>
+                <tr>
+                 <td> Cloreto de manganês</td>
+                <td> 42,86</td>
+                </tr>
+                <tr>
+                 <td> Uréia</td>
+                <td> 21,74</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Enxofre</td>
+                <td> 4,0</td>
+                </tr>
+                <tr>
+                <td> Ácido cítrico</td>
+                <td> 1,4</td>
+                </tr>
+                <tr>
+                <td> Cloreto de zinco</td>
+                <td> 4,30</td>
+                </tr>
+                <tr>
+                <td> Água potável</td>
+                <td> 22,80</td>
+                </tr>
+                </tbody>
+        </table>
+
+        <h2 id="secao4"> 4. Apresentação da calculadora </h2>
+
+        <p> Para elaboração da calculadora, foi criada uma classe chamada <strong>Materia_prima</strong> que é apresentada na <strong>Figura 2</strong>. A classe tem três atributos :</p>
+
+        <ul>
+            <li> concentracao_especificacao : é a concentração de um dado nutriente que aparece no laudo do fabricante da matéria-prima, que são apresentados na <strong>Figura 1</strong>. Por exemplo, 
+            para a matéria-prima cloreto de manganês, o atributo concentracao_especificacao é 0.14 (14%)</li>
+            <li> concentracao_nutriente : é a concentração do nutriente que está na composição de uma determinada matéria-prima na quantidade que aparece no rótulo do produto. Por exemplo,
+            a ureia fornece nitrogênio para o fertilizante e o parâmetro concentracao_nutriente para a ureia é 0.10 (10%), conforme vemos na <strong>Tabela 1</strong>.</li>
+            <li> concentracao_formulacao : é a concentração mássica da matéria-prima que deve ser inserida no misturador para produção de um lote, conforme aparece na <strong>Tabela 2</strong>. Por exemplo,
+             o parâmetro concentracao_formulacao para o enxofre é 0.04 (4,0%).</li>
+        </ul>
+
+        <p> A calculadora também apresenta um método chamado <strong>pesagem</strong>, que calcula a massa de uma determinada matéria-prima que deve ser inserida no misturador para produção de uma dada 
+        massa de produto a ser produzida. Esse método tem um parâmetro chamado <strong>producao</strong> em unidades de massa que é utilizado com o parâmetro <strong>concentracao_formulacao</strong> para 
+        calcular a massa necessária de uma dada matéria-prima.</p>
+
+        <p> O outro método da calculadora é <strong>pesagem_reprocesso</strong>. Ele é usado quando o valor da análise de laboratório de um determinado nutriente for inferior ao parâmetro do rótulo 
+        (concentracao_nutriente). Nessa caso, deverá ser calculada a <strong>massa_faltante</strong> para um dado nutriente e a massa da matéria-prima que deve ser adicionado no misturador. </p>
+
+        <figure>
+  				<img src="classemateriasprimas.png" alt="Classe matéria-primas">
+  				<figcaption><strong>Figura 2: Arquivo da classe matérias-primas.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao5"> 5. Exemplos de usos da calculadora </h2>
+
+        <h3> Massa das matérias-primas para produção de um lote de 5000 kg</h3>
+
+        <p> Como um primeiro exemplo de utilização da calculadora, vamos determinar as quantidade de cada matéria-prima que deve ser inserida no misturador para produção de um lote de 
+        5000 kg de fertilizante. Na <strong>Figura 3</strong> são apresentados os comandos que devem ser digitados para obtenção dos resultados. </p>
+
+        <p> Como pode ser visto na figura, deve ser instanciado um objeto da classe <strong>Materia_prima</strong> para cada matéria-prima, inserindo os atributos <strong>concentracao_especificacao</strong>,
+        <strong>concentracao_nutriente</strong> e <strong>concentracao_formulacao</strong>. Mesmo para a água potável, que não tem nenhum valor para concentracao_nutriente deve ser instanciado um objeto, colocando 100% para 
+        concentracao_especificacao e o valor de concentracao_formulacao deve ser retirado da <strong>Tabela 2</strong> como para as outras substâncias.</p>
+
+        <p> Depois de criar os objetos, deve-se usar o valor do lote, 5000 kg, como parâmetro <strong>producao</strong> e calcular o método <strong>pesagem</strong> para cada matéria-prima. Depois 
+        disso, rodar o programa e o resultado será impresso no terminal com os resultados conforme apresentados na <strong>Figura 4</strong>.</p>
+        <figure>
+                <img src="lote5000kg.png" alt="Classe matéria-primas">
+  				<figcaption><strong>Figura 3: Comandos para cálculo de um lote de 5000 kg.</strong></figcaption>
+		</figure>
+
+        <figure>
+                <img src="resultadolote5000kg.png" alt="Classe matéria-primas">
+  				<figcaption><strong>Figura 4: Resultados simulação de um lote  5000 kg.</strong></figcaption>
+		</figure>
+
+
+        <h3> Aplicação em um caso de reprocesso de um lote de 7000 kg</h3>
+
+        <p> Nesse segundo exemplo de aplicação da calculadora de matérias-primas de fertilizantes, iremos produzir 7000 kg de produto. Porém, quando o lote foi finalizado e enviado para análise,
+        houve um desvio de processo que produziu o resultado apresentado no laudo da <strong>Figura 5</strong>. Os nutrientes nitrogênio e enxofre ficaram abaixo da especificação, com um desvio 
+        considerável que pode afetar a qualidade do produto e ter impacto em algum cliente. Dessa forma é necessário usar o resultado da análise para calcular a <strong>massa_faltante</strong>
+        de ureia, que fornece o nitrogênio para a formulação, e de enxofre.</p>
+
+        <figure>
+                <img src="analiseloteferti.png" alt="Análise de um lote produzido">
+  				<figcaption><strong>Figura 5: Resultado da análise de um lote de 7000 kg.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong>Figura 6</strong> são apresentados primeiramente os objetos da classe <strong>Materia_prima</strong> instanciados, com os devidos parâmteros <strong>concentracao_especificacao</strong>,
+        <strong>concentracao_nutriente</strong> e <strong>concentracao_formulacao</strong>.</p> Depois são apresentados os comandos para o cálculo da massa de cada matéria-prima usando o
+        usando o método <strong>pesagem</strong>. 
+
+        <p> Nesse caso, também temos que calcular o método <strong>pesagem_reprocesso</strong> para a ureia e para o enxofre, pois tiveram suas análises bastante inferiores ao especificado. Os parâmetros desse 
+        método são <strong>producao</strong>, que é a massa inicial do lote, e <strong>analise</strong>, que é o resultado do laudo do laboratório.</p>
+
+        <figure>
+                <img src="lote7000kg.png" alt="Comando cálculo de um lote">
+  				<figcaption><strong>Figura 6: Comandos para cálculo e reprocesso de um lote de  7000 kg.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong>Figura 7</strong> é apresentada a saída do programa. Podemos ver que a massa adicional de ureia é de 182,61 kg e a massa aicional de 
+        enxofre é de 49,25 kg. A massa total do lote que era de 7000 kg, passou para 7231,86 kg (um aumento de 3,3%). A adição de uma matéria-prima para correção 
+        de um nutriente provoca a diluição relativa dos demais nutrientes da formulação. Esse efeito pode ser tratado por meio de um balanço de massa global acoplado, 
+        o que será abordado em uma publicação futura. Neste exemplo fizemos um reprocesso simplificado cujo objetivo é demonstrar o cálculo direto da massa corretiva 
+        necessária para atender à garantia de um nutriente específico, baseado em um fluxo de uma rotina prática usando laudos de laboratório e laudos de qualidade de 
+        matéria-prima.</p>
+
+         <figure>
+                <img src="saidalote7000kg.png" alt="Comando cálculo de um lote">
+  				<figcaption><strong>Figura 7: Resultado da simulação para reprocesso de lote de 7000 kg.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao6"> 6. Referências </h2>
+
+        <ul>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+            <li> Curso online : "Fundamentos de Orientação a Objetos". PUC-RS.</li>
+            <li> Curso online : "Fundamentos de Linguagem Python para Análise de Dados, Data Science e Machine Learning" Data Science Academy.</li>
+		</ul>
