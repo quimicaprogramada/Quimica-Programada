@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Obtenção de Parâmetros Cinéticos de Enzimas a partir de Dados Experimentais usando Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Ajuste de dados experimentais com Python. Função lambda. Scipy.optimize e Curve_fit.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Obtenção de Parâmetros Cinéticos de Enzimas a partir de Dados Experimentais usando Python</h1>
+
+		<h3> Seções </h3>
+
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+            <li><a href="#secao2"> 2. Obtenção de Parâmetros da Equação Michaelis-Menten para a Enzima β-glicosidase 6 </a></li>
+			<li><a href="#secao3"> 3. Parâmetros em caso de Inibição Competitiva com Furfural para Enzima β-glicosidase 4 </a></li>
+            <li><a href="#secao4"> 4. Parâmetros em caso de Inibição pelo Substrato para Enzima β-glicosidase 3 </a></li>
+            <li><a href="#secao5"> 5. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+		<p> Enzimas são proteínas que atuam como biocatalisadores em diversas reações químicas. Elas são classificadas segundo o tipo de reações que catalizam em 6 categoarias, segundo
+			o site da base de dados <a href="https://www.brenda-enzymes.org/ecexplorer2.php?browser=1">BRENDA</a>. As 6 classes são apresentadas na <strong>Tabela 1</strong>, que foi 
+			extraída da obra "Guia prático para caracterização de enzimas" da Embrapa.</p>
+
+			<table>
+            <caption><strong>Tabela 1. Classificação das enzimas segundo reação catalisada</strong></caption>
+            <thead>
+                <tr>
+                <th> Classe </th>
+                <th> Nome</th>
+                <th> Reação catalisada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> 1</td>
+                <td> Oxirredutases</td>
+                <td> Transferência de elétrons</td>
+                </tr>
+                <tr>
+                 <td> 2</td>
+                <td> Transferases</td>
+                <td> Reações de transferências de grupos funcionais</td>
+                </tr>
+                <tr>
+                 <td> 3</td>
+                <td> Hidrolaes</td>
+                <td> Reações de hidrólise</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> 4</td>
+                <td> Liases</td>
+                <td> Adição o remoção de grupos químicos</td>
+                </tr>
+                <tr>
+                <td> 5</td>
+                <td> Isomerases</td>
+                <td> Transferência de grupos dentro de uma mesma molécula (isomerização)</td>
+                </tr>
+                <tr>
+                <td> 6</td>
+                <td> Ligases</td>
+                <td> Catalisa a reação entre duas grandes moléculas (reações de condensação)</td>
+                </tr>
+            </tbody>
+        </table>
+
+		<p> As enzimas atuam de forma a diminuir a energia de ativação para que um substrato seja convertido em produto e, como consequência, 
+		aumentam consideravelmente a velocidade das reações. O substrato e a enzima interagem reversivelmente entre si, formando o complexo enzima-substrato. Ao finla do processo, esse complexo se desfaz, liberando o produto e recuperando a enzima. </p>
+
+		<p> Os principais fatores que afetam a cinética das reações enzimáticas são : concentração do substrato, pH, temperatura e presença de inibidores ou ativadores.
+		Para caracterizar uma enzima, é importante determinar como os fatores citados afetam a velocidade da reação catalisada. A partir desses ensaios, podemos obter os parâmetros 
+		cinéticos que nos possibilitam prever o comportamento da enzima em uma dada condições ambiental (física e química).
+		</p>
+
+		<p> Nessa postagem vamos estudar os parâmetros cinéticos da reação de conversão da celobiose em glicose por uma série de enzimas da família das β-glicosidase usando Linguagem Python. Esse grupo de enzimas 
+		apresenta interesse devido à sua capacidade de catalisar a conversão da celobiose. A celobiose é um dissacarídeo glicosil-glicose, composto por duas moléculas de glicose. Esse dissacarídeo
+		está presente na estrutura da celulose. Para a conversão da biomoassa lignocelulósica em açúcares fermentescíveis, na etapa de despolimerização da celulose, essa enzima tem 
+		um papel de catalisadora. As curvas reacionais serão estudadas no ambiente de programação GoogleColab. </p>
+
+		<p> Esse grupo de enzimas são hidrolases e apresentam a capacidade de conversão da celobiose. Porém, no meio reacional, apresentam características distintas, que serão demonstradas nas 
+		seções a seguir. Como listamos acima, a cinética das enzimas é afetada por fatores, como concentração de substrato ou presença de substância inibidora. E, alguns membros desse grupo de enzimas, apesar de serem capazes 
+		de converter a celobiose,  por sofrerem inibição por algum desses fatores, não são uma boa escolha para atuar no processamento da biomassa lignocelulósica.</p>
+
+        <h2 id="secao2"> 2. Obtenção de Parâmetros da Equação Michaelis-Menten para a Enzima β-glicosidase 6 </h2>
+
+		<p> A cinética da maioria das reações catalisadas por enzimas segue a equação de Michaelis-Menten, apresentada na <strong>Figura 1</strong>. Nessa equação temos dois parâmetros
+		que são V<sub>m</sub>, a velocidade máxima, e k<sub>m</sub>, a constante de Michaelis-Menten. Ela estabelece a correlaçãoe entre <i>v</i>, a velocidade da reação e <i>s</i>, a concentração do substrato.</p>
+
+		<p> Para obtenção desses parâmetros, que caracterizam a enzima em um dado ambiente, é necessário plotar o gráfico de velocidade de reação para diferentes concentrações de substrato
+		mantendo-se constante a concentração da enzima. A velocidade de reação é uma função crescente da concentração do substrato até um determinado valor,
+		quando a enzima passa a estar saturada pelo substrato e a velocidade estaciona em uma valor chamado V<sub>m</sub>. O outro parâmtero, k<sub>m</sub>, indica a afinidade da enzima pelo substrato.
+		Ele corresponde à concentração do substrato relacionada com o ponto da curva onde a velocidade é metade da velocidade máxima. Dessa forma, quanto menor o seu valor, mais rápido se atinge a metade 
+		de V<sub>m</sub>, maior é a afinidade entre enzima e substrato.</p>
+
+		<figure>
+  				<img src="equacaomichaelis.png" alt="Equação Michaelis-Menten">
+  				<figcaption><strong>Figura 1: Equação de Michaelis-Menten.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong>Figura 2</strong> são apresentados os comandos para plotagem do gráfico e ajuste da curva da velocidade de reação por concentração de substrato para a reação de hidrólise da celobiose pela enzima
+		β-glicosidase 6 para a produção de glicose. O estudo dessa reação é importante para a implementação de projetos de produção de açúcares fermentescíveis a partir de biomasssa lignocelulósica. Os dados experimentais
+		utilizados como x (concentração de celobiose em mM) e  y (velocidade de reação mmol glicose/min) foram retirados do "Guia Prático para Caracterização de Enzimas". A função lambda com dois parâmetros (função para ajuste da curva)
+		escolhida tem o formato <strong>a * x /(b + x)</strong> para corresponder à equação de Michaelis-Menten. Os outros comandos são padrão para plotagem e configuração  de gráficos em Python. A biblioteca usada para ajuste da curva foi
+		a <strong>scipy.optimize</strong>, usando a função <strong>curve_fit</strong>.</p>
+
+		<figure>
+  				<img src="plotagemmichaelis.png" alt="Equação Michaelis-Menten">
+  				<figcaption><strong>Figura 2: Comandos para plotagem da Equação de Michaelis-Menten.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong>Figura 3</strong> temos o gráfico da curva de velocidade de reação em função da concentração de substrato celobiose para a reação catalisada pela β-glicosidase 6. Do ajuste dessa curva podemos tirar os parâmetros
+		V<sub>m</sub>= 1.14353592e-03 e k<sub>m</sub>= 2.69473436. Esses parâmetros são impressos junto ao gráfico na parte superior como podemos ver na figura. Visualmente é possível peceber que a curva se ajusta bem aos parâmetros experimentais.</p>
+
+		<p> A obtenção desses parâmetros que caracterizam a atividade de uma dada enzima em relação ao um dado substrato em certas comdições ambientais é importante para realizar a escolha da enzima mais adequada para um dado processo.
+		Aquela que tiver uma menor constante de Michaelis, k<sub>m</sub>,  terá uma maior afinidade com o substrato, sendo mais adequada para um dado substrato, pois atingirá a velocidade máxima V<sub>m</sub> mais rapidamente.</p>
+
+		<figure>
+  				<img src="curvamichaelis.png" alt="Equação Michaelis-Menten">
+  				<figcaption><strong>Figura 3: Ajuste da Equação de Michaelis-Menten.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao3"> 3. Parâmetros em caso de Inibição Competitiva com Furfural para Enzima β-glicosidase 4 </h2>
+
+		<p> A enzima β-glicosidase 4 também é capaz de catalisar a reação de produção de glicose a partir da biomassa lignocelulósica, mas foi verificado experimentalmente que ela tem se desempenho afetado pela presença de furfural no meio
+		reacional. O furfural é uma molécula de alto valor agregado que pode ser obtido a partir da biomassa lignocelulósica, portanto pode estar presente em um meio reacional no qual se objetiva converter a celobiose. Dessa forma é interessante 
+		realizar um experimento a fim de verificar o efeito inibidor de diferentes concentrações de furfural na atividade catalítica da β-glicosidase 4. </p>
+
+		<p> No livro "Guia prático para caracterização de enzimas" estão disponíveis dos dados de velocidade reacional em função da concentração de celobiose para a β-glicosidase 4 em concentrações de 0, 7,5 e 15 mM de furfural. Nós vamos usar esses dados
+		para visualizar o efeito do furfural na curva da equação de Michaelis-Menten usando Python. Na <strong>Figura 4</strong> temos os comandos para plotagem das curvas de velocidade considerando efeito das concentrações de furfural.
+		Usamos a mesma função lambda da seção anterior, mas dessa vez temos um array de valores x (concentrações de celobiose) e 3 arrays de valores y (y1, y2 e y3), representando, respectivamente, as curvas de velocidade para concentrações de furfural no meio reacional de 
+	    0, 7,5 e 15 mM. Como temos 3 arrays de valores y, como vemos na figura a seguir, que precisamos chamar 3 vezes a função <strong>curve_fit</strong>, gerando 3 pares de coeficientes V<sub>m</sub> e k<sub>m</sub>.</p>
+
+		<figure>
+  				<img src="dadosfurfural.png" alt="Inibição competitiva">
+  				<figcaption><strong>Figura 4: Comando para gráfico do efeito inibidor do furfural.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong>Figura 5</strong> temos as 3 curvas da velocidade da reação com a β-glicosidase 4. Como vemos, a curva, ao passo que a presença do inibidor aumenta, se desloca para a direita. O valor de V<sub>m</sub> não se altera significativamente. Mas o valor de 
+		da constante de Michaelis se altera e passamos a chamá-la de constante de Michaelis aparente k<sub>m</sub>'. Os valores do parâmetros obtidos para as 3 curvas estão na parte superior do gráfico e são apresentados a seguir:</p>
+
+		<ul>
+			<li> sem presença de furfural : V<sub>m</sub>=8.83043041e-04, k<sub>m</sub>=3.93299162;</li>
+			<li> 7,5 mM de furfural : V<sub>m</sub>=8.80667271e-04, k<sub>m</sub>'=6.07308698;</li>
+			<li> 15 mM de furfural : V<sub>m</sub>=8.81830009e-04, k<sub>m</sub>'=8.15039643.</li>
+		</ul>
+		
+		<p> Podemos ver na prática que os valores de V<sub>m</sub> para os três experimentos permaneceram praticamente os mesmos. Já a constante de Michaelis aparente aumentou, significando que 
+		será maior a concentração de substrato para se atingir a velocidade máxima V<sub>m</sub>.</p>
+
+		<figure>
+  				<img src="graficofurfural.png" alt="Inibição competitiva">
+  				<figcaption><strong>Figura 5: Curvas de velocidade do efeito inibidor do furfural.</strong></figcaption>
+		</figure>
+
+		<p> Para os casos de inibição competitiva, além do ajuste à curva de Michelis-Menten, temos uma outra equação para determinar  k<sub>i</sub>, constante de inibição para o efeito de um inibidor 
+		de concentração <strong>i</strong>. A equação que relaciona k<sub>m</sub>' com concentração <strong>i</strong> é apresentada na <strong>Figura 6</strong>.</p>
+		
+		<figure>
+  				<img src="equacaoinibicao.png" alt="Inibição competitiva">
+  				<figcaption><strong>Figura 6: Relação entre constante de Michaelis aparente com concentração do inibidor.</strong></figcaption>
+		</figure>
+
+		<p> Para obtenção do valor da constante de inibição, que prediz qual aumento de constante de Michaelis aparente em função da concentração do inibidor, adotei uma metodologia um pouco diferente da
+		adotada em "Guia prático para a caracterização de enzimas". Nessa obra, a curva é ajustada para dois parâmetros : k<sub>m</sub> (novamente) e k<sub>i</sub>. Como há apenas 3 pontos experimentais, eu fixei o valor
+		de k<sub>m</sub> já obtido no ajuste da <strong>Figura 5</strong> com muito mais pontos experimentais e deixei apenas um parâmetro variar na função lambda, como pode ser visto na <strong>Figura 7</strong>.
+		Esse parâmetro seria o próprio k<sub>i</sub>. O valor obtido para k<sub>i</sub> é 13.94690411. Esse valor pode ser interpretado como a concentração de inibidor que dobra o valor de k<sub>m</sub>. O gráfico 
+		da equação da <strong>Figura 6</strong> é apresentado na <strong>Figura 8</strong>.</p>
+		
+		<figure>
+  				<img src="comandograficoinibicao.png" alt="Inibição competitiva">
+  				<figcaption><strong>Figura 7: Comandos para o gráfico efeito do inibidor.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="graficoinibicao.png" alt="Inibição competitiva">
+  				<figcaption><strong>Figura 8: Gráfico constante de Michaelis aparecente versus concentração de furfural.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao4"> 4. Parâmetros em caso de Inibição pelo Substrato para Enzima β-glicosidase 3 </h2>
+
+		<p> A enzima β-glicosidase 3 também é capaz de catalisar a reação de produção de glicose a partir da biomassa lignocelulósica, porém é observado experimentalmente que para concentrações 
+		mais elevadas de celobiose, há um decréscimo da velocidade de reação, caracterizando uma inibição do susbtrato. Nesses casos, a curva que correlaciona velocidade de reação com 
+		concentração de substrato é melhor representada pela equação apresentada da <strong>Figura 9</strong>. Nessa equação temos os mesmos parâmetros k<sub>m</sub>, V<sub>m</sub> e k<sub>i</sub> 
+		e s é a concentração do substrato.</p>
+
+		<figure>
+  				<img src="inibicaosubstrato.png" alt="Inibição substrato">
+  				<figcaption><strong>Figura 9: Equação com inibição pelo substrato.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong>Figura 10</strong> são apresentados os comandos para plotagem do gráfico de velocidade de reação. A função lambda escolhida tem 3 parâmetros para representar 
+		a equação apresentada na <strong>Figura 9</strong>. Com os dados experimentais, foi plotado o gráfico da <strong>Figura 10</strong> e foi feito o ajuste da função lambda, 
+		obtendo-se os parâmetros cinéticos da curva da β-glicosidase 3 com celobiose. Os parâmetros da curva obtidos são :</p>
+
+		<ul>
+			<li>V<sub>m</sub>=1.10153551e-03 ;</li>
+			<li>K<sub>m</sub>=3.14280040 ;</li>
+			<li>K<sub>i</sub>= 8.32491099.</li>
+		</ul>
+
+		<figure>
+  				<img src="comandosinibicaosubstrato.png" alt="Inibição substrato">
+  				<figcaption><strong>Figura 9: Comandos para gráfico de inibição pelo substrato.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="graficoinibicaosubstrato.png" alt="Inibição substrato">
+  				<figcaption><strong>Figura 10: Equação com inibição pelo substrato.</strong></figcaption>
+		</figure>
+
+		<p> Na curva apresentada na <strong>Figura 10</strong>, é possível ver que a curva tem um ponto máximo onde dv/ds=0. A concentração nesse ponto, onde o susbtrato passa a 
+		inibir a conversão pela ação catalítica da enzima diminuindo a velocidade de reação é chamada com <strong>S<sub>max</sub></strong> e pode ser calculada pela expressão abaixo:</p>
+		
+		<figure>
+  				<img src="smax.png" alt="Inibição substrato">
+  				<figcaption><strong>Figura 11: Expressão para obtenção de S<sub>max</sub>.</strong></figcaption>
+		</figure>
+
+		<p> O valor obtido com a ajuste feito em Python é <strong>S<sub>max</sub></strong>= 5,115 mM. Isso significa que essa enzima terá um desempenho afetado se for escolhida para conversão da celobiose
+		se a concentração for maior que 5,115 mM.</p>
+
+        <h2 id="secao5"> 5. Referências </h2>
+
+        <ul>
+            <li> "Guia prático para caracterização de enzimas". Embrapa.</li>
+		    <li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+            <li> "Parâmetros cinéticos da glutationa S-transferase e sua ativação por extratos vegetais". M.C. Torres, N. F. F. Soares, J. F. Maia. 2004.</li>
+            <li> Assistente de IA do ChatGPT.</li>
+        </ul>
+
+        <p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+    </body>
+
+</html>
+
