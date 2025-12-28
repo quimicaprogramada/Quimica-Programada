@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Interpolação em Tabelas Termodinâmicas usando Pesquisa Binária em JavaScript </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Algoritmo de pesquisa binária modificado, utilizando um objeto Map como entrada, para procurar propriedades do vapor.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Interpolação em Tabelas Termodinâmicas usando Pesquisa Binária em JavaScript </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Adaptação do algoritmo de pesquisa binária ao problema proposto</a></li>
+            <li><a href="#secao3"> 3. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Na postagem <a href="C:\Quimica_Programada\Quimica-Programada-Algoritmo-da-Pesquisa-Binaria-Aplicado-a-Procura-em-Tabelas-Termodinamicas.html">Algoritmo da Pesquisa Binária Aplicado à Procura em Tabelas Termodinâmicas em JavaScript</a>,
+        foi apresentado o algoritmo da pesquisa binária. Posteriormente, foi apresentada uma versão modificada desse algoritmo fundamental em ciência da computação para resolver o problema parcial de busca de um valor de temperatura em uma estrutura de dados 
+        com pares  de temperatura da água e pressão de saturação, tendo como entrada a pressão de saturação.</p>
+
+        <p> Agora nessa postagem, iremos modificar o algoritmo novamente para que possibilite a busca da temperatura correspondente a uma pressão de saturação segundo uma aplicação real : quando é necessário fazer a interpolação na estrutura de dados. Dificilmente,
+        quando buscamos um valor em uma tabela termodinâmica, o dado irá corresponder ao valor exato da lista de dados. Quase sempre temos que interpolar o valor de entrada na série de dados. Dessa forma, precisamos incluir os comando que possibilitem a interpolação 
+        no mecanismo de busca. </p>
+
+        <h2 id="secao2"> 2. Adaptação do algoritmo de pesquisa binária ao problema proposto </h2>
+
+        <p> A estrutura de dados usada para desenvolvimento do algoritmo modificado é a mesma usada e já explicada em detalhes na postagem <a href="Quimica-Programada-Algoritmo-da-Pesquisa-Binaria-Aplicado-a-Procura-em-Tabelas-Termodinamicas.html">Algoritmo da Pesquisa Binária 
+        Aplicado à Procura em Tabelas Termodinâmicas em JavaScript</a>. É um objeto do tipo <strong> Map</strong>.</p>
+
+        <p> Na <strong>Figura 1</strong> apresentamos o algoritmo. O início é o mesmo do artigo citado, inicializando os ponteiros início, fim e meio. Depois as variáveis Tmeio e psatmeio são inicializadas. No laço while, não temos mais a condição <strong>psatmeio !== psat</strong>, 
+        pois o valor de pressão de saturação não é um valor exato na série de dados. Temos apenas a condição <strong>fim - inicio > 1</strong>, pois não estamos mais procurando um valor exato, mas agora o laço deverá parar quando o intervalo estiver reduzido a dois pontos vizinhos.
+         Nesse momento devemos fazer a interpolação.</p>
+
+        <p> Outra modificação necessária é que, quando analisamos a condição <strong> if (psat < psatmeio)</strong>, em caso positivo, não podemos executar mais <strong> fim = meio - 1</strong>, pois iríamos excluir ponto médio do intervalo. Devemos fazer
+        <strong> fim = meio </strong> para deixar o ponto médio no intervalo, pois ele pode virar um dos extremos do intervalo vizinho à resposta. Se a condição do if é falsa, executamos <strong>inicio = meio</strong>. Depois de renovar os três ponteiros, 
+        as funções Tmeio e psatmeio são recalculadas.</p>
+
+        <p> O laço while é repetido até que <strong>fim - inicio = 1</strong>. Quando essa condição é alcançada, é feito o cálculo da temperatura interpolada. Nesse momento é definido em qual intervalo de temperaturas <strong> T1 = temperatura[inicio]</strong> e <strong>T2 = temperatura[fim]</strong>
+        se encontra o valor procurado. Com esses valores de temperatura, buscamos na estrutura de dados <strong>Map</strong> as pressões <strong> p1 = pressao(T1)</strong> e <strong>p2 = pressao(T2)</strong>. Depois de determinados esses valores, é calculada a <strong> Tinterp</strong> pela fórmula ao fim 
+        do algoritmo apresentado na <strong> Figura 1</strong>.</p>
+
+        <figure>
+  				<img src="pesquisainterpolacao.png" alt="Algoritmo pesquisa binária com interpolação">
+  				<figcaption><strong>Figura 1: Algoritmo da pesquisa binária com interpolação.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 2</strong> é apresentada a saída do algoritmo de pesquisa binária com interpolação. Podemos ver que o método agora funciona tanto para temperaturas exatas (valores de pressão de saturação exatos na estrutura de dados) quanto para temperaturas interpoladas (valores de pressão
+        de saturação entre dois valores exatos da série de dados).</p>
+
+        <figure>
+  				<img src="saidapesquisainterpolacao.png" alt="Algoritmo pesquisa binária com interpolação">
+  				<figcaption><strong>Figura 2: Saída do algoritmo da pesquisa binária com interpolação.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao3"> 3. Referências </h2>
+
+		<ul>
+            <li> "Tabela de propriedades termodinâmica da água". <a href="https://sistemas.eel.usp.br/docentes/arquivos/8554681/00000000/Tabelasdepropriedadestermodinamicas(agua).pdf"> Acesse aqui.</a></li>
+            <li> "Manual de introdução aos algoritmos - com exemplos em JavaScript." Freecodecamp.<a href="https://www.freecodecamp.org/portuguese/news/manual-de-introducao-aos-algoritmos-com-exemplos-em-javascript/"> Acesse aqui </a></li>
+            <li> Curso Online: "Fundamentos de Programação." PUC-RS</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>

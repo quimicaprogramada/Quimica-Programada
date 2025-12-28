@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Algoritmo da Pesquisa Binária Aplicado à Procura em Tabelas Termodinâmicas em JavaScript</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Algoritmo de pesquisa binária modificado, utilizando um objeto Map como entrada, para procurar propriedades do vapor.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Algoritmo da Pesquisa Binária Aplicado à Procura em Tabelas Termodinâmicas em JavaScript </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+            <li><a href="#secao2"> 2. Apresentação do problema </a></li>
+			<li><a href="#secao3"> 3. Adaptação do algoritmo de pesquisa binária ao problema proposto</a></li>
+            <li><a href="#secao4"> 4. Referências</a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+		<p> Nos artigos <a href="Quimica-Programada-Pre-selecao-de-solventes-por-temperatura-de-ebulicao-usando-pesquisa-linear-em-JavaScript.html"> Pré-seleção de solventes por temperatura de ebulição usando pesquisa linear em JavaScript</a> e 
+		<a href="Quimica-Programada-Adaptacao-do-algoritmo-de-pesquisa-linear-para-pre-selecao-de-solventes-com-multiplos-criterios-fisico-quimicos.html">Adaptação do algoritmo de pesquisa linear para pré-seleção de solventes 
+		com múltiplos critérios fisico-químicos em JavaScript</a>, propusemos a alteração de algoritmos fundamentais da ciência da computação - a pesquisa linear - a fim de resolver problemas práticos na área da Química e da Engenharia Química. Nessa postagem, iremos
+		fazer o mesmo trabalho, agora propondo uma alteração no algoritmo da pesquisa binária.</p>
+
+		<p> O algoritmo da pesquisa binária é aplicável à procura de um dado valor em uma estrutura de dados ordenada. Nessa caso, não precisamos fazer a iteração sobre todos os elementos da estrutura de dados. Há uma forma muito mais eficiente de fazer a busca em uma 
+		estrutura com essa característica, conforme podemos ler em <a href="https://www.freecodecamp.org/portuguese/news/manual-de-introducao-aos-algoritmos-com-exemplos-em-javascript/#pesquisa-linear">Manual de introdução aos algoritmos</a>: </p>
+
+		<ul>
+			<li> selecionamos o valor do meio da estrutura de dados;</li>
+			<li> comparamos o valor que estamos procurando com o valor médio;</li>
+			<li> se o valor buscado  é diferente ao valor médio, comparamos os dois valores para saber se é menor ou maior;</li>
+			<li> se o valor buscado é menor, descartamos o intervalor final da estrutura e passamos a buscar apenas na metade inferior ao valor médio;</li>
+			<li> se o valor buscado é maior, descartamos o intervalo inicial e passamos a buscar apenas na metade superior ao valor médio;</li>
+			<li> o processo é repetido até que o valor seja encontrado.</li>
+		</ul>
+
+		<p> Na <strong>Figura 1</strong> apresentamos um exemplo de algoritmo de pesquisa binária. Primeiramente temos um array de números ordenados chamado <strong>arr</strong>. Depois declaramos três ponteiros : início, fim e meio. Numa primeira iteração,
+		início assume o valor da posição zero do array, o fim assume a posição final do array e meio é obtido pela expressão <strong>Math.floor((inicio+fim)/2)</strong>. A função <strong>Math.floor</strong> faz com que o valor do meio seja sempre um número 
+		inteiro. Prosseguindo no algoritmo temos um laço while que irá ser executado enquanto as condições <strong> arr[meio] !== num</strong> e <strong>inicio <= fim </strong> forem verdadeiras. A primeira expressão significa: enquanto o valor da posição do meio do array for diferente do valor 
+		buscado. A segunda expressão : enquanto o ponteiro início for inferior ao ponteiro fim. Dentro do laço while, temos um condicional if, que compara o valor buscado com o valor <strong> arr[meio]</strong>. Se for menor, o trecho final do array é desprezado e 
+		o ponteiro fim assume o valor <strong> meio - 1</strong>. Se for maior, desprezamos o parte inicial do array e o ponteiro início assume o valor <strong> meio + 1</strong>. Quando os valores início e fim são renovados, o valor do ponteiro meio também deve ser
+		renovado. Quando a condição <strong> arr[meio]===num </strong> é atingida, a execução termina e  o valor da posição encontrada é impresso. Se o valor não existir no array, 
+		a saída é "Não encontrado". Na <strong>Figura 2</strong> são apresentadas as saídas da função <strong>procurabinaria</strong>.</p>
+
+		<figure>
+  				<img src="pesquisabinaria.png" alt="Algoritmo pesquisa binária">
+  				<figcaption><strong>Figura 1: Algoritmo da pesquisa binária.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="saidapesquisabinaria.png" alt="Algoritmo pesquisa binária">
+  				<figcaption><strong>Figura 2: Saída do algoritmo da pesquisa binária.</strong></figcaption>
+		</figure>
+
+		<h2 id="secao2"> 2. Apresentação do problema </h2>
+
+		<p> Uma tarefa bastante comum na Química e na Engenharia Química é procurar valores em tabelas termodinâmicas de propriedades de substâncias. Na <strong> Tabela 1 </strong> são apresentados os valores de pressão
+		de saturação do vapor de água em função da temperatura retirados de um trecho de uma tabela de propriedades termodinâmicas da água. Nosso problema seria descobrir qual temperatura do vapor correspondente a uma
+		determinada pressão de saturação. Em alguns casos, o valor de pressão de saturação poderá corresponder a uma valor exato da tabela, dessa forma podemos associá-lo a um valor exato de temperatura. Em outros casos, o valor de 
+		pressão de saturação deverá ser interpolado entre um intervalo da tabela, sendo necessário também interpolar um valor de temperatura. Nesse primeiro artigo, iremos apresentar o algoritmo válido apenas quando o valor de pressão 
+		de saturação corresponder a um valor exato da lista de dados. O algoritmo em caso de necessidade de interpolação é apresentado em <a href="Quimica-Programada-Interpolacao-em-Tabelas-Termodinamicas-usando-Pesquisa-Binaria.html">Interpolação em 
+		em Tabelas Termodinâmicas usando Pesquisa Binária em JavaScript</a>.</p>
+
+		<p> Para aplicação da pesquisa binária precisamos que os dados estejam ordenados em função da temperatura (em ordem crescente) e que a propriedade associada seja monotônica com a temperatura - nesse caso a pressão de saturação é crescente
+		com a temperatura. Dessa forma podemos utilizar o algoritmo da pesquisa binária para buscar e para interpolar valores de temperatura correspondentes a uma dada pressão de saturação na tabela de propriedades termodinâmicas da água. Num
+		 primeiro momento iremos apenas fazer a busca de um valor exato e, posteriormente, iremos apresentar o algoritmo para busca e interpolação.</p>
+
+		<table>
+            <caption><strong>Tabela 1. Pressão de saturação da água </strong></caption>
+            <thead>
+                <tr>
+                <th> Temperatura (°C) </th>
+                <th> Pressão de saturação (kPa)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> 90 </td>
+                <td> 70,14</td>
+                </tr>
+                <tr>
+                 <td> 95</td>
+                <td> 84,55</td>
+                </tr>
+                <tr>
+                 <td> 100</td>
+                <td> 101,35</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> 105</td>
+                <td> 120,82</td>
+                </tr>
+                <tr>
+                <td> 110</td>
+                <td> 143,27</td>
+                </tr>
+                <tr>
+                <td> 115</td>
+                <td> 169,06</td>
+                </tr>
+                <tr>
+                <td> 120</td>
+                <td> 198,53</td>
+                </tr>
+                <tr>
+                <td> 125</td>
+                <td> 232,10</td>
+                 <tr>
+                <td> 130</td>
+                <td> 270,10</td>
+                </tr>
+                <tr>
+                <td> 135</td>
+                <td> 313,00</td>
+                </tr>
+            </tbody>
+        </table>
+
+		<h2 id="secao3"> 3. Adaptação do algoritmo de pesquisa binária ao problema proposto </h2>
+
+		<p> Para resolver o problema da busca da temperatura correspondente a uma determinada pressão de saturação, nós iremos propor uma modificação
+		do algoritmo da pesquisa binária apresentado na seção 1. Num primeiro momento, nós vamos resolver o problema, que não é exatamente o que acontece na prática, 
+		propondo uma estrutura que busca qual temperatura da <strong> Tabela 1</strong> corresponde a uma pressão de saturação exata usada como valor de 
+		entrada da função. Em um artigo seguinte, <a href="Quimica-Programada-Interpolacao-em-Tabelas-Termodinamicas-usando-Pesquisa-Binaria.html">Interpolação em Tabelas 
+		Termodinâmicas usando Pesquisa Binária em JavaScript</a>, apresentamos o algoritmo que utiliza a interpolação para buscar o valor de temperatura que corresponde a 
+		uma pressão de saturação cujo valor fica no intervalo entre duas pressões da <strong> Tabela 1</strong>.</p>
+
+		<p> O novo algoritmo terá que executar as seguintes características : utilizar uma estrutura de dados que aceite tanto a chave quanto o valor como números (floats), diferentemente 
+		dos dicionários tradicionais que utilizam chaves do tipo string; criar uma função que associe uma pressão de saturação à temperatura correspondente; percorrer a estrutura de dados 
+		realizando a comparação entre a pressão de saturação desejada e aquela obtida na tabela; atualizar os ponteiros da busca para eliminar as regiões onde o valor não pode estar, de modo 
+		análogo ao algoritmo apresentado na seção 1.</p>
+
+		<p> Na <strong> Figura 3</strong> é apresentada a estrutura de dados usada para organização dos dados da <strong> Tabela 1</strong>. No artigo 
+		<a href="Quimica-Programada-Pre-selecao-de-solventes-por-temperatura-de-ebulicao-usando-pesquisa-linear-em-JavaScript.html"> Pré-seleção de solventes por temperatura de 
+		ebulição usando pesquisa linear em JavaScript</a>, usamos a estrutura de dados conhecida como dicionário para organização do dados. Essa estrutura é adequada quando temos uma chave 
+		que é uma string e um valor que é um número (tipo float). Agora para desenvolvimento do algoritmo de busca da temperatura associada a uma pressão de saturação, precisamos usar uma 
+		estrutura que aceite uma chave e um valor que sejam números. Em JavaScript temos a estrutura <strong> Map</strong>, que cria um objeto com essas características. Para criar a estrutura de
+		dados, usamos o comando <strong> new Map()</strong> para criar o objeto <strong>tabelaPressao</strong>. Para inserir dados na estrutura, usamos o comando 
+		<strong>.set()</strong>, com os pares de dados que queremos inserir.</p>
+
+		<p> Nessa estrutura de dados, a temperatura é a chave, que é um número (float) e a pressão de saturação é o valor que também é um float. Para acessar a chave de um objeto tipo <strong> Map</strong>,
+		usamos o comando <strong>.get(chave)</strong>. Criamos uma função chamada <strong>pressão()</strong> para acessar o valor de temperatura correspondente a uma dada pressão de saturação. </p>
+
+		<figure>
+  				<img src="estruturadadosmap.png" alt="Algoritmo pesquisa binária">
+  				<figcaption><strong>Figura 3: Estrutura de dados de temperatura e pressão de saturação.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong> Figura 4 </strong>, temos o algoritmo de pesquisa binária modificado. É muito semelhante ao apresentado na seção 1. Temos os três ponteiros início, fim e meio. Além disso, temos a variável Tmeio, que 
+		é a temperatura correspondente à posição do ponteiro meio, que é usada na função <strong> pressao</strong> para procurar a presão de saturação correspondente na estrutura <strong> Map</strong>. Depois de realizar a comparação
+		entre o valor buscado, <strong> psat </strong>, e o valor <strong>psatmeio</strong> localizado na estrutura tabelaPressao, os valores início, fim, meio, Tmeio e Psatmeio são renovamos e a busca continua até que <strong>psatmeio === psat</strong>. </p>
+
+		<figure>
+  				<img src="pesquisabinariamodificado.png" alt="Pesquisa binária modificado">
+  				<figcaption><strong>Figura 4: Algoritmo de pesquisa binária modificado.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong>Figura 5</strong> temos a saída do algoritmo. Quando entramos com um valor exato de presão de saturação no algoritmo, temos como saída um valor de temperatura. Quando temos como entrada um valor que não se encontra na estrutura de dados,
+		a saída é "Não encontrado". Esse algoritmo apresenta essa limitação e não atende à resolução de um problema real, no qual dificilmente queremos procurar um valor de temperatura correspondente a uma pressão de vapor exata da <strong> Tabela 1</strong>
+		. Mas decidimos dividir o desenvolvimento do algoritmo completo com interpolação de vaores em duas partes, a segunda sendo apresentada em <a href="Quimica-Programada-Interpolacao-em-Tabelas-Termodinamicas-usando-Pesquisa-Binaria.html">Interpolação
+		em Tabelas Termodinâmicas usando Pesquisa Binária em JavasScript</a>.</p>
+
+		<figure>
+  				<img src="saidapesquisabinariamodificado.png" alt="Saída pesquisa binária modificado">
+  				<figcaption><strong>Figura 5: Saída da busca da presão de saturação.</strong></figcaption>
+		</figure>
+
+		<h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> "Tabela de propriedades termodinâmica da água". <a href="https://sistemas.eel.usp.br/docentes/arquivos/8554681/00000000/Tabelasdepropriedadestermodinamicas(agua).pdf"> Acesse aqui.</a></li>
+            <li> "Manual de introdução aos algoritmos - com exemplos em JavaScript." Freecodecamp.<a href="https://www.freecodecamp.org/portuguese/news/manual-de-introducao-aos-algoritmos-com-exemplos-em-javascript/"> Acesse aqui </a></li>
+            <li> Curso Online: "Fundamentos de Programação." PUC-RS</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
