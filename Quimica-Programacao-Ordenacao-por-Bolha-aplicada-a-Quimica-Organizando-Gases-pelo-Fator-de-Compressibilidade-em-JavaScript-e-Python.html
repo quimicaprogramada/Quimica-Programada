@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Ordenação por Bolha aplicada à Química : Organizando Gases pelo Fator de Compressibilidade em JavaScript e Python </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Algoritmo de ordenação por bolha modificado, utilizando dicionário como entrada, para classificação de gases.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Ordenação por Bolha aplicada à Química : Organizando Gases pelo Fator de Compressibilidade em JavaScript e Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+            <li><a href="#secao2"> 2. Apresentação do problema </a></li>
+			<li><a href="#secao3"> 3. Adaptação do algoritmo de ordenação por bolha ao problema proposto </a></li>
+            <li><a href="#secao4"> 4. Como fica esse algoritmo em Python? </a></li>
+            <li><a href="#secao5"> 5. Referências </a></li>
+		</ul>
+
+		<h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Em algumas situações, podemos ter uma estrutura de dados que se apresenta desordenada. A forma sistemática para colocar os dados em ordem são os algoritmos de 
+        ordenação. Existem diferentes abordagens para realizar essa organização dos dados. Nessa postagem vamos apresentar e aplicar num caso prático a ordenação por bolha, também conhecida 
+        pela expressão inglesa <i>bubblesort</i>. </p>
+
+        <p> Na ordenação por bolha, é realizada a iteração na estrutura de dados e os valores adjacentes são comparados. Se as posições não estiverem ordenadas, o maior valor é jogado para 
+        posição posterior, e assim é feito com cada par até o final da sequência de dados. O efeito é como se os valores maiores fossem borbulhando para as posições finais.</p>
+
+        <p> Na <strong> Figura 1 </strong> é apresentado o algoritmo em JavaScript. Primeiramente é criado um array <strong>arr</strong> com uma sequência de números desordenados. É criado, posteriormente,
+        uma função chamada <strong>ordporbolha</strong> que recebe uma array como argumento. O primeiro passo do algoritmo é criar uma variável chamada <strong>troca</strong> que servirá para executar a troca de posições 
+        entre os valores desordenados do array. Criamos também dois laços for : o primeiro deles serve para percorrer todas as posições do array da posição <strong>0</strong> até a posição final <strong>arr.length-1</strong>;
+        o segundo deles serve para comparar valores adjacentes e realizar a troca, percorrendo o array da posição <strong>0</strong> até a posição <strong> arr.length-1-i</strong>. Essa diferença entre os laços for é devido ao fato de que 
+        quando i=0, todo o array está desordenado. Quando i=1, a última posição do array já foi ordenada. Dessa forma, o segundo laço for só necessita avançar até a posição <strong> arr.length-1-i</strong>.</p>
+
+        <p> Para realizar a troca das posições é usado o algoritmo fundamental de troca explicado em <strong> Lições de programação - Algoritmos fundamentais</strong> de Gilson Pereira. Num primeiro momento, a variável 
+        auxiliar <strong> troca </strong> guarda o valor <strong> arr[j]</strong> da posição <strong>j</strong> que está fora de ordem. Depois disso, o valor da posição <strong> j+1 </strong> é substituído pelo valor da 
+        posição <strong> j </strong>. Para finalizar, o valor guardado em <strong> troca </strong> é usado para substituir o valor da posição <strong> j + 1</strong> e estabelecer a ordem entre <strong> arr[j]</strong>
+        e <strong> arr[j+1] </strong>. Bubble sort não é eficiente para grandes volumes, mas é excelente para fins didáticos.</p>
+
+        <figure>
+  				<img src="ordporbolha.png" alt="Algoritmo ordenação por bolha">
+  				<figcaption><strong>Figura 1: Algoritmo da ordenação por bolha.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 2 </strong> é apresentada a saída do algoritmo com os valores ordenados. </p>
+
+        <figure>
+  				<img src="saidaordporbolha.png" alt="Algoritmo ordenação por bolha">
+  				<figcaption><strong>Figura 2: Saída do algoritmo da ordenação por bolha.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao2"> 2. Apresentação do problema </h2>
+
+        <p> O problema que queremos resolver nessa postagem é organizar a sequência de substâncias apresentada na <strong> Tabela 1</strong>. Nessa tabela é apresentada uma sequência, organizada 
+        ordem alfabética, com o respectivo valor de coeficiente de compressibilidade crítica (Zc). O coeficiente de compressibilidade crítico é um coeficiente adimensional que descreve o desvio do gás em relação 
+        ao comportamento ideal no ponto crítico.</p>
+
+        <p> Nosso objetivo é ordenar essa sequência de gases em ordem crescente de dificuldade de liquefazer. Um critério simplificado para fazer essa ordenação é a ordem crescente de fator de compressibilidade crítico :
+        quando mais afastado de 1 for o Zc (menor), maior serão as forças de interação entre as moléculas do gás e mais fácil será para realizar sua liquefação. Trata-se de uma abordagem didática: em um tratamento mais rigoroso, 
+        deveriam ser considerados também a temperatura crítica, a pressão crítica e o fator acêntrico. Ainda assim, o Zc fornece uma boa indicação inicial do grau de não idealidade e, portanto, da tendência à liquefação.</p>
+
+        
+		<table>
+            <caption><strong>Tabela 1. Fator de compressibilidade crítico </strong></caption>
+            <thead>
+                <tr>
+                <th> Substância </th>
+                <th> Zc (coeficiente de compressibilidade crítico)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Acetileno </td>
+                <td> 0,274</td>
+                </tr>
+                <tr>
+                 <td> Água</td>
+                <td> 0,233</td>
+                </tr>
+                <tr>
+                 <td> Amônia</td>
+                <td> 0,242</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> Argônio</td>
+                <td> 0,290</td>
+                </tr>
+                <tr>
+                <td> Benzeno</td>
+                <td> 0,274</td>
+                </tr>
+                <tr>
+                <td> Butano</td>
+                <td> 0,274</td>
+                </tr>
+                <tr>
+                <td> Dióxido de carbono</td>
+                <td> 0,276</td>
+                </tr>
+                <tr>
+                <td> Dióxido de enxofre</td>
+                <td> 0,268</td>
+                 <tr>
+                <td> Etano</td>
+                <td> 0,285</td>
+                </tr>
+                <tr>
+                <td> Etanol</td>
+                <td> 0,249</td>
+                </tr>
+                <tr>
+                <td> Etileno</td>
+                <td> 0,270</td>
+                </tr>
+                <tr>
+                <td> Hélio</td>
+                <td> 0,300</td>
+                </tr>
+                <tr>
+                <td> Hidrogênio</td>
+                <td> 0,304</td>
+                </tr>
+                <tr>
+                <td> Metano</td>
+                <td> 0,290</td>
+                </tr>
+                <tr>
+                <td> Metanol</td>
+                <td> 0,220</td>
+                </tr>
+                <tr>
+                <td> Monóxido de carbono</td>
+                <td> 0,294</td>
+                </tr>
+                <tr>
+                <td> Nitrogênio</td>
+                <td> 0,291</td>
+                </tr>
+                <tr>
+                <td> Octano</td>
+                <td> 0,258</td>
+                </tr>
+                <tr>
+                <td> Oxigênio</td>
+                <td> 0,290</td>
+                </tr>
+                <tr>
+                <td> Propano</td>
+                <td> 0,276</td>
+                </tr>
+                <tr>
+                <td> Propileno</td>
+                <td> 0,276</td>
+                </tr>
+                <tr>
+                <td> Refrigerante 12</td>
+                <td> 0,278</td>
+                </tr>
+                <tr>
+                <td> Refrigerante 22</td>
+                <td> 0,267</td>
+                </tr>
+                <tr>
+                <td> Refrigerante 134 a</td>
+                <td> 0,260</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="secao3"> 3. Adaptação do algoritmo de ordenação por bolha ao problema proposto </h2>
+
+        <p> Na <strong> Figura 3 </strong> é apresentado o algoritmo de ordenação por bolha modificado proposto para resolver o problema que foi descrito na seção 2. Os dados listados na <strong> Tabela 1 </strong>
+        são organizados na forma de um dicionário chamado <strong> gases</strong>. Para que os dados possam ser percorridos de forma sequencial com um laço for, eles precisam estar organizados na forma de um objeto 
+        cujas posições possam ser percorridas com um ponteiro. Isso não é possível num dicionário. Em JavaScript temos o comando <strong>Object.entries()</strong> que transforma um dicionário em um objeto no formato de uma 
+        lista composta por listas no formato [chave, valor]. Esse objeto pode ser percorrido com dois índices n e m na forma <strong> lista_dados[n][m]</strong>.</p>
+
+        <p> O resto do algoritmo é semelhante à ordenação por bolha original apresentado na seção 1 : temos a variável auxiliar <strong> troca </strong>, temos dois laços for para percorrer a lista e o algoritmo de 
+        troca para alterar a posição dos elementos. Para finalizar, como queremos apenas o nome do gás ordenado, sem o valor Zc impresso na saída, usamos o comando <strong> lista_dados.map(item => item[0])</strong> 
+        para percorrer a lista de dados já ordenada, imprimindo apenas o elemento da posição 0 (item[0]). Mais claramente, a função map permite criar um novo vetor contendo apenas os nomes dos gases, a partir da lista de 
+        pares [gás, Zc]. Ela aplica uma transformação a cada elemento do array, devolvendo um novo array transformado. Na <strong> Figura 4</strong> temos a saída do algoritmo, com a lista de  gases ordenados segundo 
+        critério simplificado para classificá-los de acordo com dificuldade de liquefazer.</p>
+
+        <p> Este exercício mostra como um conceito clássico de ciência da computação pode ser aplicado a um problema da engenharia química, reforçando a interdisciplinaridade entre áreas.</p>
+
+        <figure>
+  				<img src="ordporbolhadicionario.png" alt="Algoritmo ordenação por bolha com dicionario">
+  				<figcaption><strong>Figura 3: Algoritmo da ordenação por bolha modificado.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="saidaordporbolhadicionario.png" alt="Algoritmo ordenação por bolha com dicionario">
+  				<figcaption><strong>Figura 4: Saída do algoritmo da ordenação por bolha modificado.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao4"> 4. Como fica esse algoritmo em Python? </h2>
+
+        <p> Na <strong> Figura 5 </strong> temos o mesmo algoritmo da seção 3 programado em Python. Como podemos ver, as chaves do dicionário gases devem ser colocadas entre aspas "" para serem lidas como 
+        strings, diferentemente de JavaScript. Para transformação do dicionário de <strong> dados</strong> em uma lista que possa ser percorrida pelo laço for, usamos o comando <strong> list(dados.items()) </strong>.
+        Em JavaScript é criada uma lista de listas a partir do dicionário; em Python é criada uma lista de tuplas. Para percorrer a lista com ponteiros, em Python usamos o range com a série de comandos <strong>for i 
+        in range (len(lista_dados)-1)</strong>. Igualmente ao programa em JavaScript, queremos imprimir apenas o nome do gases. Em Python o comando para imprimir as chaves é 
+        <strong> [gases for gases, zc in lista_dados] </strong>.</p>
+
+        <figure>
+  				<img src="ordporbolhadicionariopython.png" alt="Algoritmo ordenação por bolha com dicionario">
+  				<figcaption><strong>Figura 5: Algoritmo da ordenação por bolha modificado em Python.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao5"> 5. Referências </h2>
+
+		<ul>
+            <li> "Termodinâmica" 7<sup>a</sup> Edição. Tabelas e Diagramas de Propriedades. Yunus A. Çengel e Michael A. Boles. </li>
+            <li> "Manual de introdução aos algoritmos - com exemplos em JavaScript." Freecodecamp. <a href="https://www.freecodecamp.org/portuguese/news/manual-de-introducao-aos-algoritmos-com-exemplos-em-javascript/">Acesse aqui.</a></li>
+            <li> "Lições de programação - Algoritmos fundamentais." Gilson pereira do Carmo Filho. </li>
+            <li> Perfil do Professor Gilson Pereiro no GitHub. <a href="https://github.com/gilsonpcf"> Acesso aqui. </a></li>
+            <li> Curso Online: "Fundamentos de Programação." PUC-RS. </li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
