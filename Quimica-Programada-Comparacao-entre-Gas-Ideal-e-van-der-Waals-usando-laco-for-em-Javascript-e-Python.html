@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Comparação entre Gás Ideal e van der Waals usando laço for em JavaScript e Python </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Laço for com funções dentro do laço e uso de arrays de objetos para tratamento dos dados. exemplo 
+        prático para equação dos gases.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Comparação entre Gás Ideal e van der Waals usando laço for em JavaScript e Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução - Apresentação do problema </a></li>
+            <li><a href="#secao2"> 2. Apresentação da arrow function, estruturas de repetição e arrays de objetos em JavaScript </a></li>
+			<li><a href="#secao3"> 3. Apresentação do algoritmo em JavaScript </a></li>
+            <li><a href="#secao4"> 4. Apresentação do algoritmo em Python </a></li>
+            <li><a href="#secao5"> 5. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução - Apresentação do Problema </h2>
+
+        <p> Nessa seção do Química Programada, o objetivo é demonstrar a utilização de estruturas de repetição para solução de um problema de engenharia química :
+        verificar como a pressão de um gás descrito pela equação de van der Waals se afasta da pressão ideal à medida que a temperatura é aumentada, mantendo-se constantes o número de mols e o volume. </p>
+
+        <p> Para sua resolução, precismos criar uma função que receba como dados de entrada o número de mols <strong>n</strong>, o volume <strong> V </strong>, as constante de van der Waals <strong> a </strong>
+        e <strong> b </strong> e um array com as temperaturas para as quais se deseja calcular a pressão. Essa função deverá percorrer o array de temperaturas e avaliar a pressao de gás ideal,
+        a pressão de gás de van der Waals e o erro (a diferença entre as duas pressões). </p>
+
+        <p> Por fim, os valores de temperatura, as respectivas pressões e o erro deverão ser organizados e apresentados em uma estrutura de dados conveniente para posterior análise.</p>
+
+        <h2 id="secao2"> 2. Apresentação da arrow function, estruturas de repetição e arrays de objetos em JavaScript </h2>
+
+        <p>
+        Para elaborar o algoritmo que resolve o problema proposto, é necessário combinar três conceitos fundamentais de programação:
+        uma <em>arrow function</em>, uma estrutura de repetição do tipo <strong>for</strong> e um array de objetos para organizar os resultados.
+        </p>
+
+        <p>
+        A <em>arrow function</em> será responsável por receber os dados de entrada — como o array de temperaturas e os parâmetros do sistema —
+        e executar os cálculos da pressão do gás ideal e da pressão do gás de van der Waals.
+        </p>
+
+        <p>
+        Uma <em>arrow function</em> é uma função anônima introduzida no JavaScript que permite declarar funções de forma mais compacta,
+        utilizando a sintaxe <strong>=></strong>. A <strong>Figura 1</strong> apresenta a estrutura básica de uma arrow function aplicada
+        ao cálculo da pressão de um gás ideal.
+        </p>
+
+        <p>Dentro dessa função é utilizado um laço <strong>for</strong>, responsável por percorrer todo o array de temperaturas.
+        O laço inicia na posição <strong>i = 0</strong> e é executado até o último elemento do array
+        (<strong>array.length</strong>). A cada iteração, o valor da temperatura é utilizado para recalcular a pressão do gás ideal.
+        </p>
+
+        <figure>
+            <img src="arrow.png" alt="Arrow function">
+            <figcaption><strong>Figura 1: Exemplo de uma arrow function que calcula a pressão de um gás ideal.</strong></figcaption>
+        </figure>
+
+        <p>Para armazenar os resultados obtidos em cada iteração, foi criado um array denominado <strong>resultados</strong>,
+        inicializado com o comando <strong>let resultados = []</strong>. A cada passagem pelo laço <strong>for</strong>, esse array recebe um novo elemento por meio do comando
+        <strong>resultados.push()</strong>.
+        </p>
+
+        <p>Quando há necessidade de armazenar mais de uma informação por temperatura, cada elemento do array pode ser um objeto. Essa estrutura é semelhante a um dicionário em outras linguagens
+        e pode ser criada, por exemplo, com o comando <strong>resultados.push({A: 5, B: 6});</strong>.
+        </p>
+
+        <h2 id="secao3"> 3. Apresentação do algoritmo em Javascript </h2>
+
+        <p> Na <strong> Figura 2 </strong> é apresentada o algoritmo que possibilita o cálculo da pressão de gás ideal, pressão de gás de van der Waals e o erro como sendo a diferença entre 
+        a pressão de van der Waals menos a pressão do gás ideal dividido pela pressão de gás ideal.</p>
+
+        <p> As entradas da <i>arrow function</i> são o array de temperatura, o número de mols <strong>n</strong>, o volume <strong>V </strong> ocupado e as constantes de van der Waals <strong> a </strong>
+        e <strong> b</strong>. Os valores das contante foram retirados da Wikipédia na página que pode ser <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_Van_der_Waals"> acessada aqui. </a> No exemplo 
+        que simulamos para teste do programa escolhemos o gás hidrogênio cujas contantes são <strong> a = 0,2444</strong> e <strong> b = 0,02661</strong>.</p>
+
+        <p> Dentro do laço <strong> for</strong> temos três expressões a serem calculadas cada vez que o laço é percorrido : pressaoIdeal, pressaoVanderWaals e erro. No final com o comando <strong>push</strong>, o array de resultados 
+        é incrementado com um objeto de 4 dados : <strong> T[i]</strong>, <strong> pressaoIdeal</strong>, <strong> pressaoVanderWaals</strong> e <strong> erro</strong>.</p>
+         
+        <figure>
+            <img src="laçoforgases.png" alt="Pressões de gases">
+            <figcaption><strong>Figura 2: Função pressão de gases em JavaScript.</strong></figcaption>
+        </figure>
+
+        <p> Na <strong> Figura 3 </strong> é apresentado um trecho da saída do resultado da execução da função para o gás hidrogênio. Pode-se ver 
+        que quando a temperatura aumenta, com mesmo volume e número de mols, aumenta a diferença entre a pressão de gás ideal e a pressão de gás de van der Waals.
+        A pressão real pode ser maior ou menor que a ideal dependendo das condições e do balanço entre <strong>a</strong>e <strong> b </strong>. Para as condições simuladas, 
+        observa-se que a pressão calculada pela equação de van der Waals é ligeiramente superior à pressão ideal. </p>
+
+        <figure>
+            <img src="saidalaçoforgases.png" alt="Pressões de gases">
+            <figcaption><strong>Figura 3: Saída da função pressão de gases.</strong></figcaption>
+        </figure>
+
+        <h2 id="secao4"> 4. Apresentação do algoritmo em Python </h2>
+
+        <p> Na <strong> Figura 4</strong> é apresentado o mesmo programa, mas agora executado em Python. A estrutura é muito semelhante.
+        Criou-se uma função temperatura com um laço <strong> for </strong> interno. O comando para que a saída <strong>resultados</strong> seja 
+        incrementada a cada laço agora é feito através do comando <strong> resultados.append().</strong>
+        </strong></p>
+
+        <figure>
+            <img src="laçoforgasespy.png" alt="Pressões de gases">
+            <figcaption><strong>Figura 4: Função pressão de gases em Python.</strong></figcaption>
+        </figure>
+
+        <h2 id="secao5"> 5. Referências </h2>
+
+		<ul>
+            <li> Equação de Van der Waals. Wikipédia. <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_Van_der_Waals"> Acesse aqui. </a></li>
+            <li> Lógica de Programação e Algoritmo com Javascript. Edécio Fernando Iepsen. 2<sup>a</sup>Edição. Novatec.</li>
+            <li> Curso Online: "Fundamentos de Programação." PUC-RS. </li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
