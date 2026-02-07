@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Tabela de pressão de vapor em função da temperatura (Equação de Antoine em JavaScript) </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Laço for com funções dentro do laço e uso de arrays de objetos para tratamento dos dados. exemplo 
+        prático para equação dos gases.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Tabela de pressão de vapor em função da temperatura (Equação de Antoine em JavaScript) </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Apresentação do Algoritmo em JavaScript </a></li>
+            <li><a href="#secao3"> 3. Imprima sua Tabela de Pressão de Vapor </a></li>
+            <li><a href="#secao4"> 4. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+
+        <p>Em química e engenharia química, é bastante comum o uso de tabelas de propriedades termodinâmicas de substâncias puras 
+			e misturas. No Química Programada, já vimos exemplos de como extrair valores dessas tabelas a partir de uma variável de 
+			entrada — geralmente a temperatura — bem como realizar interpolações entre pontos tabulados.</p>
+		
+		<p>Nesta postagem, propomos um exercício de sentido oposto: em vez de consultar uma tabela existente, vamos construir uma 
+		tabela de pressão de vapor utilizando JavaScript, a partir da equação de Antoine.</p>
+
+		<p>A equação de Antoine, apresentada a seguir, é uma correlação empírica que relaciona a temperatura de uma substância pura 
+		com sua pressão de vapor. Para cada substância, existe um conjunto específico de constantes A, B e C que, quando inseridas 
+		na equação juntamente com a temperatura, permitem o cálculo da pressão de vapor.</p>
+
+		<figure>
+  				<img src="equacaoantoine.png" alt="Equação de Antoine">
+  				<figcaption><strong>Figura 1: Equação de Antoine.</strong></figcaption>
+		</figure>
+
+		<p>Em muitas aplicações práticas, mais do que trabalhar diretamente com equações, é conveniente dispor de tabelas de propriedades 
+		em função da temperatura ou de outra variável, facilitando análises, simulações e consultas rápidas. Dessa forma, o objetivo 
+		deste exercício é desenvolver uma aplicação capaz de gerar e exibir uma tabela de pressão de saturação com base na equação de 
+		Antoine.</p>
+
+		 <h2 id="secao2"> 2. Apresentação do Algoritmo em JavaScript </h2>
+
+		 <p> Na <strong> Figura 2</strong> é apresentado o formulário html para entrada de dados para os cálculos das pressões de vapor segundo 
+		equação de Antoine e construção da tabela. Primeiramente temos as entradas de temperatura que são : início, fim e incremento. Todos em graus celsius.
+		São entradas de tipo "number", os identificadores são respectivamente inNumero1, inNumero2 e inNumero3. A configuração <strong> Step="any"</strong> permitem
+		que a entrada seja inteiro ou tipo float. Depois temos as entradas dos parâmetros da Equação de Antoine A, B e C. Também são tipo number com a mesma configuração 
+		de entrada para inteiro e float.</p>
+
+		<figure>
+  				<img src="antoinehtml.png" alt="Equação de Antoine">
+  				<figcaption><strong>Figura 2: Formulário html para equação de Antoine.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong> Figura 3</strong>, temos o arquivo <strong>.js</strong> que deve ser associado ao formulário html. Inicialmente temos os comandos de leitura das 
+		variáveis do formulário html e transformação das mesmas em variáveis que serão maiúsculas dentro do arquivo <strong>.js</strong>. Depois disso, temos o evento associado 
+		ao botão "Mostrar Tabela" que calcula a pressão de vapor segundo a equação de Antoine para o trecho de temperatura escolhido. O laço for tem como ponto de início
+		a variável chamada de <strong> numero1</strong>, como final a variável chamada <strong> numero2</strong> e o incremento <strong> numero3</strong>. Por isso temos que os 
+		parâmetros do laço for são <strong>let i = numero1; i <= numero2; i=i+numero3</strong>. </p>
+
+
+		<figure>
+  				<img src="antoinejs.png" alt="Equação de Antoine">
+  				<figcaption><strong>Figura 3: Arquivo js para equação de Antoine.</strong></figcaption>
+		</figure>
+
+		 <h2 id="secao3"> 3. Imprima a sua Tabela de Pressão de Vapor </h2>
+
+		<p> Abaixo você pode usar esse formulário para construir sua própria tabela de pressão de vapor. A entrada de início, fim e incremento são em graus celsius e a saída é em 
+		mmHg.</p>
+
+		<p> Observação: as constantes A, B e C da equação de Antoine são válidas apenas para faixas específicas de temperatura e sistemas de unidades. O usuário deve garantir 
+		compatibilidade entre constantes, temperatura (°C) e unidade de pressão (mmHg).</p>
+
+		 <h1> Tabela Equação de Antoine </h1>
+    <form>
+		<p>Início:
+		<input type="number" id="inNumero1" name="inNumero1" step="any" required>
+		</p>
+		<p>Fim:
+		<input type="number" id="inNumero2" name="inNumero2" step="any" required>
+		</p>
+		<p>Incremento:
+		<input type="number" id="inNumero3" name="inNumero3" step="any" required>
+		</p>
+		<p> Constante de Antoine A:
+		<input type="number" id="inA" name="inA" step="any" required>
+		</p>
+		<p> Constante de Antoine B:
+		<input type="number" id="inB" name="inB" step="any" required>
+		</p>
+		<p> Constante de Antoine C:
+		<input type="number" id="inC" name="inC" step="any" required>
+		</p>
+		<input type="submit" value="Mostrar Tabela">
+		</form>
+		<pre></pre>
+		<script src="antoine.js"></script>
+    <!-- /body e /html -->
+
+         <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> Equação de Antoine. Wikipédia. <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_Antoine"> Acesse aqui. </a></li>
+            <li> Lógica de Programação e Algoritmo com Javascript. Edécio Fernando Iepsen. 2<sup>a</sup>Edição. Novatec.</li>
+            <li> Curso Online: "Fundamentos de Programação." PUC-RS. </li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
