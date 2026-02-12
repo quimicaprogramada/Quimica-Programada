@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Uso de map encadeado para conversão de unidades e cálculo da pressão de Van der Waals </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Laço for com funções dentro do laço e uso de arrays de objetos para tratamento dos dados. exemplo 
+        prático para equação dos gases.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Uso de map encadeado para conversão de unidades e cálculo da pressão de Van der Waals </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Algoritmo com dois map encadeados </a></li>
+            <li><a href="#secao3"> 3. Algoritmo com múltiplos map encadeados </a></li>
+            <li><a href="#secao4"> 4. Conclusão </a></li>
+			<li><a href="#secao5"> 5. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+		<p>A função <strong>map</strong> é um recurso do Python que aplica uma determinada função a cada elemento de um iterável (como uma lista, por exemplo). Seu retorno é um iterador contendo os resultados, que pode posteriormente 
+		ser convertido em um novo iterável, como uma lista, para exibição ou processamento adicional. No exemplo da <strong>Figura 1</strong>, temos um array de temperaturas e aplicamos a função gasIdeal a cada elemento desse array, 
+		sem a necessidade de utilizar um laço explícito do tipo for. Todo o processamento é feito por meio da função <strong>map</strong>.</p>
+
+
+		<figure>
+  				<img src="funcaomap.png" alt="Uso da função map">
+  				<figcaption><strong>Figura 1: Exemplo de uso da função map.</strong></figcaption>
+		</figure>
+
+		<p>A função <strong>map</strong> recebe dois argumentos principais:</p>
+		<ul>
+			<li>a função que será aplicada (neste caso, gasIdeal);</li>
+			<li>o iterável sobre o qual essa função será executada.</li>
+		</ul>
+		<p> Essa estrutura faz com que a função seja aplicada elemento a elemento ao conjunto de temperaturas, retornando um iterador com os valores de pressão calculados.
+		A partir desse exemplo simples, evoluiremos gradualmente para encadear múltiplas chamadas da função <strong>map</strong>, aplicando transformações sucessivas aos dados.</p>
+	
+		<h2 id="secao2">2. Algoritmo com dois map encadeados</h2>
+		
+		<h3>Descrição do problema</h3>
+
+		<p>Considere um array de temperaturas em Fahrenheit. Deseja-se calcular a pressão de Van der Waals para um determinado gás, cujo volume, 
+		número de moles e constantes de Van der Waals são conhecidos.</p>
+		<p>Sabemos que:</p>
+		<ul>
+			<li>Para R=0,08206, a pressão será obtida em atm;</li>
+			<li>A temperatura deve estar em Kelvin;</li>
+			<li>O volume deve estar em litros.</li>
+		</ul>
+
+		O problema consiste, portanto, em:
+		<ol>
+			<li>Converter as temperaturas de Fahrenheit para Kelvin;</li>
+			<li>Aplicar a equação de Van der Waals para cada temperatura convertida.</li>
+		</ol>
+		<h3>Estrutura do algoritmo</h3>
+
+		<p>Na <strong>Figura 2</strong>, apresentamos o algoritmo que realiza os cálculos utilizando duas chamadas encadeadas da função <strong>map</strong>.</p>
+		<p>As funções aplicadas aos dados são:</p>
+		<ul>
+			<li>kelvin – responsável pela conversão de temperatura;</li>
+			<li>vanderWaals – responsável pelo cálculo da pressão.</li>
+		</ul>
+
+		<figure>
+  				<img src="mapvanderWaals.png" alt="Uso da função map">
+  				<figcaption><strong>Figura 2: Exemplo com duas funções map.</strong></figcaption>
+		</figure>
+
+		<p>O encadeamento ocorre da seguinte forma:</p>
+		<ol>
+			<li>A primeira chamada de <strong>map</strong> aplica a função <strong>kelvin</strong> ao array <strong>Temperatura_F</strong>, gerando um iterador com as temperaturas convertidas para Kelvin.</li>
+			<li>Esse iterador é então utilizado como entrada para a segunda chamada de <strong>map</strong>, que aplica a função <strong>vanderWaals</strong> a cada temperatura convertida.</li>
+		</ol>
+		<p>Dessa forma, evitamos a criação explícita de estruturas intermediárias e organizamos o processamento como um fluxo de transformações sucessivas.
+		Inicialmente, o código é apresentado com as funções definidas separadamente, destacando claramente cada etapa do cálculo.
+		Em seguida, mostramos que os comandos podem ser simplificados utilizando função <strong>lambda</strong> na mesma linha onde é chamada a função <strong>map</strong>, incorporando a lógica diretamente na chamada dessa última função, 
+		conforme ilustrado na <strong>Figura 3</strong>. Essa escolha torna o código mais conciso, embora possa reduzir a legibilidade dependendo da complexidade da expressão utilizada.</p>
+
+		<figure>
+  				<img src="mapnalinha.png" alt="Uso da função map">
+  				<figcaption><strong>Figura 3: Funções map na mesma linha.</strong></figcaption>
+		</figure>
+
+		<h2 id="secao3">3. Algoritmo com múltiplos map encadeados</h2>
+		
+		<p>Vamos agora acrescentar um novo requisito ao problema: os valores de pressão devem ser apresentados em mmHg, e não em atm.
+		Isso implica a aplicação de uma nova transformação aos dados de saída.
+		Para atender a esse requisito, introduzimos uma terceira chamada encadeada da função map, responsável por converter os valores de pressão de atm para mmHg.</p>
+		<p>O encadeamento passa então a ter três etapas:</p>
+		<ol>
+		    <li>Conversão de Fahrenheit para Kelvin;</li>
+			<li>Cálculo da pressão pela equação de Van der Waals;</li>
+			<li>Conversão da pressão de atm para mmHg.</li>
+		</ol>
+		<p><strong>Figura 4</strong>, apresentamos o algoritmo com as três chamadas encadeadas da função <strong>map</strong>.
+		Essa abordagem organiza o processamento como um pipeline funcional de transformações, no qual cada etapa aplica uma operação específica ao conjunto de dados recebido da etapa anterior.
+		Embora o código se torne mais compacto, é importante observar que o excesso de encadeamentos pode reduzir a legibilidade. Em aplicações reais, a escolha entre concisão e clareza deve 
+		ser feita com critério, especialmente em projetos colaborativos ou de manutenção prolongada.</p>
+
+		<figure>
+  				<img src="tresmap.png" alt="Uso da função map">
+  				<figcaption><strong>Figura 4: Três funções map aninhadas.</strong></figcaption>
+		</figure>
+
+		<h2 id="secao4">4. Conclusão</h2>
+
+		<p> O uso encadeado da função map permite estruturar transformações sucessivas de dados de maneira funcional, evitando estruturas explícitas de repetição.
+		Esse tipo de abordagem é particularmente útil quando trabalhamos com séries de dados experimentais, simulações termodinâmicas ou rotinas de pós-processamento em engenharia química, 
+		nas quais múltiplas conversões e modelos matemáticos precisam ser aplicados sequencialmente a um conjunto de valores.
+		Mais do que reduzir linhas de código, o encadeamento de map organiza o raciocínio computacional como um fluxo lógico de transformações — algo bastante próximo da 
+		forma como estruturamos problemas de engenharia.</p>
+
+        <h2 id="secao5">5. Referências </h2>
+
+		<ul>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+            <li> Curso Online: "Fundamentos de Orientação a Objetos." PUC-RS</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
