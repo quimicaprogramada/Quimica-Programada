@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Química Programada - Calculadora de Gases em C++ e Python </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Switch case em C++, Laço match em Python. Gás ideal, gás de van der Waals e gás de Redlich-Kong.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Química Programada - Calculadora de Gases em C++ e Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Algoritmo em C++ </a></li>
+            <li><a href="#secao3"> 3. Algoritmo em Python </a></li>
+			<li><a href="#secao4"> 4. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+
+        <p> O <strong>switch case</strong> em C++ é uma estrutura de controle usada para tomar decisões com base no valor de uma expressão. Ele é útil quando se tem várias opções 
+        válidas para essa expressão, substituindo o uso de diversos if concatenados. Nessa postagem do Química Proramada vamos usar a estrutura do switch case para 
+        elaborar um programa que calcule a pressão de um dado gás segundo três equações distintas : gás ideal, gás de van der Waals e gás de Redlich-Kwong.</p>
+
+        <p> Também iremos apresentar o algoritmo do equivalente ao switch case em Python, que é o <strong>match case</strong>.</p>
+
+        <h2 id="secao1"> 2. O Algoritmo em C++  </h2>
+        
+        <p> Primeiramente, temos que definir as funções de estado que usaremos para calcular as pressões de gás ideal, de gás de van der Waals e de gás de Redlich-Kwong. Essas funções
+        são apresentadas na <strong> Figura 1</strong> que apresentada a declaração dessas funções em C++. Note que é necessário chamar a biblioteca <strong>cmatch</strong> no início
+        do programa para calcular as espressões de potência e raiz quadrada. </p>
+        
+        <figure>
+  				<img src="funcoesdegases.png" alt="Uso da função em C++">
+  				<figcaption><strong>Figura 1: Funções da calculadora.</strong></figcaption>
+		</figure>
+
+        <p> Depois de declarar as funções da calculadora de gases, vamos para a função main, onde teremos um trecho inicial na qual o usuário irá fazer a escolha de qual equação será usada.
+        Cada equação é equivamente a um número : 1 - gás ideal; 2 gás de van der Waals; 3 - gás de Redlich-Kwong. Essa opção será lida atarvés do teclado e será atribuída à variável 
+        chamada de <strong> equacao</strong>. Qaundo o usuário escolher a opção 1, será calculada a pressão do gás segundo a equação do gás ideal. O terminal do C++ vai pedir ao usuário as variáveis
+        necessárias para o cálculo da pressão : n (numero de mols), T (temperatura) e V (volume). O comando <strong>cin</strong> é o comando em C++ que faz a leitura de valores pelo teclado 
+        do usuário. Se o usuário escolher a opção 2 para variável <strong>equacao</strong>, será calculada a presão de van der Waals, sendo necessário, além dos valores n, T, e V, entrar com 
+        os valores dos parâmetros <strong>a</strong> e <strong>b</strong> da equação de van der Waals. Se o usuário escolher opção 3, serão solicitados os parâmetros
+        Pc (pressão crítica) e Tc (Temperatura crítica), necessários para o cálculo da pressão pela equação de estado de Redlich-Kwong.</p>
+
+        <figure>
+  				<img src="switchcase.png" alt="Switch case em C++">
+  				<figcaption><strong>Figura 2: Estrutura do switch case.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao1"> 2. O Algoritmo em Python  </h2>
+
+        <p> Em Python, o equivalente ao <strong>switch case</strong> é o <strong>match case</strong>. A mesma calculadora de gases em Python apresenta a estrutura conforme as <strong> Figura 3</strong>
+        e <strong>Figura 4</strong>. Na primeira, é apresentada a declaração das funções dos gases ideal, van der Waals e Redlich-Kwong. Na segunda, 
+        é apresentada a estrutura do <strong> match case</strong>.</p>
+
+        <figure>
+  				<img src="funcoesdegasespython.png" alt="Equações dos gases">
+  				<figcaption><strong>Figura 3: Equações de estado dos gases.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="matchcase.png" alt="Match case em Python">
+  				<figcaption><strong>Figura 4: Estrutura do match case.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao5">4. Referências </h2>
+
+		<ul>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+            <li> "Equação de van der Waals. Wikipedia. <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_Van_der_Waals"> Acesse aqui </a></li>
+            <li> "Equação de Redlick-Kwong. Wikipedia. <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_estado_de_Redlich%E2%80%93Kwong"> Acesse aqui </a></li></li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
