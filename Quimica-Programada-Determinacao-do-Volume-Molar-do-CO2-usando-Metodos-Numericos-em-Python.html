@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Determinação do Volume Molar do CO<sub>2</sub> usando Métodos Numéricos em Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Cálculo do volume molar do CO2 em alta pressão usando a equação de estado de Redlich-Kwong e métodos numéricos em Python.">
+	</head>
+
+    <body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Determinação do Volume Molar do CO<sub>2</sub> usando Métodos Numéricos em Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li> 
+            <li><a href="#secao2"> 2. A Equação de Estado de Redlich-Kwong </a></li>
+            <li><a href="#secao3"> 3. A obtenção da equação de estado em termos do fator de compressibilidade para o CO<sub>2</sub></a></li>
+            <li><a href="#secao4"> 4. A resolução numérica da equação de estado e obtenção do volume molar </a></li>
+			<li><a href="#secao5"> 5. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Essa postagem do Química Programada vai tratar da resolução numérica de equações de estado de gases reais para obtenção do volume molar. O gás escolhido é o gás carbônico, nas condições de temperatura e pressão 
+        indicadas a abaixo
+
+        <ul>
+            <li> P= 50 atm;</li>
+            <li> T = 320 K.</li>
+        </ul>
+
+        <p> A Equação de Estado usada para modelagem do comportamento real do gás será a Equação de Redlich-Kwong. Para tanto, é necessário uso das constantes críticas do gás que são:</p>
+
+        <ul>
+            <li> Pc = 72,9 atm;</li>
+            <li> Tc = 304,2 K </li>
+        </ul>
+        <h2 id="secao2"> 2. A equação de Estado de Redlich-Kwong </h2>
+
+        <p> Na <strong> Figura 1</strong>, apresentamos a Equação de Estado de Redlich-Kwong. Ela foi formulada por Otto Redlich e Joseph Neng Shun Kwong em 1949.
+        Ela é mais precisa que a equação de van der Waals e apresenta duas constantes que dependem das propriedades críticas do gás. A constante <strong> a</strong> corrige 
+        o potencial de atração das moléculas e a constante <strong> b </strong> corrige o volume.</p>
+
+        <figure>
+  			<img src="redlichkwong.png" alt="equação de estado">
+  			<figcaption><strong>Figura 1: Equação de Estado de Redlich-Kwong.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao3"> 3. A obtenção da Equação de Estado em termos do fator de compressibilidade para o CO<sub>2</sub> </h2>
+
+        <p> Para obtenção do volume molar do CO<sub>2</sub> nas condições de interesse (50 atm e 320 K), é necessária a resolução da equação cúbica de estado em termos do fator de compressibilidade.
+        Obtendo a solução em termos do fator de compresibilidade, é possível estimar o volume molar. Para transformação da equação apresentada na <strong> Figura 1 </strong> na equação cúbica em termos do fator de 
+        compressibilidade, é necessário executar a sequência de manipulações algébricas apresentadas nas figuras de <strong>Figura 2</strong> a <strong> Figura 4</strong>.</p>
+        
+         <figure>
+  			<img src="primeirotermo.png" alt="equação de estado">
+  			<figcaption><strong>Figura 2: Primeiro termo da equação de Estado de Redlich-Kwong.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="segundotermo.png" alt="equação de estado">
+  			<figcaption><strong>Figura 3: Segundo termo da equação de Estado de Redlich-Kwong.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="equacaocompressibilidade.png" alt="equação de estado">
+  			<figcaption><strong>Figura 4: Obtenção da Equação de Estado em função do fator de compressibilidade.</strong></figcaption>
+	    </figure>
+
+        <p> Agora, de posse dos dados de pressão e temperatura críticas do CO<sub>2</sub> apresentados na seção 1 e da pressão e temperatura no ponto onde se deseja 
+        conhecer o volume molar do gás, é possível conhecer as constantes da Equação de Estado de Redlich-Kwong <strong> a</strong> e <strong> b </strong> e as variáveis
+        <strong> A </strong> e <strong> B </strong>. Posteriormente, é possível obter a Equação de Estado em termos do fator de compressibilidade para o caso específico, conforme
+        apresentado na <strong> Figura 5</strong>.</p>
+        
+        <figure>
+  			<img src="equacaoespecifica.png" alt="equação de estado">
+  			<figcaption><strong>Figura 5: Obtenção da Equação de Estado para o CO<sub>2</sub>.</strong></figcaption>
+	    </figure>
+
+
+        <h2 id="secao4"> 4. A resolução numérica da equação de estado e obtenção do volume molar </h2>
+
+        <p> Para obtenção do volume molar do CO<sub>2</sub> a 50 atm e 320 K, é necessário resolver a equação cúbica apresentada na <strong> Figura 5</strong> através de algum 
+        método numérico. Antes de escolher o método, é necessário plotar o gráfico do polinômio em Python, para verificar as regiões de existência de raízes. Os comandos necessários 
+        para plotagem da função em Python, estão apresentados na <strong> Figura 6 </strong>. Na <strong> Figura 7 </strong>, é apresentado o gráfico com uma aproximação na região onde encontra-se uma raiz, próximo ao 
+        valor de z=0,75. Esse valor foi utilizado para tentar convergir uma raiz real. </p>
+
+        <figure>
+  			<img src="plotagemequacao.png" alt="equação de estado">
+  			<figcaption><strong>Figura 6: Plotagem equação de estado.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="aproximacao.png" alt="equação de estado">
+  			<figcaption><strong>Figura 7: Aproximação da raiz.</strong></figcaption>
+	    </figure>
+
+        <p> Numa primeira tentativa de convergência da raiz, devido à facilidade de obtenção da derivada da função, optou-se pelo método de Newton-Raphson para resolução da equação. Porém,
+        não obteve-se convergência para valores na vizinhança de 0,75. Uma das razões pode ser o valor pequeno da derivada na vizinhanças da raiz. Com isso, optou-se pelo método da secante,
+        com valor de x0=0,75 e x1=0,80, conforme algoritmo apresentado na <strong> Figura 8 </strong>. Para esse método houve convergência para um valor do fator de compressibilidade 
+        <strong> z = 0.765694</strong>. </p>
+
+        <figure>
+  			<img src="algoritmosecante.png" alt="equação de estado">
+  			<figcaption><strong>Figura 8: Algoritmo método da secante.</strong></figcaption>
+	    </figure>
+
+        <p> De posse do valor do fator de compressibilidade, é possível obter o valor do volume molar a 50 atm e 320 K. O valor é de 0,4021 L/mol. Considerando um gás ideal, o valor do volume molar
+        nas mesmas condições seria de 0,525 L/mol. Isso revela que nessa pressão há um predomínio das forças atrativas intramoleculares. 
+        </p>
+
+        <h2 id="secao5"> 5. Referências </h2>
+
+		<ul>
+            <li> "Caderno Didático de Métodos Numéricos em Python". Tiago Buriol. <a href="https://tiagoburiol.github.io/metodos_numericos_em_python/intro.html"> Acesse aqui.</a></li>
+            <li> "Cálculo Numérico - Um livro colaborativo versão Python." UFRGS <a href="https://www.ufrgs.br/reamat/CalculoNumerico/livro-py/main.html"> Acesse aqui. </a></li>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+            <li> "Equação de Estado de Redlich-Kwong". Wikipedia. <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_estado_de_Redlich%E2%80%93Kwong"> Acesse aqui. </a></li>
+		</ul>
+		
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg" alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
