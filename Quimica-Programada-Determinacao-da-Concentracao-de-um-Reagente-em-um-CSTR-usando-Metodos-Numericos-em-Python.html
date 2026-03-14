@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Determinação da Concentração de um Reagente em um CSTR usando Métodos Numéricos em Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Cálculo da concentração de um reagente no estado estacionário usando métodos numéricos em Python.">
+	</head>
+
+    <body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Determinação da Concentração de um Reagente em um CSTR usando Métodos Numéricos em Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li> 
+            <li><a href="#secao2"> 2. O Equacionamento do Problema </a></li>
+            <li><a href="#secao3"> 3. A resolução numérica da equação da concentração do reagente A </a></li>
+			<li><a href="#secao4"> 4. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> O objetivo dessa postagem do Química Programada é determinar a concentração C<sub>A</sub> do estado estacionário para o processo que ocorre no 
+        CSTR detalhado na <strong> Figura 1</strong>. Esse problema é apresentado na página 14 do livro de "Modelagem e Simulação de Processos Químicos" de Ivan Carlos Franco.
+        No reator ocorre uma reação de segunda ordem em relação ao reagente C<sub>A</sub>. Os valores das variáveis 
+        indicadas na figura e da constante de reação são listados a seguir:</p>
+
+        <ul>
+            <li> F = 2 L/s</li>
+            <li> C<sub>A0</sub>= 0,7 mol/L</li>
+            <li> V = 16,5 L </li>
+            <li> k = 1,25 L/mol.s </li>
+        </ul>
+
+        <figure>
+  			<img src="cstr.png" alt="CSTR">
+  			<figcaption><strong>Figura 1: Reator CSTR.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao2"> 2. O Equacionamento do problema </h2>
+
+		<p> Na <strong> Figura 2</strong> é apresentado o equacionamento do problema. O reagente A, que entra no reator, é consumido por uma reação de segunda ordem. No estado estacionário, a vazão de saída no reator 
+		é C<sub>A</sub>.</p>
+
+		<figure>
+  			<img src="equacionamentocstr.png" alt="equacionamento CSTR">
+  			<figcaption><strong>Figura 2: Equacionamento do Reator CSTR.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao3"> 3. A resolução numérica da equação da concentração do reagente A </h2>
+
+		<p> Na <strong> Figura 3 </strong>, é apresentado o algoritmo para plotagem da função apresentada na <strong> Figura 2</strong> e a resolução da mesma utilizando o método de Newton-Raphson. Na <strong> Figura 4</strong>,
+		vemos o gráfico da função e temos uma raiz aproximada na região de 0,22. Usamos esse valor como aproximação no método no Newton-Raphson. O valor encontrado pelo algoritmo na terceira iteração foi de 
+		0,2165, de acordo com o resultado apresentado na obra "Modelagem e Simulação de Processos Químicos".</p>
+
+		<figure>
+  			<img src="algoritmocstr.png" alt="algoritmo CSTR">
+  			<figcaption><strong>Figura 3: Algoritmo Reator CSTR.</strong></figcaption>
+	    </figure>
+
+		<figure>
+  			<img src="raizcstr.png" alt="algoritmo CSTR">
+  			<figcaption><strong>Figura 4: Aproximação de raiz do equacionamento do Reator CSTR.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> "Caderno Didático de Métodos Numéricos em Python". Tiago Buriol. <a href="https://tiagoburiol.github.io/metodos_numericos_em_python/intro.html"> Acesse aqui.</a></li>
+            <li> "Cálculo Numérico - Um livro colaborativo versão Python." UFRGS <a href="https://www.ufrgs.br/reamat/CalculoNumerico/livro-py/main.html"> Acesse aqui. </a></li>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+            <li> "Modelagem e Simulação de Processos Químicos". Ivan Carlos Franco.</li>
+		</ul>
+		
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg" alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
