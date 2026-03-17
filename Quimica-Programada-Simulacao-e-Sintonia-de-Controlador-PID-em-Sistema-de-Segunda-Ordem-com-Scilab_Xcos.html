@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Simulação e Sintonia de Controlador PID em Sistema de Segunda Ordem com Scilab/Xcos </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Simulação de sistema de segunda ordem. Ajuste e sintonia de malha de PID com Scilab/Xcos.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Simulação e Sintonia de Controlador PID em Sistema de Segunda Ordem com Scilab/Xcos </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. A simulação no Scilab/Xcos </a></li>
+            <li><a href="#secao3"> 3. Resultado da Simulação e escolha dos Parâmetros do Controlador </a></li>
+            <li><a href="#secao4"> 4. Conclusão </a></li>
+			<li><a href="#secao5"> 5. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> O problema que essa postagem se propõe a resolver, se encontra na página 60 do livro "Controle de Processos Industriais" de Alcindo Prado Junior. Nesse livro há um exercício que solicita
+        que se projete um controlador PID para uma planta representada pela função de transferência apresentada na <strong> Figura 1</strong>. Esse problema será resolvido se utilizando o Xcos do Scilab.
+        Será feito o ajuste do controlador PID para o sistema em malha fechada. </p>
+        
+        <figure>
+  				<img src="funcaotransferencia.png" alt="Função de transferência">
+  				<figcaption><strong>Figura 1: Função de transferência.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao2"> 2. Simulação do Scilab/Xcos </h2>
+
+        <p> Na <strong> Figura 2</strong> é apresenta o esquema da malha que foi utilizada para simulação da planta apresentada na <strong> Figura 1</strong>. A simulação foi feita no Xcos do Scilab.</p>
+
+         <figure>
+  				<img src="malhafechada.png" alt="Controlador PID">
+  				<figcaption><strong>Figura 2: Esquema da simulação do sistema em malha fechada.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao3"> 3. Resultado da Simulação e escolha dos Parâmetros do Controlador </h2>
+
+        <p> A estratégia inicial de sintonia do PID é iniciar com um valor baixo de ganho proporcional <strong> Kp</strong>, um integrador <strong> Ki</strong> e derivativo <strong> Kd</strong> nulos.
+        Verificar qual foi a resposta do sistema e depois disso ir fazendo ajustes graduais no controlador. A resposta para o controlador com <strong> Kp=1</strong> é apresentado na <strong> Figura 3</strong>.</p>
+
+        <p> Pode-se ver que para esse valor de <strong> Kp</strong>, a resposta do sistema a uma entrada do tipo degrau unitário apresentou um erro de regime. A saída ao estímulo degrau convergiu para 0,5, um valor um pouco baixo.
+        Não foi observado nenhum overshoot. Esse ajuste do ganho não foi suficiente. É necessário aumentar o valor do ganho proporcional e verificar o que acontece com a resposta. </p>
+
+        <figure>
+  				<img src="respostacontrolador1.png" alt="Controlador PID">
+  				<figcaption><strong>Figura 3: Resposta do controlodor Kp=1.</strong></figcaption>
+		</figure>
+
+        <p> Foram feitas mais simulações e foi observado que para <strong> Kp=2</strong>, o sistema converge para um valor um pouco maior, 0,667 e apresenta um overshoot de cerca de 2,1%.
+        Em muitos projetos de controle considera-se aceitável um overshoot inferior a aproximadamente 20%. Dessa forma, aumentamos o <strong> Kp</strong> até 10. Na <strong> Figura 4</strong>, são apresentados os gráficos
+        para o caso de um controlador com <strong> Kp = 5</strong>. Na <strong> Tabela 1</strong> são apresentados os valores de ganho estacionário, pico e overshoot em porcentagem para valores crescentes de 
+        Kp. Na figura é possível observar que o sistema convergiu para 0,833 e teve um overshoot de 12,7%. O valor de erro diminuiu bastante em relação à simulação inicial. Para um valor de <strong> Kp=10</strong>,
+        apesar de termos uma convergência mais próxima ao valor máximo do degrau (0,909), pode-se ver na tabela que o overshoot fica um pouco elevado no valor de 24,6%. Para nosso ajuste escolhemos como parâmetro para a malha um ganho proporcional de <strong> Kp=5</strong> e vamos, com esse valor fixo,
+        prosseguir com a sintonia dos outros parâmetros para tentar diminuir ou eliminar o erro de regime da resposta. </p>
+
+        <figure>
+  				<img src="respostacontrolador2.png" alt="Controlador PID">
+  				<figcaption><strong>Figura 4: Resposta do controlador Kp=5.</strong></figcaption>
+		</figure>
+
+        <table>
+            <caption><strong>Tabela 1. Parâmetros da resposta de uma malha com controlador PID </strong></caption>
+            <thead>
+                <tr>
+                <th> Kp </th>
+                <th> Valor estacionário</th>
+                <th> Pico </th>
+                <th> Overshoot</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> 1</td>
+                <td> 0,5</td>
+                <td> 0,5</td>
+                <td> 0 %</td>
+                </tr>
+                <tr>
+                <td> 3</td>
+                <td> 0,75</td>
+                <td> 0,793</td>
+                <td> 5,7 %</td>
+                </tr>
+                <tr>
+                 <td> 5</td>
+                <td> 0,833</td>
+                <td> 0,939</td>
+                <td> 12,7 %</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> 7</td>
+                <td> 0,875</td>
+                <td> 1,036</td>
+                <td> 18,4 %</td>
+                </tr>
+                <tr>
+                <td> 10</td>
+                <td> 0,909</td>
+                <td> 1,133</td>
+                <td> 24,6 %</td>
+                </tr>
+                </tbody>
+        </table>
+
+        <p> Agora podemos prosseguir na sintonia ajustando os outros parâmetros. Embora o aumento de <strong> Kp</strong> reduza o erro estacionário, ele não elimina completamente esse erro.
+         Para obter erro nulo em regime permanente para entradas do tipo degrau, é necessário introduzir a ação integral no controlador.</p>
+
+        <p> Com <strong> Ki=0,2</strong>, o sistema não converge até o final dos 50 s da simulação, não sendo um ajuste adequado. Mas podemos ver que estamos no caminho certo, pois o erro diminui bastante.
+        Para <strong> Ki=0,5</strong>, o comportamento é idêntico. Para <strong> Ki=1,2</strong>, o erro de regime é anulado para t=47,179 s. Escolhemos <strong> Ki=1,5</strong> para sintonia em que o erro de regime 
+        é anulado para t=41,276 s. A resposta para essa sintomia é apresentada na <strong> Figura 5</strong>.</p>
+
+        <figure>
+  				<img src="respostacontrolador3.png" alt="Controlador PID">
+  				<figcaption><strong>Figura 5: Resposta do controlador Kp=5 e Ki=1.5.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao4"> 4. Conclusão </h2>
+
+        <p> Os resultados mostram que o ganho proporcional melhora a rapidez da resposta, mas não elimina completamente o erro estacionário. A introdução da ação integral 
+        permite eliminar esse erro, resultando em resposta que converge para o valor de referência.</p>
+
+        <p> Foi realizada variação do ganho proporcional entre 1 e 10. Observou-se redução progressiva do erro estacionário acompanhada de aumento do overshoot. Um valor intermediário de <strong>Kp=5</strong>
+        foi selecionado por apresentar overshoot moderado (12,7%) e boa rapidez de resposta. Para eliminar o erro estacionário observado com controle proporcional, introduziu-se ação integral no controlador. 
+        O ganho integral foi gradualmente aumentado até que a saída atingisse o valor de referência.</p>
+
+        <p> Embora a sintonia PI tenha apresentado desempenho satisfatório, foi realizado um teste adicional introduzindo ação derivativa no controlador. Observou-se que a inclusão de <strong> Kd=1</strong>
+        reduziu significativamente o overshoot da resposta sem comprometer a estabilidade do sistema. Esse resultado ilustra o efeito amortecedor da ação derivativa no controlador PID.</p>
+
+        <h2 id="secao5"> 5. Referências </h2>
+
+		<ul>
+			<li> "Controle de Processos Industriais" Alcindo Prado Junior, 2010.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
