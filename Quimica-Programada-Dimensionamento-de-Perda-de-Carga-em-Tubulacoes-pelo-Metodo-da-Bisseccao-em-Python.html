@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Dimensionamento de Perda de Carga em Tubulações pelo Método da Bissecção em Python </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Método da bissecção, perda de carga.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Dimensionamento de Perda de Carga em Tubulações pelo Método da Bissecção em Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Equacionamento do Problema </a></li>
+            <li><a href="#secao3"> 3. Resolução pelo Método da Bissecção </a></li>
+            <li><a href="#secao4"> 4. Conclusão </a></li>
+			<li><a href="#secao5"> 5. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+
+        <p> Esta publicação do Química Programada se propõe a calcular a perda de carga distribuída em uma tubulação. Para isso, é necessário determinar a forma
+        como será obtido o fator de atrito. Decidimos utilizar a equação de Colebrook-White. Essa equação, como será demonstrado na seção 2, é uma equação implícita.
+        Dessa forma, precisamos escolher um método numérico para sua resolução. </p>
+
+        <p> A equação de Colebrook-White foi desenvolvida em 1939 por C.F.Colebrook e C.M.White. Ela possibilita a obtenção de forma bastante precisa do fator de atrito,
+        principalmente em regime turbulento.</p>
+
+        <p> O método numérico escolhido para resolução da equação do fator de atrito foi o método da bissecção. Esse método tem uma boa convergência e também a facilidade
+        de que não é necessário obter a derivada da função, em casos em que essa é de difícil obtenção.</p>
+
+        <p> Para teste da eficácia do método, nós comparamos o resultado com a resolução de um exemplo do cáculo de carga em tubulações usando o método gráfico de Moody : o exemplo resolvido 
+        da página 176 do livro Mecanica de Fluidos de Franco Brunetti.</p>
+
+        <h2 id="secao2"> 2. Equacionamento do Problema  </h2>
+
+        <p> O cálculo da perda de carga distribuída em tubulações é realizado pela equação de Darcy-Weisbach. Ela foi desenvovida dos anos de 1940 
+        por Henry Philibert Gaspard Darcy e aprimorada por Ludwig Weisbach. Ela é apresentada na <strong> Figura 1 </strong>. Nessa equação temos os parâmetros listados abaixo: </p>
+        
+        <ul>
+            <li> f é o fator de atrito;</li>
+            <li> L é o comprimento do tubo;</li>
+            <li> D é o diâmetro do tubo;</li>
+            <li> v é a velocidade de escoamento do fluido;</li>
+            <li> g é a aceleração da gravidade.</li>
+        </ul>
+
+        <figure>
+  				<img src="equacaodarcy.png" alt="Darcy-Weisbach">
+  				<figcaption><strong>Figura 1: Equação de Darcy-Weisbach.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 1</strong>, a velocidade de escoamento é obtida através da divisão da vazão de escoamento pela área da seção transversal do tubo. O fator de atrito é determinado
+        através da equação de Colebrook-White, apresentada na <strong> Figura 2</strong>. Essa equação é bastante precisa e é uma equação implícita que deve ser 
+        calculada com algum método numérico. Nessa equação temos o parâmetro <strong> Re</strong>, que é o número de Reynolds. Esse é um número adimensional e sua equação 
+        é apresentado na <strong> Figura 3 </strong>. O número de Reynols pode ser calculado com a viscidade dinâmica e a massa
+        específica ou com a viscosidade cinemática do fluido.</p>
+
+        <figure>
+  				<img src="equacaocolebrook.png" alt="Colebrook-White">
+  				<figcaption><strong>Figura 2: Equação de Colebrook-White.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="reynolds.png" alt="Reynolds">
+  				<figcaption><strong>Figura 3: Número de Reynolds.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao3"> 3. Resolução pelo Método da Bissecção  </h2>
+
+        <p> Para verificar se a resolução pelo método da bissecção irá convergir para resposta correta, vamos resolver um exemplo de
+        cálculo da perda de carga que é apresentado página 177 do livro "Mecânica dos Fluidos" de Franco Brunneti usando o gráfico de Moody.
+         Esse problema solicita que se determine a perda de carga de uma tubulação de aço de seção circular com os dados apresentados 
+         na lista abaixo:. 
+
+        <ul>
+            <li> e=4,6.10<sup>-5</sup>m;</li>
+            <li> L = 1000 m;</li>
+            <li> D = 0,45;</li>
+            <li> v = 1,19 m/s;</li>
+            <li> g = 9,81 m/s<sup>2</sup>;</li>
+            <li><i><strong>ν</i></strong>= 1,6.10<sup>-5</sup> m<sup>2</sup>/s.</i>
+        </ul>
+
+        <p> Para resolução da equação, primeramente precisamos plotar o gráfico da função de Colebrook-White, inspecionar o mesmo na região de proximidade
+        da raiz para determinar dois valores próximo do cruzamento do eixo x. Na <strong>Figura 4 </strong> temos os comandos necessários
+        para plotagem do gráfico.  Na <strong> Figura 5</strong>, temos o gráfico na região de proximidade da raiz. Para que consigamos visualizar a 
+        raiz temos que plotar o gáfico num intervalo pequeno e excluir a proximidade o 0, onde a equação explode para valores muito próximos de 0. Nós escolhemos
+         o intervalo 0,005 e 0,05. De acordo com o gráfico, podemos escolher os valores de fator de atrito para iniciar o método da bissecção como s
+        a= 0,020 e b=0,022. Escolhemos que a diferença (ou erro absoluto, parâmetro para parar a iteração) é 0.00001. A resposta convergiu 
+        0.02093 e o número de iterações foi 7. O número de Reynolds obtido foi de 50518. A resposta ficou bastante de acordo com o valor
+        obtido pelo método gráfico de Moody no livro citado, de 0,021. O valor da perda de carga para esses dados, foi
+        de 3,32 m.c.a./ km de tubo.</p>
+
+        <figure>
+  				<img src="graficoperda.png" alt="Colebrook-White">
+  				<figcaption><strong>Figura 4: Algoritmo plotagem do gráfico .</strong></figcaption>
+		</figure>
+        
+         <figure>
+  				<img src="graficoperda2.png" alt="Colebrook-White">
+  				<figcaption><strong>Figura 5: Gráfico equação Colebrook-White (Segundo exemplo).</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 6</strong>, temos o algoritmo que foi usado para resolução da equação. Esse método é de fácil implementação,
+        pois não requer que seja calculada a derivada da função objetivo. </p>
+        
+        
+         <figure>
+  				<img src="algotimografico.png" alt="Colebrook-White">
+  				<figcaption><strong>Figura 6: Algoritmo para cálculo do fator de atrito.</strong></figcaption>
+		</figure>
+        
+        <h2 id="secao4"> 4. Conclusão </h2>
+
+        <p> O algoritmo usado para calcular o fator de atrito com o método da bissecção se demonstrou preciso, quando comparado com o exemplo
+         citado acima que foi resolvido pelo método usando o gráfico de Moody. No caso da equação de Colebrook-White, esse método é mais fácil 
+         do que resolver pelo método de Newton-Raphson,  pois não é necessário obter a derivada da função objetivo, o que pode ser bastante complicado às vezes.</p>
+
+
+        <h2 id="secao5"> 5. Referências </h2>
+
+		<ul>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+			<li> Curso Online : "Crie um site simples usando HTML, CSS e Javascript". Fundação Bradesco.</li>
+            <li> "Mecânica dos Fluidos". 2<sup>a</sup> Edição. Franco Brunetti.</li>
+            <li> "Fenômenos de Transporte". 2<sup>a</sup> Edição. R. Byron Bird.</li>
+            <li> Equação de Darcy-Weisbach - Cálculo da Perda de Carga. Engquimicasantosssp Blog de Engenharia Química.<a href="https://www.engquimicasantossp.com.br/2016/06/equacao-darcy-weisbach-calculo-perda-carga.html"> Acesse aqui </a></li>
+            <li> Cálculo Numérico Um Livro Colaborativo - Versão Python. UFRGS. </li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
