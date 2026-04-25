@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Preparação de uma Base com Tensoativos para um Detergente e um Xampu e Confecção de uma Calculadora de Formulação em Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Desenvolvimento de formulações de detergente e xampu com tensoativos, análise reológica, formação de espuma e implementação de calculadora em Python.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Preparação de uma Base com Tensoativos para um Detergente e um Xampu e Confecção de uma Calculadora de Formulação em Python</h1>
+
+		<h3> Seções </h3>
+
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+            <li><a href="#secao2"> 2. Tensoativos usados em Produtos Comerciais </a></li>
+			<li><a href="#secao3"> 3. Apresentação das Formulações e passo a passo para Produção </a></li>
+            <li><a href="#secao4"> 4. Aspecto dos produtos e desempenho</a></li>
+            <li><a href="#secao5"> 5. Calculadora para as formulações em Python</a></li>
+            <li><a href="#secao6"> 6. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> O objetivo desta postagem é desenvolver duas bases para detergentes (misturas sem adição de fragrância, corante e conservante) e comparar seu desempenho reológico, 
+        formação de espuma e aspecto visual. Além da  eficiência na limpeza, busca-se obter uma formulação com viscosidade, brilho e transparência semelhantes aos detergentes 
+        comerciais, caracterizada por um aspecto translúcido e homogêneo. </p>
+
+        <p> Também vai ser apresentada uma formulação de base para xampu, com aspecto de um xampu comercial, incolor e sem fragrância que poderá ser complementada com acidulante,
+		fragrância e cor para resultar em um produto comercial. </p>
+
+		<p> Depois de definido se as formulações resultaram em um produto adequado sob esses aspectos, será elaborada uma calculadora de formulações usando Python.
+		Essa calculadora irá imprimir as quantidades e o passo a passo para produção de um determinado lote do detergente ou xampu. A calculadora será elaborado utilizando-se
+		POO, Programação Orientada  a Objetos. </p>
+
+		<h2 id="secao2"> 2. Tensoativos usados em Produtos Comerciais </h2>
+
+		<p> Formulações comerciais com base em tensoativos do tipo detergente ou xampu, por exemplo, são em geral um blend de tensoativos com funções específicas.  Podemos ter
+		formulações com um dois tensoativos primários, geralmente com função de detergência ou de fazer a limpeza propriemente dita, e um ou mais co-tensoativos, com função de estabilizar
+		a espuma ou melhorar a formação das micelas.</p>
+
+		<p> Como exemplo de tensoativos primários, temos o ácido sulfônico e o lauril éter sulfato de sódio que são largamente usados em soluções de limpeza (louça, limpeza pesada de graxa) e soluções de 
+		higiene (xampu ou sabonete líquido). Esses dois tensoativos são do tipo aniônicos, os principais ativos que atuam na detergência usados em formulações comerciais. O sulfônico tem maior capacidade de detergência e limpeza pesada, 
+		enquanto que o lauril tem maior solubilidade e estabiliza as micelas em solução, mas também tem poder de limpeza.</p>
+
+		<p> Como co-tensoativos, alguns que são bastante presente nas formulações comerciais são dietanolamida de ácido graxo de coco, amina óxida mirística e coco amido propil betaína. A dietanolamina de ácido graxo 
+		de coco é um tensoativo que ajuda na formação de espuma (aspecto ligado à sensação de limpeza), ajuda no aumento da viscosidade e na transparência do produto. Ela é um tensoativo não-iônico. A amina óxida mirística 
+		é um tensoativo anfótero, com função de estabilizar a espuma e espessante. Já o coco amido propil betaína é um tensoativo anfótero que pode ajudar no aumento da viscosidade.
+		</p>
+
+		<p> E linhas gerais, temos que os tensoativos aniônicos são os principais atuadores na limpeza propriamente dita, enquando que os outros tensoativos (não-iônicos e anfóteros) tem características secundárias e, em geral, 
+		aparecem em formulações de higiene pessoal, pois são menos irritantes à pele e aos olhos do que os aniônicos. </p>
+		
+		<h2 id="secao3"> 3. Apresentação das Formulações e passo a passo para Produção </h2>
+
+		<p> A primeira base para detergente formulada é apresentada na <strong> Tabela 1</strong>. Os tensoativos primários utilizados são ácido sulfônico 90% e 
+		Lauril éter sulfato de sódio 27% com concentrações de 5% e 10% respectivamente. O co-tensoativo utilizado é a dietanolamida de ácido graxo de coco, com uma conentração de 2%.
+		A neutralização do ácido sulfônico é realizada com NaOH, cerca de 1,5% e o ganho de viscosidade é feito com o sal NaCl com cerca de 0,4%. O restante da formulação é
+		água potável. </p>
+
+		<p> Primeiramente, coloca-se 80% da água no misturador e acrescenta-se lentamente o ácido sulfônico com agitação de baixa a média (entre 380 e 500 rpm). Não se pode ter uma agitação muito elevada
+		pois pode formar espuma excessiva. Após a misturação do ácido sulfônico, deve-se medir o pH com fita indicadora. Coloca-se então a soda aos poucos e acompanha-se o pH que deve se aproximar do pH neutro.
+	    Depois desse ajuste, deve-se acrescentar o lauril, seguido da dietanolamida. Depois de homogeneizar esses reagentes, deve-se acrescentar o sal dissolvido no restante da água. Nesse instante será perceptível um aumento
+		considerável da viscosidade. Deve-se deixar agitando por cerca de 15 minutos e a mistura estará pronta.</p>
+
+		<table>
+            <caption><strong>Tabela 1. Formulação #1 de base para detergente </strong></caption>
+            <thead>
+                <tr>
+                <th> Componente </th>
+                <th> % (m/m)</th>
+				 <th> kg </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Ácido sulfônico 90% </td>
+                <td> 5 % </td>
+				<td> 0,100 kg </td>
+                </tr>
+                <tr>
+                 <td> Lauril éter sulfato de sódio 27% </td>
+                <td> 10 % </td>
+				<td> 0,200 kg </td>
+                </tr>
+                <tr>
+                 <td> Dietnolamina de ácido graxo de coco</td>
+                <td> 2 % </td>
+				<td> 0,040 kg </td>
+                </tr>
+                <tr>
+                <td> NaOH </td>
+                <td> 1,5 % </td>
+				<td> 0,030 kg </td>
+                </tr>
+				<tr>
+                <td> NaCl </td>
+                <td> 0,4 % </td>
+				<td> 0,008 kg </td>
+                </tr>
+				<tr>
+                <td> Água </td>
+                <td> q.s.p. 100 % </td>
+				<td> 1,622 kg </td>
+                </tr>
+            </tbody>
+        </table>
+
+		<p> A segunda base para detergente formulada é apresentada na <strong> Tabela 2</strong>. Os tensoativos primários utilizados são ácido sulfônico 90% e 
+		lauril éter sulfato de sódio 27% com concentrações de 5% e 10% respectivamente. O co-tensoativo utilizado é a amina óxida mirística, com uma concentração de 2,5%.
+		A neutralização do ácido sulfônico é realizada com NaOH, cerca de 1,5% e o ganho de viscosidade é feito com o sal NaCl com cerca de 0,8%. O restante da formulação é
+		água potável. </p>
+
+		<p> Primeiramente, coloca-se 80% da água no misturuador e acrescenta-se lentamente o ácido sulfônico com agitação de baixa a média (entre 380 e 500 rpm). Não pode-se ter uma agitação muito elevada
+		pois pode formar espuma excessiva. Após a misturação do ácido sulfônico, deve-se medir o pH com fita indicadora. Coloca-se então a soda aos poucos e acompanha-se o pH que deve se aproximar do pH neutro.
+	    Depois desse ajuste, deve-se acescentar o lauril, seguido da amina óxida. Depois de homogeneizar esses reagentes, deve-se acrescentar o sal dissolvido no restante da água. Nesse instante será perceptível um aumento
+		considerável da viscosidade. Deve-se deixar agitando por cerca de 15 minutos e a mistura estará pronta.</p>
+
+		<table>
+            <caption><strong>Tabela 2. Formulação #2 de base para detergente </strong></caption>
+            <thead>
+                <tr>
+                <th> Componente </th>
+                <th> % (m/m)</th>
+				 <th> kg </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Ácido sulfônico 90% </td>
+                <td> 5 % </td>
+				<td> 0,100 kg </td>
+                </tr>
+                <tr>
+                 <td> Lauril éter sulfato de sódio 27% </td>
+                <td> 10 % </td>
+				<td> 0,200 kg </td>
+                </tr>
+                <tr>
+                 <td> Amina Óxida Mirística</td>
+                <td> 2,5 % </td>
+				<td> 0,050 kg </td>
+                </tr>
+                <tr>
+                <td> NaOH </td>
+                <td> 1,5 % </td>
+				<td> 0,030 kg </td>
+                </tr>
+				<tr>
+                <td> NaCl </td>
+                <td> 0,8 % </td>
+				<td> 0,016 kg </td>
+                </tr>
+				<tr>
+                <td> Água </td>
+                <td> q.s.p. 100 % </td>
+				<td> 1,604 kg </td>
+                </tr>
+            </tbody>
+        </table>
+
+		<p> A terceira formulação é uma base para xampu. A composição é mostrada na  <strong> Tabela 3</strong>. O tensoativo primário utilizando é o lauril éter sulfato de sódio 27% 
+		com concentração de 40%. Os co-tensoativos utilizados são a dietanolamida de ácido graxo de coco e o coco amido propil betaína, ambos com  concentração de 2% e o ganho de viscosidade é
+		feito com o sal NaCl com cerca de 1%. O restante da formulação é água potável. </p>
+
+		<p> Primeiramente, coloca-se 80% da água no misturuador e acrescenta-se o  lauril lentamente, com agitação média. Depois prossegue-se com a adição da dietanolamida e do coco amido propil betaína. 
+		Depois de homogeneizar esses reagentes, deve-se acrescentar o sal dissolvido no restante da água. Nesse instante será perceptível um aumento
+		considerável da viscosidade. Deve-se deixar agitando por cerca de 15 minutos e a mistura estará pronta.</p>
+
+		<table>
+            <caption><strong>Tabela 3. Formulação #3 de base para xampu </strong></caption>
+            <thead>
+                <tr>
+                <th> Componente </th>
+                <th> % (m/m)</th>
+				 <th> kg </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> Lauril éter sulfato de sódio 27% </td>
+                <td> 40 % </td>
+				<td> 0,800 kg </td>
+                </tr>
+                <tr>
+                 <td> Dietanolamida de ácido graxo de coco </td>
+                <td> 2 % </td>
+				<td> 0,040 kg </td>
+                </tr>
+                <tr>
+                 <td> Coco amido propil betaína</td>
+                <td> 2 % </td>
+				<td> 0,040 kg </td>
+                </tr>
+				<tr>
+                <td> NaCl </td>
+                <td> 1 % </td>
+				<td> 0,020 kg </td>
+                </tr>
+				<tr>
+                <td> Água </td>
+                <td> q.s.p. 100 % </td>
+				<td> 1,100 kg </td>
+                </tr>
+            </tbody>
+        </table>
+
+		<h2 id="secao4"> 4. Aspecto dos produtos e desempenho </h2>
+
+		<p> A primeira formalação resultou num detergente com boa formação de espuma e viscosidade média. O produto ficou translúcido e límpido, como 
+		detergente comercial. Sua viscosidade ficou em cerca de 300 mPa.s. O detergente proporcionou a formação de uma espuma consistente e abundante.
+		Para virar um produto comercial, é necessário adicionar um corante, um aroma e um conservante, para evitar a formação de mal cheiro.
+		O aspecto do produto pode ser visto no vídeo a seguir.</p>
+
+		<figure>
+        <video controls width="400">
+            <source src="detergente1.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+        </video>
+        <figcaption> Video do aspecto da Formulação #1.</figcaption>
+       </figure>
+
+	   <p> A segunda formação resultou num produto com as mesmas característica da formulação anterior, porém com uma viscosidade de 420 mPa.s, um pouco 
+		acima da Formulação #1. Foi colocado uma quantidade maior de sal nessa Formulação #2. O aspecto do produto é mostrado no video a seguir.
+	   </p>
+	   
+		<figure>
+        <video controls width="400">
+            <source src="detergente2.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+        </video>
+        <figcaption> Video do aspecto da Formulação #2.</figcaption>
+       </figure>
+
+	   <p> A terceira formulação apresentou uma viscosidade muito mais elevada, de 5000 mPa.s. Ficou com aspecto translúcido e brilhoso. O xampu precisa ser
+		mais viscoso que um detergente ou sabonete líquido para evitar perda/desperdício do produto. Apresentou formação abundante de espuma. Para virar um xampu 
+		comercial, deve ser acrescentado nessa base de xampu fragrância, cor, um acidulante como ácido cítrico para conrole do pH e um umectante como a glicerina.</p>
+
+		<figure>
+        <video controls width="400">
+            <source src="xampu.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+        </video>
+        <figcaption> Video do aspecto da Formulação #3.</figcaption>
+       </figure>
+	
+	   <h2 id="secao5"> 5. Calculadora para as formulações em Python e C++</h2>
+
+	   <p> Nessa seção, como é o objetivo do Química Programada, vamos integrar o material do artigo de química com programação. Vamos demonstrar como podemos utilizar
+		POO  (Programação Orientada a Objetos) para fazer uma calculadora de formulação de detergente ou xampu, que ao receber os dados de entrada da concentração dos reagente,
+		imprima um passo a passo com as quantidades a serem misturadas para produção de um lote do produto.</p>
+
+		<p> Na <strong> Figura 1</strong> é apresentada a estrutura da classe criada em Python para representar a Formulação #1. Ela apresenta seus atributos que são as concentrações das
+		diferentes matérias-primas que são usadas para sua produção. Quando for instanciada a classe para criação de um objeto, todas as concentrações
+		da classe deverão ser especificadas. Além dos atributos, a classe apresenta um método que calcula a massa de cada reagente que deve ser usada para produção de um lote de 
+		produto com uma certa massa que também deve ser especificada. </p>
+
+		<figure>
+  				<img src="formulação1.png" alt="formulação detergente">
+  				<figcaption><strong> Figura 1. Classe formulação.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong> Figura 2</strong> é feita uma instanciação da classe formulação, criando um objeto chamado produtoB. Esse produto tem as concentraçãoes de cada matéria-prima 
+		especificadas conforme mostrado na figura. Depois de instanciar a classe é possível calcular pelo método <strong> modedepreparo</strong> as quantidades 
+		que devem ser adicionadas ao reator para produção de um determinado lote de 1000 kg do produto B. As quantidades serão impressas no console conforme apresentado 
+		na <strong> Figura 3</strong>.</p>
+		 <figure>
+  				<img src="produtoformulação.png" alt="formulação detergente">
+  				<figcaption><strong> Figura 2. Objeto da classe formulação.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="passoapassoformulação.png" alt="formulação detergente">
+  				<figcaption><strong> Figura 3. Passo a passo para produção do lote da formulação.</strong></figcaption>
+		</figure>
+
+		<h2 id="secao6"> 6. Referências: </h2>
+
+		<ul>
+			<li> "Chemical Formulation: An Overview Of Surfactant Based Formulation Used in Everyday Life". Tony Hargreaves.</li>
+			<li> "Detergentes Naturais e Sintéticos: Um Guia Técnico". Dionisio Borsato, Ivanira Moreira e Olivio Fernandes Galao.</li>
+			<li> "Trabalhando a Química dos detergentes e Sabões". UFRGS. Odone Gino Zago Neto e José Claudio Del Pino</li>
+			<li> "Fundamentos de Cosmetologia : Shampoos". Luciana Amiralian, Claudia Regina Fernandes</li>
+			<li> "Óxidos de amina e suas diferentes aplicações". TCC de Letícia Helen Cabral Nicolau. EEL-USP</li>
+			<li> "Amine Oxides: A Review". Sudhir Kumar SINGH, M. BAJPAI and V.K. TYAGI. J. Oleo Sci., Vol. 55, No. 3, 99-119 (2006)</li>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+		</ul>
+		
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg" alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
