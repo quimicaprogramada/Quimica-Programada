@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Plotando Gráficos com Pandas </title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="DataFrame, plotando graficos com pandas e com matplotlib.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Plotando Gráficos com Pandas </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Plotando dados de um DataFrame </a></li>
+            <li><a href="#secao3"> 3. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+
+        <p> O Pandas é uma biblioteca para armazenamento, carregamento e tratamento de uma quantidade de dados de maneira ágil. Usando essa biblioteca
+        é fácil transformar séries de dados em tabelas para organizar as informações. Uma vez que as informações se encontrem em tabelas, existem diversos
+        métodos e funções para manipular os dados.
+        </p>
+
+        <p> Nessa postagem, vamos transformar 3 séries de dados em um DataFrame e, posteriormente, vamos demonstrar que é muito mais fácil plotar um gráfico
+        uma vez que os dados estejam no formato de um DataFrame.
+        </p>
+
+        <h2 id="secao2"> 2. Plotando dados de um DataFrame  </h2>
+
+        <p> Os dados que vamos explorar são os mesmos que foram analisados na postagem <a href="Quimica-Programada-Obtencao-de-Parametros-Cineticos-de-Enzimas-a-partir-de-Dados-Experimentais-usando-Python.html">Obtenção de 
+        Parâmetros Cinéticos de Enzimas a partir de Dados Experimentais usando Python.</a> São os dados de velocidade de reação catalisada pela enzima β-glicosidase.</p>
+
+        <p> Primeiramente, temos que transformar os dados em uma série do pandas. Isso é feito através do comando <strong>pd.Series([dados])</strong>. Temos 3 séries de dados em y e uma única série de dados em x.
+        Para declará-las usando pandas, devemos prosseguir conforme <strong>Figura 1</strong>. </p>
+
+        <figure>
+  				<img src="seriepandas.png" alt="serie de dados no pandas">
+  				<figcaption><strong>Figura 1: Criação das Series no pandas.</strong></figcaption>
+		</figure>
+
+        <p>Agora queremos transformar essas séries de dados em uma tabela, que possa ser impressa no terminal no formato de uma tabela. Os comandos para tanto são 
+        apresentados na <strong> Figura 2</strong>. Transformamos as séries de dados num DataFrame, que é a estrutura de dados do python que representa uma tabela.
+        O comando <strong>tabela['y1']=y1.values</strong> é necessário para preencher a coluna 'y1' com os dados da Serie, que até então é uma coluna vazia.
+        Usando o comando <strong>print</strong> podemos imprimi-la e assim irá aparecer no terminal conforme <strong>Figura 3</strong>.
+        </p>
+
+        <figure>
+  				<img src="tabelapandas.png" alt="serie de dados no pandas">
+  				<figcaption><strong>Figura 2: Criação de uma tabela no pandas.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="tabelaimpressa.png" alt="serie de dados no pandas">
+  				<figcaption><strong>Figura 3: Impressão da tabela de dados.</strong></figcaption>
+		</figure>
+
+        <p> Agora vamos ver como é fácil de plotar os dados do dataFrame no formato de um gráfico usando o pandas e o matplotlib. Na 
+        <strong>Figura 4</strong> são apresentados os comandos. Basicamente precisamos apenas utilizar o método <strong>.plot()</strong> e 
+        o comando <strong>plt.show()</strong>. Os outros comandos adicionados são necessários apenas para inserir um título
+        no gráfico e inserir uma legenda. É muito fácil criar um gráfico a partir de um dataFrame. Na <strong> Figura 5</strong> está 
+        plotado o gráfico.</p>
+           
+        <figure>
+  				<img src="comandosplot.png" alt="serie de dados no pandas">
+  				<figcaption><strong>Figura 4: Comandos para plotar dataFrame.</strong></figcaption>
+		</figure>
+
+
+         <figure>
+  				<img src="pandasplot.png" alt="serie de dados no pandas">
+  				<figcaption><strong>Figura 5: Gráfico plotado com pandas.</strong></figcaption>
+		</figure>
+
+        <p> O uso de DataFrames torna a análise e visualização de dados muito mais simples e eficiente, sendo uma ferramenta essencial 
+        para aplicações científicas e de engenharia.</p>
+
+        <h2 id="secao3"> 3. Referências </h2>
+
+		<ul>
+            <li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+            <li> Curso Online : "Fundamentos de Linguagem Python - Do Básico a Aplicações de IA". Data Science Academy</li>
+            <li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+            <li> "Introdução do Python para Engenharia Química". Sidinei Silva. Editora Blucher.</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
