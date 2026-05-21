@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Encontrando as Raízes de um Polinômio pelos Métodos da Bissecção e Newton-Raphson</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Métodos Newton-Raphson, Bissecção, raízes de um polinômio.">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Encontrando as Raízes de um Polinômio pelos Métodos da Bissecção e Newton-Raphson </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Resolução do Problema  </a></li>
+            <li><a href="#secao3"> 3. Comparação com resolução do fsolve e com resultado do livro  </a></li>
+            <li><a href="#secao4"> 4. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+
+        <p> O problema que será resolvido nessa postagem do Química Programada é apresentado na página 96 do livro "Métodos Numéricos para 
+        Engenheiros Químicos, disponível gratuitamente no site da ABEQ. Se trata de encontrar, numericamente, as raízes reais de um polinômio de grau 8.</p>
+
+        <p> O problema será resolvido com o método da bissecção e o método de Newton-Raphson, a fim de se comparar o desempenho de cada algoritmo. Posteriormente,
+        o problema será resolvido utilizando o método <strong>fsolve</strong> da biblioteca Scipy e todos os resultados serão comparados com o resultado do 
+        livro.  </p>
+        
+        <h2 id="secao2"> 2. Resolução do problema </h2>
+
+        <p> Na <strong> Figura 1</strong> é apresentado o polinômio de grau 8 cujas raízes reais deverão ser encontradas. Sabe-se que são 4 raízes reais e 4 raízes complexas.
+        Aqui nós iremos apenas encontrar as raízes reais. </p>
+
+        <p> Na <strong> Figura 2</strong> apresentamos os comandos em Python para plotar o gráfico do polinômio para encontrar aproximações para as raízes. Na <strong> Figura 3</strong>
+        podemos ver o gráfico com os pontos onde o polinômio corta o eixo x. Para resolução pelo método de Newton-Raphson, precisamos encontrar um valor que será usado como uma aproximação para cada raiz. 
+        Para resolução pelo método da bissecção precisamos de 2 valores para iniciar as iterações. Esses valores escolhidos, chamados a e b, devem ser tais que f(a) e f(b) tenham sinais 
+        diferentes (ou seja, um acima do eixo x e outro abaixo do eixo x). Esses valores não precisam ser necessariamente próximos da raiz, mas devem satisfazer a condição de mudança de sinal da função. 
+        Para encontrar as raízes com Newton-Raphson, foram escolhidas as aproximações -1,74, -0,40, 0,65 e 1,60. Para resolução pelo método da bissecção, escolhemos os valores a, b = (-1.74,-1.70), (-0.55, -0.40), (0.55,0.65) e (1.550,1.60).
+         </p>
+
+        <figure>
+  				<img src="polinomio.png" alt="polinomio">
+  				<figcaption><strong>Figura 1: Polinômio de grau 8.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="graficopolinomio.png" alt="grafico polinomio">
+  				<figcaption><strong>Figura 2: Comandos para plotar polinômio.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="plotarpolinomio.png" alt="plotar polinomio">
+  				<figcaption><strong>Figura 3: Gráfico do polinômio.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 4 </strong>temos o algoritmo para resolução do polinômio pelo método de Newton-Raphson. Na <strong> Figura 5</strong> é apresentada
+        as soluções que foram encontradas e o número de iterações para convergir com um erro menor que 0,00001. Para Newton-Raphson, vemos que foram necessárias entre 3 e 4 
+        iterações. </p>
+
+        <figure>
+  				<img src="algoritmopolinomio.png" alt="plotar polinomio">
+  				<figcaption><strong>Figura 4: Algoritmo solução do polinômio por Newton-Raphson.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="resultadopolinomio.png" alt="plotar polinomio">
+  				<figcaption><strong>Figura 5: Resultado da resolução por Newton-Raphson.</strong></figcaption>
+		</figure>
+        
+        <p> Na <strong> Figura 6 </strong>temos o algoritmo para resolução do polinômio pelo método da Bissecção. Na <strong> Figura 7</strong> é apresentada
+        as soluções que foram encontradas e o número de iterações para convergir com um erro menor que 0,00001. Para Bissecção, vemos que foram necessárias entre 12 e 14 
+        iterações. </p>
+
+        <figure>
+  				<img src="algoritmopolinomio2.png" alt="plotar polinomio">
+  				<figcaption><strong>Figura 6: Algoritmo solução do polinômio por Bissecção.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="resultadopolinomio2.png" alt="plotar polinomio">
+  				<figcaption><strong>Figura 7: Resultado da resolução por Bissecção.</strong></figcaption>
+		</figure>
+
+        <p> O método de Newton-Raphson apresentou convergência rápida devido à boa escolha do chute inicial e ao comportamento suave da função na região da raiz. Ele é 
+        tipicamente mais rápido que outros métodos. Já o método da bissecção apresentou uma convergência mais lenta.
+        </p>
+
+        <h2 id="secao3"> 3. Comparação com resolução do fsolve e com resultado do livro  </h2>
+
+        <p> Na <strong> Figura 8</strong> temos os comandos necessários para resolução das raízes do polinômio utilizando o método fsolve
+        da biblioteca Scipy do Python. O método fsolve utiliza algoritmos baseados em Newton-Raphson, como o método híbrido de Powell, incorporando aproximações 
+        numéricas da derivada e estratégias de estabilização para melhorar a convergência.</p>
+
+        <figure>
+  				<img src="solucaofsolve.png" alt="plotar polinomio">
+  				<figcaption><strong>Figura 8: Comandos resolução pelo fsolve.</strong></figcaption>
+		</figure>
+
+        <p> Os valores encontrados para as raízes usando <strong>fsolve</strong> foram : -1.71066901, -0.46602357, 0.59466711 e 1.58202547. Tantos os valores 
+        obtidos com o <strong> fsolve</strong> quanto os valores obtidos com algoritmo desenvolvido para o método da bissecção e de Newton-Raphson estiveram de acordo
+        com o resultado proposto pelo livro "Métodos Numéricos para Engenheiros Químicos."</p>
+
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+            <li> Curso Online : "Fundamentos de Linguagem Python - Do Básico a Aplicações de IA". Data Science Academy</li>
+            <li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+            <li> "Métodos Numéricos para Engenheiros Químicos". Argimiro Secchie e Evaristo C. Biscaia Jr .</li>
+		</ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
