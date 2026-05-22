@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Calculadora de Energia de Ativação em Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Equação de Arrhenius, energia de ativação, python">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Calculadora de Energia de Ativação em Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Modelagem do problema  </a></li>
+            <li><a href="#secao3"> 3. Resolução com Python  </a></li>
+            <li><a href="#secao4"> 4. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+
+        <p>Essa postagem tem que como objetivo calcular os parâmetros da equação de Arrhenius, sejam estes a Energia de ativação e Fator 
+        de frequência, e o R<sup>2</sup> da correlação obtida com os dados cinéticos experimentais de temperatura e constante de 
+        velocidade. Os dados do problema a ser resolvido forma extraídos da apostila “Cinética Química Aplicada” 
+        disponível online no site da Universidade de São Paulo, Escola de Engenharia de Lorena.</p>
+
+        <p> O problema será resolvido de forma a elaborar uma função que receba um array de qualquer tamanho de dados de 
+        temperatura em graus Celsius e um array de constante de velocidade do mesmo tamanho. Será elaborada uma função 
+        reaproveitável, que possa ser utilizada para outro conjunto de dados.</p>
+
+        <p> Será possível também plotar o gráfico da dispersão dos dados experimentais com a curva ajustada com o método da biblioteca do Scipy.</p>
+
+        <h2 id="secao2"> 2. Modelagem do Problema  </h2>
+
+        <p> A equação de Arrhenius estabelece uma correlação entre a constante de velocidade de uma reação química e a temperatura. Frequentemente
+        ela é utilizada para obter a Energia de ativação de uma reação, tendo em mãos os dados experimentais de velocidade de reação e temperatura.
+        A equação é apresentada na <strong> Figura 1</strong>. Nessa equação temos que <strong> k </strong> é a constante de velocidadede reação, <strong> Ea </strong> 
+        é a energia de ativação e <strong> A </strong> é o fator de frequência. </p>
+
+        <figure>
+  				<img src="equacaoarrhenius.png" alt="equação de Arrhenius">
+  				<figcaption><strong>Figura 1: Equação de Arrhenius.</strong></figcaption>
+		</figure>
+
+        <p> Ao aplicar o logaritmo natural na equação de Arrhenius, obtém-se uma forma linear que permite determinar a energia de ativação a partir da 
+        inclinação da reta em um gráfico de ln(k) versus 1/T. Essa forma linearizada da equação de Arrhenius é apresentada na <strong> Figura 2 </strong>.
+        </p>
+
+         <figure>
+  				<img src="arrheniuslinearizada.png" alt="equação de Arrhenius linearizada">
+  				<figcaption><strong>Figura 2: Equação de Arrhenius linearizada.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 3</strong> são apresentados os dados experimentais de temperatura e constante de velocidade de reação. A partir desses dados e da equação 
+        de Arrhenius linearizada, deve-se obter os parâmetros Ea, A e também o R<sup>2</sup>, para verificar se os dados experimentais se ajustam
+        adequadamente a um modelo linearizado.</p>
+
+        <figure>
+  				<img src="dadosproblemaarrhenius.png" alt="equação de Arrhenius linearizada">
+  				<figcaption><strong>Figura 3: Dados experimentais.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao3"> 3. Resolução com Python  </h2>
+
+        <p> Na <strong> Figura 4</strong> é apresentado o algoritmo para obtenção da energia de ativação a partir dos dados experimentais e 
+        para plotar o gráfico com os dados da dispersão e a equação de Arrhenius linearizada.</p>
+
+        <p> Foi criada uma função chamada <strong> arrhenius_fit</strong> que recebe duas listas como parâmetros: uma lista são os dados de temperatura
+        em graus Celsius e a constante de velocidade de reação em s<up>-1</up>. As listas são transformadas em arrays do numpy para serem manipuladas no interior da função.
+        Depois, os dados de temperatura são convertidos em kelvin e é calculado o inverso dos valores, para serem usadas na equação de Arrhenius linearizada.
+        Também é calculado o logaritmo natural da constante de velocidade da reação. Depois temos a chamada da função <strong>curve_fit</strong>, que irá fazer o ajuste dos dados experimentais
+        ao modelo linear.</p>
+
+        <p> O algoritmo segue com os comando para plotagem do gráfico e o comando para obtenção da correlação dos dados, para sabermos se os dados experimentais
+        tiveram um bom ajuste ao modelo linear.</p>
+
+        <figure>
+  				<img src="algoritmoarrhenius.png" alt="equação de Arrhenius linearizada">
+  				<figcaption><strong>Figura 4: Algoritmo para cálculo da Energia de ativação.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Figura 5</strong> temos a dispersão dos dados experimentais e a reta que representa ajuste linear obtido, no plano (1/T) x ln(K). 
+        Na <strong> Figura 6</strong> temos duas listas, uma com as temperaturas em graus Celsius e outra com a constante velocidade de reação para as temperaturas.
+        Quando é feito comando de entrada de dados na função <strong> arrhenius_fit</strong>, essas duas listas são transformadas em arrays no numpy, como
+        já foi dito mais acima, e são feitas as operações necessárias para cálculo da Energia de ativação.</p> Na <strong> Figura 7</strong> são apresentados
+        o valor da Energia de Ativação, do fator de frequência A, e do fator de correlação do ajuste, que foi de 0,95501, indicando uma boa correlação. O valor 
+        da Energia de ativação e do fator de frequência estão de acordo com os resultados apostila citada, validando o método de resolução proposto </p>
+
+        <figure>
+  				<img src="graficoarrhenius.png" alt="equação de Arrhenius linearizada">
+  				<figcaption><strong>Figura 5: Gráfico da equação de Arrhenius.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="dadosarrhenius.png" alt="equação de Arrhenius linearizada">
+  				<figcaption><strong>Figura 6: Entrada dos dados.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="resultadoarrhenius.png" alt="equação de Arrhenius linearizada">
+  				<figcaption><strong>Figura 7: Resultado do algoritmo.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+            <li> Curso Online : "Fundamentos de Linguagem Python - Do Básico a Aplicações de IA". Data Science Academy</li>
+            <li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+            <li> "Apostila Cinética Química Aplicada". Escola de Engenharia de Lorena. USP.<a href="https://sistemas.eel.usp.br/docentes/arquivos/5963230/LOQ4003/ApostilaCinetica.pdf"> Acesse aqui.</a></li>
+            <li> Equação de Arrhenius. Wikipédia. <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_Arrhenius">Acesse aqui.</a></li>
+        </ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
