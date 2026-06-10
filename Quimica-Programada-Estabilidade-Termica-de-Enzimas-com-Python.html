@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Estabilidade Térmica de Enzimas com Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Equação de Arrhenius, energia de ativação, python">
+	</head>
+
+
+	<body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Estabilidade Térmica de Enzimas com Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li>
+			<li><a href="#secao2"> 2. Modelagem do problema  </a></li>
+            <li><a href="#secao3"> 3. Resolução com Python  </a></li>
+            <li><a href="#secao4"> 4. Referências </a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução  </h2>
+
+        <p> A estabilidade térmica de enzimas é um fator crucial para sua aplicação em processos industriais, especialmente 
+            em setores como alimentos, biotecnologia e indústria farmacêutica. Em condições de temperatura elevada, as enzimas
+             tendem a perder sua atividade ao longo do tempo, em função de alterações estruturais em sua conformação 
+             tridimensional. Essas alterações envolvem mudanças nas estruturas secundária e terciária da proteína, 
+             levando à desnaturação e consequente redução da atividade catalítica.</p>
+
+        <p>A compreensão do comportamento da atividade enzimática em função do tempo e da temperatura é fundamental 
+            para a modelagem cinética de processos de desativação térmica. Nesse contexto, modelos cinéticos, como o 
+            de primeira ordem, são frequentemente utilizados para descrever a perda de atividade enzimática e estimar 
+            parâmetros relevantes, como a constante de desativação térmica.</p>
+
+        <h2 id="secao2"> 2. Modelagem do Problema  </h2>
+
+        <p> O modelo mais simples para descrever a desativação de uma enzima é o modelo de primeira ordem, na qual a taxa de desativação
+        é diretamente proporcional à concentração da enzima ativa, conforme apresentado na <strong> Figura 1</strong>. Essa relação, após integrada
+        assume a forma da <strong> Figura 2</strong>, onde kd é chamada de constante de desativação ou desnaturação e A(t)/A0 é considerada 
+        a atividade relativa, onde A0 é a atividade no tempo inicial.
+        </p>
+
+        <figure>
+  				<img src="atividadeenzima.png" alt="equação desativação">
+  				<figcaption><strong>Figura 1: Modelo de desativação.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="atividaderelativa.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 2: Equação da atividade relativa.</strong></figcaption>
+		</figure>
+
+        <p>O valor de kd deverá ser determinado pelas equações acima em diversas temperaturas. De posse desses valores, pode-se obter a energia de ativação 
+        da enzima para o substrato estudado, através da equação de Arrhenius apresentada na <strong>Figura 3</strong>. Comparando Ed para duas enzimas, o maior valor de energia de ativação
+        da inativação térmica se traduz em uma enzima menos sensível à temperatura (mais estável a elevadas temperaturas.)
+        </p>
+
+         <figure>
+  				<img src="arrheniusenzima.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 3: Equação de Arrhenius para enzimas.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao3"> 3. Resolução com Python  </h2>
+
+        No livro "Guia Prático para caracterização de enzima", disponível gratuitamente no site da Embrapa, é possível encontrar valores de atividade relativa com o tempo
+        para enzima β-glicosidase 6  nas temperaturas de 30, 40, 50 ,60 e 70<sup>o</sup>C. Foi feito o ajuste da curva ln(A(t)/A0) versus tempo para todas elas, mas aqui iremos apresentar 
+        apenas para temperatura de 70<sup>o</sup>C na <strong> Figura 5</strong>. Na <strong> Figura 4 </strong>estão os comandos necessários para plotar esse gráfico.</strong></p> 
+
+        <figure>
+  				<img src="atividade70.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 4: Comandos para plotar atividade relativa.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="grafico70.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 5: Gráfico da atividade relativa.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="resultado70.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 6: Resultado atividade relativa.</strong></figcaption>
+		</figure>
+
+        <p> Na <strong> Tabela 1</strong> são apresentados os valores de constante de desativação para todas as temperaturas citadas acima. Com esses valores obtidos,
+        foi feita a plotagem dos mesmos para calcular os parâmetros da equação de Arrhenius linearizada, apresentado na <strong> Figura 8</strong>. Com os valores dos 
+        parâmetros da equação de Arrhenius, foi calculada Energia da ativação e o fator de frequência, assim como o R<sup>2</sup> do ajuste, demonstrando que foi muito boa a linearidade 
+        dos pontos. </p>
+
+        <table>
+            <caption><strong>Tabela 1. Constante de desativação em função da temperatura </strong></caption>
+            <thead>
+                <tr>
+                <th> Temperatura (<sup>o</sup>C) </th>
+                <th> Constante de desativação (h<sup>-1</sup>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> 30 </td>
+                <td> 0,006997</td>
+                </tr>
+                <tr>
+                 <td> 40</td>
+                <td> 0,009672</td>
+                </tr>
+                <tr>
+                <td> 50 </td>
+                <td> 0,016003</td>
+                </tr>
+                <tr>
+                 <td> 60</td>
+                <td> 0,027704</td>
+                </tr>
+                <tr>
+                 <td> 70</td>
+                <td> 0,040115</td>
+                </tr>
+                </tbody>
+        </table>
+
+        <figure>
+  				<img src="arrheniusdesativacao.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 7: Comandos para ajuste em Arrhenius.</strong></figcaption>
+		</figure>
+
+         <figure>
+  				<img src="arrheniusenzimalinearizada.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 8: Gráfico Arrhenius linearizada.</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="resultadoarrheniuslinearizada.png" alt="equação atividade relativa">
+  				<figcaption><strong>Figura 9: Energia de ativação.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+            <li> Curso Online : "Fundamentos de Linguagem Python - Do Básico a Aplicações de IA". Data Science Academy</li>
+            <li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+            <li> "Guia Prático para Caracterização de Enzimas". Embrapa </li>
+            <li> Equação de Arrhenius. Wikipédia. <a href="https://pt.wikipedia.org/wiki/Equa%C3%A7%C3%A3o_de_Arrhenius">Acesse aqui.</a></li>
+        </ul>
+    
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg " alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
