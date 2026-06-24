@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Visualização de Escoamentos com CFD em Python : Linhas de Corrente e Campo de Velocidade</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="CFD em Python: Como Plotar Linhas de Corrente e Campo de Velocidade Passo a Passo.">
+	</head>
+
+    <body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Visualização de Escoamentos com CFD em Python : Linhas de Corrente e Campo de Velocidade </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li> 
+            <li><a href="#secao2"> 2. Obtenção da Linha de Corrente </a></li>
+			<li><a href="#secao3"> 3. Plotagem das Linhas de Corrente </a></li>
+            <li><a href="#secao4"> 4. Plotagem do campo de velocidade </a></li>
+			<li><a href="#secao5"> 5. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+		<p> Essa postagem se propõe a apresentar uma solução para o exemplo 4.4 da página 113 do livro Mecânica os Fluidos - Fundamentos e Aplicações de Yunus Çengel.
+		Nesse exemplo, é solicitado que se plote o gráfico das linhas de corrente para um dado escoamento bidimensional, incompressível e estacionário com campo de velocidades 
+		conhecido.</p>
+
+		<p> Uma linha de corrente é um a curva que é tangente em todos os pontos ao vetor velocidade local instantâneo. Sendo conhecido o campo de velocidades <strong>v</strong>= u <strong>i</strong>+ v <strong> j</strong>,
+		 para se obter as linhas de corrente, é necessário integrar a equação apresentada abaixo :</p>
+
+		 <figure>
+  				<img src="linhasdecorrente.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 1: Equação de uma linha de corrente.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao2"> 2. Obtenção da Linha de Corrente </h2>
+
+		<p> O campo de velocidades do escoamento é o seguinte : <strong>v</strong>= 0,5+0,8x <strong>i</strong>+ 1,5-0,8y <strong> j</strong>. A equação diferencial a ser resolvida é
+		apresentada na <strong> Figura 2</strong>.</p>
+
+		<figure>
+  				<img src="edo.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 2: Equação diferencial.</strong></figcaption>
+		</figure>
+
+		<p>Essa é uma EDO separável, que pode ser reescrita na forma abaixo e ser resolvida pelos procedimentos algébricos apresentado na <strong> Figura 4.</strong></p>
+
+		<figure>
+  				<img src="edoseparavel.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 3: Equação diferencial separável.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="resolucaoedo.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 4: Resolução da equação diferencial.</strong></figcaption>
+		</figure>
+
+		<p> A equação apresentada na <strong> Figura 4</strong> é a equação da linha de corrente. A constante de integração C irá assumir diversos valores para 
+		se obter as linhas de corrente.</p>
+
+		<h2 id="secao3"> 3. Plotagem das Linhas de Corrente </h2>
+
+		<p> Para plotagem das linhas de corrente, os comandos necessários são apresentados na <strong> Figura 5</strong>. O função f(x)= 1,5/0,8 + C/(0,8*(0,5+0,8x))
+		deve ser plotada para cada valor de C. Dessa forma, foi feito uma laço <strong> for </strong> para variar os valores da variável C, sendo avaliada a função f(x) para cada valor de C.</p>
+
+		<figure>
+  				<img src="comandoslinhasdecorrente.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 5: Comandos para plotagem das linhas de corrente.</strong></figcaption>
+		</figure>
+
+		<p> Na <strong> Figura 6</strong> temos o gráfico das linhas de corrente para valores de C positivos e x positivo. O gráfico está de acordo com o exemplo 4.4 do livro Mecânica dos Fluidos - Fundamentos e Aplicações.</p>
+
+		<figure>
+  				<img src="graficolinhasdecorrente.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 6: Gráfico das linhas de corrente.</strong></figcaption>
+		</figure>
+        <h2 id="secao4"> 4. Plotagem do campo de velocidade </h2>
+
+		<p> Além das linhas de corrente, às vezes é necessário plotar os vetores do campo de velocidade. Os comandos essa plotagem se encontram na <strong> Figura 7 </strong>. Para esse gráfico, Python tem ferramentas apropriadas como o <strong> meshgrid</strong> e o <strong>plt.quiver</strong>.
+		O <strong> meshgrid</strong> discretiza o domínio fazendo para ordenados de x e y sobre todo domínio. Depois esses pares ordenados são usados para calcular os valores dos vetores U e V. E, com o comando <strong> quiver</strong>
+		os vetores são plotados por todo domínio que foi discretizado. O campo de velocidades é apresentado na <strong> Figura 8</strong>.</p>
+
+		<figure>
+  				<img src="comandosvelocidade.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 7: Comandos para plotagem do campo de velocidades.</strong></figcaption>
+		</figure>
+
+		<figure>
+  				<img src="graficocampovelocidades.png" alt="Linhas de corrente">
+  				<figcaption><strong>Figura 8: Plotagem do campo de velocidades.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao5"> 5. Referências </h2>
+
+		<ul>
+            <li> "Mecânica dos Fluidos - Fundamentos e Aplicações" Yunus A.  Çengel, John M. Cimbala, 2006. </li>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+		</ul>
+		
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg" alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
