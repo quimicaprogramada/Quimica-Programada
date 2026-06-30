@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Dimensionamento de um PFR Usando Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="CFD em Python: Como Plotar Linhas de Corrente e Campo de Velocidade Passo a Passo.">
+	</head>
+
+    <body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Dimensionamento de um PFR Usando Python </h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li> 
+            <li><a href="#secao2"> 2. Método de dimensionamento </a></li>
+			<li><a href="#secao3"> 3. Escolha do modelo e cálculo do volume </a></li>
+			<li><a href="#secao4"> 4. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Um PFR (Plug Flow Reactor) é um reator tubular no qual há um fluxo de entrada de reagentes e um fluxo de saída dos produtos.
+        Nesse tipo de reator operando de forma estacionária, a concentração dos reagentes varia de forma contínua na direção axial.Consequentemente,
+        a velocidade de reação também varia nessa direção. Não há variação de velocidade de reação na direção radial.</p>
+
+        <p> Na <strong> Figura 1</strong> é apresentada a equação para determinação do volume <strong> V </strong> de um PFR, alimentado com uma vazão 
+        molar <strong>F<sub>A0</sub></strong>, com uma corrente de saída  <strong>F<sub>Ai</sub></strong> e velocidade de reação <strong>-r<sub>A</sub></strong>.</p>
+
+        <figure>
+  				<img src="volumereator.png" alt="volume PFR">
+  				<figcaption><strong>Figura 1: Volume de um reator PFR.</strong></figcaption>
+		</figure>
+
+        <p> Escrevendo a vazão F<sub>A</sub> em função da conversão X e substituindo na equação da <strong> Figura 1</strong>, teremos a equação de dimensionamento do PFR
+        em função da conversão, apresentada na <strong> Figura 2</strong>.</p>
+
+        <figure>
+  				<img src="volumeconversao.png" alt="volume PFR">
+  				<figcaption><strong>Figura 2: Volume em função da conversão.</strong></figcaption>
+		</figure>
+
+        <h2 id="secao2"> 2. Método de dimensionamento </h2>
+
+        <p> Para dimensionar um PFR a partir da equação da <strong> Figura 2</strong>, precisamos gerar dados de velocidade de reação em função da conversão. Esses dados
+        são apresentados na <strong> Tabela 1</strong> e foram retirados do livro "Essentials of Chemical Engineering".</p>
+
+        <p> Segundo o método proposto no livro citado, deve-se plotar o gráfico da razão <strong>F<sub>A0</sub>/(-r<sub>A</sub>)</strong> em função da conversão <strong> X</strong>.
+        Depois disso, basta calcular a área sob a curva plotada e obteremos o volume do reator em função de uma dada conversão.</p>
+
+        <p> Aqui no Química Programada iremos utilizar Python para obter uma função que represente a variação de <strong>F<sub>A0</sub>/(-r<sub>A</sub>)</strong> com a conversão. Depois disso,
+        iremos calcular a integral da função obtida. No livro "Essentials of Chemical Engineering", o método consiste em usar fórmulas aproximadas para cálculo  da 
+        área abaixo da curva que foi plotada.</p>
+
+        <table>
+            <caption><strong>Tabela 1. Velocidade de reação em função da conversão </strong></caption>
+            <thead>
+                <tr>
+                <th> X (conversão) </th>
+                <th> Velcidade de reação (-r<sub>A</sub> em mol/m<sup>3</sup>.s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td> 0 </td>
+                <td> 0,45</td>
+                </tr>
+                <tr>
+                 <td> 0,1</td>
+                <td> 0,37</td>
+                </tr>
+                <tr>
+                 <td> 0,2</td>
+                <td> 0,30</td>
+                </tr>
+                </tr>
+                <tr>
+                <td> 0,4</td>
+                <td> 0,195</td>
+                </tr>
+                <tr>
+                <td> 0,6</td>
+                <td> 0,113</td>
+                </tr>
+                <tr>
+                <td> 0,7</td>
+                <td> 0,079</td>
+                </tr>
+                <tr>
+                <td> 0,8</td>
+                <td> 0,05</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="secao2"> 3. Escolha do modelo e cálculo do volume </h2>
+
+        <p> Para obtenção do modelo que representa melhor a curva <strong>F<sub>A0</sub>/(-r<sub>A</sub>)</strong> em função da conversão <strong> X</strong>, foi 
+        realizada 3 ajustes : um exponencial, um quadrático e um cúbico. Os comandos para obtenção dos ajustes e plotagem dos gráficos
+        são apresentados nas <strong> Figuras 3 </strong> e <strong> 4.</strong></p> Na <strong> Figura 5</strong>, temos a representação gráfica para os três 
+        modelos escolhidos (expencial em azul, quadrático em laranja  e cúbico em verde). E possível, por visualização, verificar que o modelo que mais se ajusta aos dados 
+        é o modelo cúbico. Isso é confirmado pelos valores que obtivemos para o R<sup>2</sup>: exponencial, 0,89956; quadrático, 0.97174; cúbico, 0.99669.  
+        Dessa forma escolhemos o modulo de um polinômio cúbido para calcular o volume do reator. O modelo obtido é <strong>f(X)=29,4773*X<sup>3</sup>-19,8117*X<sup>2</sup>+5,8370*X + 0.7960</sup></strong>.</p>
+
+        <figure>
+  				<img src="comandosgraficovelocidade.png" alt="volume PFR">
+  				<figcaption><strong>Figura 3: Comandos para modelagem do reator.</strong></figcaption>
+		</figure>
+
+         <figure>
+  				<img src="comandosgraficovelocidade2.png" alt="volume PFR">
+  				<figcaption><strong>Figura 4: Comandos para modelagem do reator (parte 2).</strong></figcaption>
+		</figure>
+
+        <figure>
+  				<img src="graficodimenpfr.png" alt="volume PFR">
+  				<figcaption><strong>Figura 5: Gráficos modelos.</strong></figcaption>
+		</figure>
+
+        <p> Como fizemos a ajuste da curva com polinômio, ficou bastante fácil obter a integral. Dessa forma, foi obtida a integral da função f(X) e calculou-se o valor do 
+        volume do reator usando-se a fórmula apresentada na <strong>Figura 2</strong>. O valor obtido foi de 2,1419 m<sup>3</sup>. O valor obtido no exemplo resolvido no livro
+        "Essentials of Chemical Engineering" foi de 2,165 m<sup>3</sup>.</p>
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> "Essentials of Chemical Engineering" Fogler, H. Scott. </li>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+		</ul>
+		
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg" alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
