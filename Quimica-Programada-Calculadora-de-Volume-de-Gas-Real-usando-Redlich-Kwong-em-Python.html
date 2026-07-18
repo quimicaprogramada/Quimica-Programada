@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-V8PJ6273R4"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-V8PJ6273R4');
+		</script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width;initial-scale=1.0">
+		<title> Química Programada - Calculadora de Volume de Gás Real usando Redlich-Kwong em Python</title>
+		<link rel="stylesheet" href="Formatação.css">
+		<meta name="description" content="Calculadora de Gás Real, Python, Redlich-Kwong.">
+	</head>
+
+    <body>
+		<!-- Aqui está o corpo da página -->
+		<h1> Química Programada - Calculadora de Volume de Gás Real usando Redlich-Kwong em Python</h1>
+
+		<h3> Seções </h3>
+        <ul>
+			<li><a href="#secao1"> 1. Introdução </a></li> 
+            <li><a href="#secao2"> 2. Obtenção da Equação Cúbica </a></li>
+			<li><a href="#secao3"> 3. Algoritmo para Resolução da Equação </a></li>
+			<li><a href="#secao4"> 4. Referências</a></li>
+		</ul>
+
+        <h2 id="secao1"> 1. Introdução </h2>
+
+        <p> Essa postagem do Química Programada se propõe a resolver o exemplo 5.1 do material online (livro) "Termodinâmica Química". Seu enunciado é o seguinte : "<i>O gás natural é composto principalmente de metano e é utilizado na produção de energia térmica e como combustível veicular. Os gasodutos que
+        transportam o metano para os postos de gasolina operam a 25<sup>o</sup>C e 250 atm. Calcule a densidade do metano nesta condição. Nos cálculos de volume molar do metano admita que o metano se comporte como: 1. Gás ideal; 2. Gás real (use a equação de Redlich-Kwong)</i></p>
+        
+        <p> Para a resolução da equação de Redlich-Kwong, será necessária escrevê-la na forma cúbica e determinar um algoritmo para resolvê-la, determinando o volume ocupado pelo gás. Como dados para resolução do problema,
+        temos a Tc=215,5 K e Pc=45,8. </p>
+
+        <p>Já fizemos uma postagem na qual resolvemos a equação cúbica na forma do fator de compressibilidade, para um caso específico (T,P, Tc,Pc fixas), na postagem <a href="Quimica-Programada-Determinacao-do-Volume-Molar-do-CO2-usando-Metodos-Numericos-em-Python.html"> Determinação do Volume Molar do
+        CO<sub>2</sub> usando Métodos Numéricos em Python</a>. Agora, vamos resolver a equação de estado na forma do volume, fazendo um algoritmo que possa ser reaproveitado, bastanto inserir Tc, Pc, T, P e 
+        o chute do volume para resolver o método numérito.</p>
+
+        <h2 id="secao2"> 2. Obtenção da Equação Cúbica </h2>
+
+        <p> A equação de Redlich-Kwong é apresentada na <strong> Figura 1</strong>. No caso de um problema onde as variáveis conhecidas são a Tempreatura e a Pressão,
+        será necessário isolar a variável V e resolvê-la. Para tanto, a equação de estado deverá ser escrita na sua forma cúbica e deve ser escolhido
+        um método numérico para solução. As manipulações algébricas para escrever a equação na forma cúbica são apresentadas na <strong> Figura 2</strong>.</p>
+
+        <figure>
+  			<img src="redlichkwong.png" alt="equação de estado">
+  			<figcaption><strong>Figura 1: Equação de Estado de Redlich-Kwong.</strong></figcaption>
+	    </figure>
+
+        <figure>
+  			<img src="equacaovolumetrica.png" alt="equação de estado">
+  			<figcaption><strong>Figura 2: Equação na forma cúbica.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao3"> 3. Algoritmo para Resolução da Equação </h2>
+
+        <p> O método escolhido para resolução do problema é o Newton-Raphson. Na <strong> Figura 3</strong>, são apresentadas as funções para calcular as constantes a e b 
+        da equação de Redlich-Kwong. Também são apresentadas a função e a derivada da mesma para resolução do método numérico Newton-Raphson. Nessa função, podemos entrar
+        com os valores de Pc em atm e Tc em K. Para as funções f(V, Tc, Pc, T, P) e df(V, Tc, Pc, T, P), podemos entrar com o chute inicial V (pode ser o volume do gás ideal
+        em litros), os valores da constantes críticas e os valores de T e P para o qual queremos calcular o volume V.</p>
+
+        <figure>
+  			<img src="aebequacao.png" alt="equação de estado">
+  			<figcaption><strong>Figura 3: Funções.</strong></figcaption>
+	    </figure>
+
+        <p> O trecho do algoritmo que calcula o volume pelo métdo Newton-Raphson é apresentado na <strong> Figura 4 </strong>. Foi criada uma função chamada 
+        <strong> resolucao</strong>, onde entramos com o valor do chute inicial, as constantes Tc e Pc e as variáveis T e P. O função pode ser usada para resolução 
+        do problema para outro gás (outra Pc e Tc) e ou de outro valor de variáveis T e P. O chute escolhido para inciar o algoritmo de Newton-Raphson é o volume 
+        para um gás ideal, de 0,0977 l/mol. Para os valores de P=250 atm e T=298,15, o volume obtido foi 0.080351355. No livro online em questão, o valor do volume 
+        obtido foi de 0,0802. Dessa forma, pode-se concluir que o algoritmo elaborado pode ser usado para obtenção de volume do gás real.</p>
+
+        <figure>
+  			<img src="algoritmovolumetrica.png" alt="equação de estado">
+  			<figcaption><strong>Figura 4: Algoritmo Newton-Raphson.</strong></figcaption>
+	    </figure>
+
+        <h2 id="secao4"> 4. Referências </h2>
+
+		<ul>
+            <li> "Termodinâmica Química" Fabiano Fernandes, Sandro Pizzo e Deovaldo Moraes Jr. </li>
+			<li> Curso Online : "Fundamentos de Linguagem Python para Análise de Dados e Data Science". Data Science Academy.</li>
+			<li> Curso Online : "Desenvolvimento orientado a objetos utilizando Linguagem Python". Fundação Bradesco.</li>
+            <li> Curso Online : "Introdução à Programação Orientada a Objetos (POO)". Fundação Bradesco.</li>
+            <li> Curso online : "Linguagem de Programação Python". Fundação Bradesco.</li>
+		</ul>
+		
+		<figure>
+  				<img src="logo_quimica_programada_mini.jpg" alt="logo2">
+  				<figcaption><strong>Imagem gerada a partir de fotos do desenvolvedor do site modificadas com o Copilot e ChatGPT.</strong></figcaption>
+		</figure>
+
+		<p> Desenvolvimento :  <strong><i> Química Programada </i></strong></p>
+
+	</body>
+
+</html>
